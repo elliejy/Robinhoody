@@ -1,0 +1,35 @@
+{
+  "name": "robinhoody",
+  "version": "1.0.0",
+  "description": "Fullstack project to clone the existing service, called Robinhood. ",
+  "main": "bundle.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --watch --mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elliejy/Robinhoody.git"
+  },
+  "keywords": [
+    "fullstack"
+  ],
+  "author": "elliejy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elliejy/Robinhoody/issues"
+  },
+  "homepage": "https://github.com/elliejy/Robinhoody#readme",
+  "dependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5"
+  }
+}
