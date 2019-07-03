@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resource :watchlist
   resources :users
 
+  root "static_pages#root"
 end
