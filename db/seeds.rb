@@ -4,4 +4,24 @@
 # Examples:
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+#   Character.create(name: 'Luke', movie: movies.firs
+User.delete_all
+
+User.create!(
+  {
+          id: 1, 
+          userame: 'fancybanker',
+          name: 'Elliot Humph', 
+       }
+)
+User.create!(
+  {       id: 2, 
+          username: 'harold', 
+          name: 'Ryan Mapa' }
+)
+
+User.create!(
+  {       id: 3, 
+          username: 'bronil',
+          name: 'Ronil Stach'}
+)
