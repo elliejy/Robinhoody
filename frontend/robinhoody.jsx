@@ -12,4 +12,5 @@ document.addEventListener('DOMContentLoaded', () => {
   window.dispatch = store.dispatch;
   window.state = this.getState();
 
+
 });

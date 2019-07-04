@@ -17,7 +17,7 @@ const App = () => (
   <div>
     <header>
       <Link to="/" className="header-link"> 
-        <img src= "/public/logo.png"/>
+        <img src= {window.images.logo}/>
         <GreetingContainer />
       </Link>
     </header>

@@ -38,18 +38,18 @@ class SessionForm extends React.Component {
   }
 
   render() {
-    let imgUrl = 'public/loginpage.png'
+    
     return (
       <div className="login-form-container">
+        <img src= {windows.images.loginpic} className="login-pic" />
         <form onSubmit={this.handleSubmit} className="login-form-box">
-          <h1>Welcome to Robinhoody</h1>
+          <h1 className="welcome">Welcome to Robinhoody</h1>
           <br />
           {/* Please {this.props.formType} or {this.props.navLink}
           {this.renderErrors()} */}
           <div className="login-form">
-            <div className="login-pic" style= {{backgroudImage: 'url(' +imgUrl +')'}}></div>
             <br />
-            <label>Username:
+            <label>Username
               <input type="text"
                 value={this.state.username}
                 onChange={this.update('username')}
@@ -57,7 +57,7 @@ class SessionForm extends React.Component {
               />
             </label>
             <br />
-            <label>Password:
+            <label>Password
               <input type="password"
                 value={this.state.password}
                 onChange={this.update('password')}
