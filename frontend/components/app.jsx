@@ -17,14 +17,14 @@ const App = () => (
   <div>
     <header>
       <Link to="/" className="header-link"> 
-        <img src= {window.images.logo}/>
+        <img src= {window.images.logo} className="logo"/>
         <GreetingContainer />
       </Link>
     </header>
     <Switch>
       <AuthRoute exact path="/login" component={LogInFormContainer} />
       <AuthRoute exact path="/signup" component={SignUpFormContainer} />
-      <Route exact path='/' component={HomeContainer} />
+      {/* <Route exact path='/' component={HomeContainer} /> */}
       <Redirect to='/' />
     </Switch>
   </div>
