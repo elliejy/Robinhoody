@@ -31,14 +31,14 @@ class User < ApplicationRecord
         @password = password
     end
 
-    def reset_token!
+    def reset_token
         self.session_token = SecureRandom.urlsafe_base64
         self.save!
         self.session_token
     end
 
     def self.find_by_credentials(username, password)
-        user = Users.find_by(username:username)
+        user = User.find_by(username:username)
         return nil unless user
         user.is_password?(password) ? user :nil
     end

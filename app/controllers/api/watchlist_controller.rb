@@ -1,4 +1,4 @@
-class WatchlistController < ApplicationController
+class Api::WatchlistController < ApplicationController
 
     def new
 
