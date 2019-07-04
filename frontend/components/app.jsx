@@ -3,25 +3,29 @@ import { Provider } from 'react-redux';
 import {
   Switch,
   Link,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
+import {AuthRoute, ProtectedRoute} from '../util/route_util'
 
 import SignUpFormContainer from './session_form/signup_form_container';
 import LogInFormContainer from './session_form/login_form_container';
 import GreetingContainer from './greeting/greeting_container';
-
+import HomeContainer from './home/home_container';
 
 const App = () => (
   <div>
     <header>
-      <Link to="/" className="header-link">
-        <h1>Robinhoody</h1>
+      <Link to="/" className="header-link"> 
+        <img src= "/public/logo.png"/>
         <GreetingContainer />
       </Link>
     </header>
     <Switch>
-      <Route exact path="/login" component={LogInFormContainer} />
-      <Route exact path="/signup" component={SignUpFormContainer} />
+      <AuthRoute exact path="/login" component={LogInFormContainer} />
+      <AuthRoute exact path="/signup" component={SignUpFormContainer} />
+      <Route exact path='/' component={HomeContainer} />
+      <Redirect to='/' />
     </Switch>
   </div>
 );

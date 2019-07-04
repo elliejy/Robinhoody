@@ -8,10 +8,10 @@ class Api::UsersController < ApplicationController
 
     if @user.save
       sign_in(@user)
-      redirect_to links_url
+      render "api/users/show"
     else
       flash.now[:errors] = @user.errors.full_messages
-      render :new
+      render json: 'I need to render the server side errors here', status: 418
     end
   end
 

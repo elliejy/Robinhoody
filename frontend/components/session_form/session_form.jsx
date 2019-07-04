@@ -38,6 +38,7 @@ class SessionForm extends React.Component {
   }
 
   render() {
+    let imgUrl = 'public/loginpage.png'
     return (
       <div className="login-form-container">
         <form onSubmit={this.handleSubmit} className="login-form-box">
@@ -46,6 +47,7 @@ class SessionForm extends React.Component {
           {/* Please {this.props.formType} or {this.props.navLink}
           {this.renderErrors()} */}
           <div className="login-form">
+            <div className="login-pic" style= {{backgroudImage: 'url(' +imgUrl +')'}}></div>
             <br />
             <label>Username:
               <input type="text"

@@ -10,5 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(<Root store={store} />, root);
   window.login = Action.login;
   window.dispatch = store.dispatch;
+  window.state = this.getState();
 
 });
