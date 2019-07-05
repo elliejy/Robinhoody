@@ -17,7 +17,12 @@ class Api::SessionsController < ApplicationController
   end
 
   def destroy
-    sign_out
-    render '/'
+    if current_user
+      sign_out
+      render json: {}
+    else
+      debugger
+      render "api/users/show"
+    end
   end
 end

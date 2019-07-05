@@ -1,35 +1,55 @@
 .home-container{
     display: flex;
     flex-direction: row;
+    margin-top: 40px;
 }
 
 .home-free{
     width: 50%;
+    margin-left: 5%;
+    margin-top: 100px;
 }
 
 .home-free > h1 {
-    font-weight: 900;
-    font-size: 60px;
+    font-weight: bold;
+    font-size: 55px;
 }
 .home-free > p {
     margin-left: 10%;
     font-weight: 30;
 }
+.two-phones{
+    margin-left: -5%;
+    height: 100%;
+    overflow:hidden;
+}
+.two-phones > img{
+  transform: translateY(-10%);
+  transition: all 1s ease-in-out;
+}
+
+// .two-phones > img {
+//     width: 90%;
+//     height: 100%;
+// }
 
 hgroup {
   margin-left: 68%;
   align-items: right;
   flex-direction: row;
+  display: flex;
 }
 
-.hgroup > h2 {
+h2 {
     color: black;
-    margin-right: 3%;
+    padding-right: 10%;
 }
 .logout-button{
-  color: white;
-  font-weight: 800;
-  border-radius: 50px;
+  border-radius: 30px;
   padding: 10px 20px;
   background-color: rgba(140, 500, 212, 1.5);
+}
+.logout-button > h6 {
+  color: white;
+  font-style: bold;
 }

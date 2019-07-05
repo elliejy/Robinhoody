@@ -76,6 +76,32 @@ h6 {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
+ul > li  {
+ 
+  background-color: rgb(13, 12, 21);
+  border-radius: 5px;
+  text-align: center;
+  width: 85%;
+  height: 10%;
+  position: relative;
+  color: white;
+  padding: 6px 6px;
+  list-style-type: none;
+}
+
+ul > li:after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -15px;
+  left: 130px;
+  width: 0;
+  border-width: 15px 15px 0;
+  border-style: solid;
+  border-color: rgb(13, 12, 21) transparent;;
+}
+
+
 * {
   font-family: 'Barlow', sans-serif;
 }

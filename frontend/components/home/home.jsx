@@ -12,7 +12,10 @@ class Home extends React.Component {
                 <h1>Invest Commision-Free</h1>
                 <p>Invest in stocks, ETs, options and cryptocurrencies, all commission-free, right from your phone or desktop.</p>
             </div>
-            <img src={ window.images.splash } alt="Splash" />
+            <div className="two-phones">
+                <img src={ window.images.splash } alt="Splash" />
+            </div>
+            
         </div>
         )
     }

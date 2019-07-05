@@ -15,18 +15,18 @@ const Greeting = ({ currentUser, logout }) => {
     )
   };
   const personalGreeting = () => {
-
     return (
     <hgroup>
       <h2>Hi!</h2>
-      <button className="logout-button" onClick={logout}>Log Out</button>
+        <button className="logout-button" onClick={ logout }><h6>Log Out</h6></button>
     </hgroup>
     )
   };
 
-  if (currentUser===null){
+  if (!currentUser){
     return sessionLinks();
-  }else{
+  }
+  else{
     return personalGreeting();
   }
   

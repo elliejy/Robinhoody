@@ -6,7 +6,7 @@ export const usersReducer = (state ={}, action)=>{
   let newState = Object.assign({}, state)
   switch(action.type){
     case RECEIVE_CURRENT_USER:
-      newState[action.curretUser.id] = action.user
+      newState = {curretUserId: action.user.id}
       return newState;
     default:
       return state;
