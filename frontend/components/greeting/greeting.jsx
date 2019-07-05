@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 
 
 
-const Greeting = ({ currentUser, logout }) => {
-
+const Greeting = (props) => {
+  
   const sessionLinks = () => {
+  
     return(
     <nav className="login-signup">
       <Link to="/login" className="login-button">Log In</Link>
@@ -18,17 +19,18 @@ const Greeting = ({ currentUser, logout }) => {
     return (
     <hgroup>
       <h2>Hi!</h2>
-        <button className="logout-button" onClick={ logout }><h6>Log Out</h6></button>
+        <button className="logout-button" onClick={ props.logout }><h6>Log Out</h6></button>
     </hgroup>
     )
   };
-
-  if (!currentUser){
-    return sessionLinks();
-  }
-  else{
-    return personalGreeting();
-  }
+  
+  if ( props.path !== '/signup' || props.path !== '/login'){
+      if (!props.currentUser){
+        return sessionLinks();
+      }
+      else{
+        return personalGreeting();
+      }}
   
 };
 

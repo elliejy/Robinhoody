@@ -1,3 +1,7 @@
+.header {
+  margin-top: 10%;
+}
+
 .home-container{
     display: flex;
     flex-direction: row;
@@ -12,11 +16,15 @@
 
 .home-free > h1 {
     font-weight: bold;
-    font-size: 55px;
+    font-size: 50px;
+
 }
 .home-free > p {
     margin-left: 10%;
     font-weight: 30;
+    width: 60%;
+    margin-bottom: 30px;
+    letter-spacing: 0.08em;
 }
 .two-phones{
     margin-left: -5%;
@@ -52,4 +60,17 @@ h2 {
 .logout-button > h6 {
   color: white;
   font-style: bold;
+}
+
+.below-free{
+  margin: 16% 10%;;
+  border-radius: 30px;
+  padding: 10px 20px;
+  background-color: rgba(140, 500, 212, 1.5);
+  color: white;
+}
+
+.home-free > h3 {
+  margin-left: 10%;
+  color: aquamarine
 }

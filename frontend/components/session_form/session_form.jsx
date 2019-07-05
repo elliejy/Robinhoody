@@ -34,21 +34,18 @@ class SessionForm extends React.Component {
   };
 
   componentWillUnmount(){
-    this.props.receiveErrors([]);
+    // this.props.receiveErrors();
   }
   renderErrors() {
-
-      return (
-        <ul>
-          { this.props.errors.map( ( error) => (
-            <li key={ error } className= "error">
-              { error }
-            </li>
-          ) ) }
-        </ul>
-      );
-    
-   
+    return (
+      <ul>
+        { this.props.errors.map( ( error) => (
+          <li key={ error } className= "error">
+            { error }
+          </li>
+        ) ) }
+      </ul>
+    );
   }
 
   render() {

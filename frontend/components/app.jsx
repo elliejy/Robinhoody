@@ -15,12 +15,6 @@ import Home from './home/home';
 
 const App = () => (
   <div>
-    <header>
-      <Link to="/" className="header-link"> 
-        <img src= {window.images.logo} className="logo"/>
-        <GreetingContainer />
-      </Link>
-    </header>
 
     <Switch>
       <AuthRoute exact path="/login" component={LogInFormContainer} />
