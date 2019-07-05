@@ -11,8 +11,8 @@ class Api::SessionsController < ApplicationController
       sign_in(@user)
       render "api/users/show"
     else
-      flash.now[:errors] = ['Invalid username or password']
-      render json: 'Invalid Credentials', status: 422
+      errors = ['Invalid username or password']
+      render json: errors, status: 422
     end
   end
 
