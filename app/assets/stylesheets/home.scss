@@ -12,5 +12,24 @@
     font-size: 60px;
 }
 .home-free > p {
-    
+    margin-left: 10%;
+    font-weight: 30;
+}
+
+hgroup {
+  margin-left: 68%;
+  align-items: right;
+  flex-direction: row;
+}
+
+.hgroup > h2 {
+    color: black;
+    margin-right: 3%;
+}
+.logout-button{
+  color: white;
+  font-weight: 800;
+  border-radius: 50px;
+  padding: 10px 20px;
+  background-color: rgba(140, 500, 212, 1.5);
 }

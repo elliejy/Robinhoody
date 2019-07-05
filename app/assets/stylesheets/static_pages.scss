@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 header {
   padding-bottom: 2%;
+  display: inline;
 }
 body {
   height: 100%;
@@ -11,6 +12,7 @@ body {
   width: 7%;
   height: 7%;
   display: inline;
+  margin-left: 7%;
 }
 .login-signup{
   display: inline;
