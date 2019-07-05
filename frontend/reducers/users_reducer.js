@@ -6,9 +6,8 @@ export const usersReducer = (state ={}, action)=>{
   let newState = Object.assign({}, state)
   switch(action.type){
     case RECEIVE_CURRENT_USER:
-      return merge( {}, state, { [action.user.id]: action.user } );
-    case RECEIVE_USER_INFO:
-      return merge( {}, state, { [action.info.id]: action.info } );
+      newState[action.curretUser.id] = action.user
+      return newState;
     default:
       return state;
   }

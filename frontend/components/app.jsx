@@ -11,7 +11,7 @@ import {AuthRoute, ProtectedRoute} from '../util/route_util'
 import SignUpFormContainer from './session_form/signup_form_container';
 import LogInFormContainer from './session_form/login_form_container';
 import GreetingContainer from './greeting/greeting_container';
-import HomeContainer from './home/home_container';
+import Home from './home/home';
 
 const App = () => (
   <div>
@@ -21,10 +21,11 @@ const App = () => (
         <GreetingContainer />
       </Link>
     </header>
+
     <Switch>
       <AuthRoute exact path="/login" component={LogInFormContainer} />
       <AuthRoute exact path="/signup" component={SignUpFormContainer} />
-      {/* <Route exact path='/' component={HomeContainer} /> */}
+      <Route exact path='/' component={Home} />
       <Redirect to='/' />
     </Switch>
   </div>
