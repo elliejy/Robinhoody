@@ -237,6 +237,7 @@ DEPENDENCIES
   rails (~> 5.2.3)
   rails-pry
   rails_12factor
+  rake
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
