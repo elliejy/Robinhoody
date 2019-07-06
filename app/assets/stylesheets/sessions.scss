@@ -5,7 +5,7 @@
 
 .login-form-container{
   background-color: aquamarine;
-  height: 100vw;
+  height: 100vh;
   display: flex;
 }
 .login-pic {
@@ -14,7 +14,7 @@
   background-image: url("loginpage.png");
 }
 .login-form-box{
-  padding-top: 10%;
+  padding-top: 7%;
   background-color: white;
   width: 50%;
 }
@@ -37,7 +37,7 @@ h6 {
 .login-input{
     margin: 2% 0;
     padding: 4%;
-    width: 85%;
+    width: 68%;
     height: 10%;
     border-radius: 5px;
     border: 1px solid whitesmoke;
@@ -78,30 +78,25 @@ h6 {
 }
 
 ul > li  {
- 
-  background-color: rgb(13, 12, 21);
-  border-radius: 5px;
-  text-align: center;
-  width: 85%;
-  height: 10%;
+  border-radius: 10px;
+  text-align: left;
   position: relative;
-  color: white;
-  padding: 6px 6px;
+  color:  rgb(13, 12, 21);
+  padding: 2px;
+  width: 68%;
   list-style-type: none;
 }
-
-ul > li:after {
-  content: "";
-  display: block;
-  position: absolute;
-  bottom: -15px;
-  left: 130px;
-  width: 0;
-  border-width: 15px 15px 0;
-  border-style: solid;
-  border-color: rgb(13, 12, 21) transparent;;
+ul {
+  margin: 0;
 }
-
+.exclamation{
+  width: 8%;
+  height: 8%;
+  display: inline;
+  color:black;
+  margin-left: -30px;
+  margin-top: 6px;
+}
 
 * {
   font-family: 'Barlow', sans-serif;

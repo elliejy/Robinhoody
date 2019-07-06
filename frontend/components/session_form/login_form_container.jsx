@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { login, receiveErrors } from '../../actions/session_actions';
 import SessionForm from './session_form';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   const formType= 'Sign In'
   return {
     errors: state.errors,

@@ -21,7 +21,7 @@ class Api::SessionsController < ApplicationController
       sign_out
       render json: {}
     else
-      render "api/users/show"
+      render "/"
     end
   end
 end

@@ -6,7 +6,7 @@ import Greeting from './greeting';
 const mapStateToProps = (state,ownProps) => {
   return {
     currentUser: state.entities.users[state.session.currentUserId],
-    path: ownProps.path
+    loggedIn: Boolean( state.session.currentUserId )
   };
 };
 

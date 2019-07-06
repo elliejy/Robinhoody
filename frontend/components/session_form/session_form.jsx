@@ -34,14 +34,16 @@ class SessionForm extends React.Component {
   };
 
   componentWillUnmount(){
-    // this.props.receiveErrors();
+    this.props.receiveErrors([]);
   }
   renderErrors() {
+    
     return (
       <ul>
         { this.props.errors.map( ( error) => (
           <li key={ error } className= "error">
-            { error }
+            <img className="exclamation" src={window.images.exclamation} />
+             { error }
           </li>
         ) ) }
       </ul>
@@ -57,7 +59,6 @@ class SessionForm extends React.Component {
           <form onSubmit={this.handleSubmit} className="login-form-box">
             <h1 >Welcome to Robinhoody</h1>
             <br />
-            {this.renderErrors()}
             <div className="login-form">
               <br />
               <label><h6>Username</h6>
@@ -75,9 +76,11 @@ class SessionForm extends React.Component {
                   className="login-input"
                 />
               </label>
+              { this.renderErrors() }
               <br />
               <h6>Already have an account?  { this.props.navLink } </h6>
-              <br/>
+              
+              
               <input className="session-submit" type="submit" value={this.props.formType} />
               <button className= "demo" onClick={this.handleDemoLogin}>Demo Login</button>
             </div>
