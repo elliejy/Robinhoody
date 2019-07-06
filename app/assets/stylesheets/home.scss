@@ -1,18 +1,101 @@
+header {
+  padding-bottom: 2%;
+  display: inline;
+}
+body {
+  height: 100%;
+}
+
 .header-link {
   text-decoration: none;
   margin-left: 10%;
+  font-family: 'Roboto', sans-serif;
+  display:inline;
 
+
+/*LOGGEDIN*/
+.loggedin-body{
+  background: #1b1b1d;
 }
-.home-container{
-    display: flex;
-    flex-direction: row;
-    margin-top: 40px;
+.search-bar-black {
+  display: inline;
+  width: 30vw;
+  margin-left: 7%;
+  border: 0.7px solid rgba(128, 128, 128, 0.405);
+  padding: 8px 11px;
+  border-radius: 3px;
+  transition: box-shadow 0.3s ease-in-out;
+}
+.search-input-black{
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  border: none;
+  color: white;
+}
+
+.search-bar-black:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  border: none;
+  color: white;
+}
+.search-bar-black:focus{
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  border: none;
+  color: white;
+}
+.magwhite{
+  width: 1%;
+  height: 1%;
+  padding: 0 9px;
+}
+
+.logowhite {
+  width: 4%;
+  height: 4%;
+  display: inline;
+  margin-left: 1%;
+  margin-top: 8px;
+}
+
+
+/*LOGGEDOUT*/
 }
 .header-link > h4 {
   display: inline-block;
   font-size: 27px;
   color: black;
-  font-family: 'Barlow', sans-serif;
+}
+.search-bar {
+  display: inline;
+  width: 30vw;
+  margin-left: 7%;
+  border: 0.7px solid rgba(128, 128, 128, 0.405);
+  padding: 8px 11px;
+  border-radius: 3px;
+  // box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  transition: box-shadow 0.3s ease-in-out;
+}
+.search-bar:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  border: none;
+}
+.search-bar:focus{
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  border: none;
+}
+.mag{
+  width: 1%;
+  height: 1%;
+  padding: 0 9px;
+}
+.search-input{
+ border:  none;
+ font-size: 15px;
+ width: 30vw;
+}
+.home-container{
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
 }
 .home-free{
     width: 40%;
@@ -36,7 +119,6 @@
     margin-top: 20px;
     margin-bottom: 50px;
     letter-spacing: 0.08em;
-    font-family: 'Barlow', sans-serif;
     font-size: 18px;
 }
 
@@ -51,7 +133,6 @@
 .home-free > h3 {
   margin-left: 8%;
   color: aquamarine;
-  font-family: 'Barlow', sans-serif;
 }
 .two-phones{
     margin-left: -5%;
@@ -62,12 +143,14 @@
   margin-top: 5%;
   margin-left: -10%;
   transform: translateY(-10%);
-  transition: all 1s ease-in-out;
+  -webkit-transition: height 0.9s ease-in-out;
+  transition: height 0.9s ease-in-out;
 }
 
 h2 {
     color: black;
     padding-right: 7%;
+    font-family: 'Roboto', sans-serif;
  
 }
 .logout-button{
@@ -75,12 +158,15 @@ h2 {
   padding: 7px 15px;
   background-color: rgba(140, 500, 212, 1.5);
   margin-top: -25px;
-  margin-left: 60%;
-  display: inline-block;
+  margin-left: 10vw;
+  display: inline;
+  font-family: 'Roboto', sans-serif;
+  border-style: none;
 }
 .logout-button > h6 {
   color: white;
   font-style: bold;
+  font-family: 'Roboto', sans-serif;
 }
 
 .logo {
@@ -92,14 +178,16 @@ h2 {
 }
 .login-signup{
   display: inline;
-  margin-left: 50%;
+  margin-left: 10vw;
   align-items: right;
+  font-family: 'Roboto', sans-serif;
 
 }
 .login-button {
   font-weight: 800;
   padding-right: 2%;
   color:black;
+  font-family: 'Roboto', sans-serif;
 }
 .login-button:hover {
   color: aquamarine;
@@ -110,6 +198,7 @@ h2 {
   border-radius: 50px;
   padding: 15px 20px;
   background-color: rgba(140, 500, 212, 1.5);
+  font-family: 'Roboto', sans-serif;
   
 }
 

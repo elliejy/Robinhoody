@@ -47,6 +47,9 @@ h6 {
 .login-input:hover{
   border: 1px solid aquamarine;
 }
+.login-input:focus{
+  background-color: rgba(143, 179, 245, 0.23);
+}
 
 .demo {
   margin-top: 5%;
@@ -56,6 +59,7 @@ h6 {
   font-size: 15px;
   border-radius: 5px;
   border: none;
+  font-family: 'Roboto', sans-serif;
 }
 
 .demo:hover {
@@ -71,6 +75,7 @@ h6 {
   font-size: 15px;
   border-radius: 5px;
   border: none;
+  font-family: 'Roboto', sans-serif;
 }
 .session-submit:hover{
    color: black;
@@ -99,5 +104,5 @@ ul {
 }
 
 * {
-  font-family: 'Roboto', sans-serif;
+    font-family: 'Barlow', sans-serif;
 }
