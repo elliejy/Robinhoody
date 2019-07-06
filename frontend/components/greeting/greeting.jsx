@@ -7,12 +7,11 @@ class Greeting extends React.Component {
   constructor(props){
     super(props)
     this.logout = this.props.logout
-    this.currentUser = this.props.currentUser
     this.state = {
       loggedIn: Boolean( this.props.loggedIn)
     }
     this.sessionLinks = this.sessionLinks.bind(this)
-    this.logoutLink = this.logoutLink.bind(this)
+    this.accountDropDown = this.accountDropDown.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
   }
   
@@ -31,10 +30,13 @@ class Greeting extends React.Component {
     this.logout().then( () => this.setState( { loggedIn: false } ) )
   };
 
-  logoutLink() {
+  accountDropDown() {
     return(
-        <button className="logout-button" onClick={ this.handleLogout }><h6>Log Out</h6></button>
 
+          <button className="logout-button" onClick={ this.handleLogout }><h6>Log out</h6></button>
+      //   </div>
+        
+      // </div>
     )
   };
   
@@ -43,7 +45,7 @@ class Greeting extends React.Component {
         return this.sessionLinks();
       }
       else{
-        return this.logoutLink();
+        return this.accountDropDown();
       }
    }
 

@@ -15,6 +15,14 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def info
+    @user = User.find(params[:id])
+  end
+
+  def watchlist
+    @user = User.find(params[:id])
+  end
+
   private
   def user_params
     params.require(:user).permit(:password, :username, :name)

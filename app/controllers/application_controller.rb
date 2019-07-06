@@ -24,6 +24,6 @@ class ApplicationController < ActionController::Base
   end
 
   def require_signed_in!
-    reder '/' unless signed_in?
+    render '/' unless signed_in?
   end
 end

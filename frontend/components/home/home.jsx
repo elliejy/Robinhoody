@@ -5,22 +5,33 @@ import GreetingContainer from '../greeting/greeting_container';
 class Home extends React.Component {
     constructor(props){
         super(props)
-        this.loggedIn = this.props.loggedIn;
         this.currentUser = this.props.currentUser;
         this.logout = this.props.logout;
-    }
-
-    render() {
-        if ( this.loggedIn) {
-          return (this.loggedInPath())
-        }else {
-          return (this.loggedOutPath())
+        this.state = {
+            loggedIn: Boolean( this.props.loggedIn),
+            currentUser: this.currentUser
         }
+    }
+    
+    componentDidMount() {
+        // console.log( this.currentUser)
+        // console.log(this.props)
+        // if ( this.currentUser ) {
+        //     this.props.fetchUserInfo( this.currentUser );
+        // }
+    }
+    render() {
+       
+        // if ( this.currentUser) {
+        //   return (this.loggedInPath())
+        // }else {
+          return (this.loggedOutPath())
+        // }
     }
 
     loggedInPath(){
         return(<>
-            <body className="loggedin-body">
+           <div className="loggedin">
             <header className="header">
                 <Link to="/" className="header-link">
                     <img src={ window.images.logowhite } className="logowhite" />
@@ -31,9 +42,10 @@ class Home extends React.Component {
                     <GreetingContainer />
                 </Link>
             </header>
-        
+            <body className="loggedin-body">
+                <img className="default-chart" src={window.images.defchart} alt="Default Chart"/>
             </body>
-            
+            </div>
         </>)
     }
     loggedOutPath(){

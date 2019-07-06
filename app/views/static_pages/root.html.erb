@@ -1,4 +1,10 @@
-
+    
+    <% if signed_in? %>
+      <script type="text/javascript">
+        window.currentUser = 
+        <%= render("api/users/user.json.jbuilder", user: current_user).html_safe %>
+      </script>
+    <% end %>
 
 <script type="text/javascript">
   window.images={
@@ -9,6 +15,7 @@
     maggrey: "<%= asset_path('maggrey.png') %>",
     magwhite: "<%= asset_path('magwhite.png') %>",
     logowhite: "<%= asset_path('logo-white.png')%>",
+    defchart: "<%= asset_path('defchart.png')%>"
   }
   </script>
 <main id="root"></main>
