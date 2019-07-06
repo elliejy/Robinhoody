@@ -36,8 +36,9 @@ class SessionForm extends React.Component {
   componentWillUnmount(){
     this.props.receiveErrors([]);
   }
+
   renderErrors() {
-    
+    console.log(this.props.errors)
     return (
       <ul>
         { this.props.errors.map( ( error) => (

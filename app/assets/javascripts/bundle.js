@@ -290,10 +290,10 @@ function (_React$Component) {
   }, {
     key: "logoutLink",
     value: function logoutLink() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hgroup", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "logout-button",
         onClick: this.handleLogout
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Log Out")));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Log Out"));
     }
   }, {
     key: "render",
@@ -406,7 +406,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: window.images.logo,
         className: "logo"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_greeting_greeting_container__WEBPACK_IMPORTED_MODULE_2__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "robinhoody"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_greeting_greeting_container__WEBPACK_IMPORTED_MODULE_2__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "home-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "home-free"
@@ -607,6 +607,7 @@ function (_React$Component) {
   }, {
     key: "renderErrors",
     value: function renderErrors() {
+      console.log(this.props.errors);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.errors.map(function (error) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: error,

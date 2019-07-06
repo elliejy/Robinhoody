@@ -8,7 +8,7 @@ class Home extends React.Component {
             <>
             <header className="header">
                 <Link to="/" className="header-link">
-                    <img src={ window.images.logo } className="logo" />
+                        <img src={ window.images.logo } className="logo" /><h4>robinhoody</h4>
                     <GreetingContainer />
                 </Link>
             </header>

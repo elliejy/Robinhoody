@@ -33,9 +33,8 @@ class Greeting extends React.Component {
 
   logoutLink() {
     return(
-    <hgroup>
         <button className="logout-button" onClick={ this.handleLogout }><h6>Log Out</h6></button>
-    </hgroup>
+
     )
   };
   
