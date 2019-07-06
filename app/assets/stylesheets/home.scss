@@ -9,8 +9,8 @@
 }
 
 .home-free{
-    width: 50%;
-    margin-left: 5%;
+    width: 40%;
+    margin-left: 10%;
     margin-top: 100px;
 }
 
@@ -32,6 +32,7 @@
     overflow:hidden;
 }
 .two-phones > img{
+  margin-left: -10%;
   transform: translateY(-10%);
   transition: all 1s ease-in-out;
 }
