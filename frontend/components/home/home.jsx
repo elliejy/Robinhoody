@@ -15,7 +15,7 @@ class Home extends React.Component {
         
             <div className="home-container">
                 <div className="home-free">
-                    <h1>Invest Commision-Free</h1>
+                    <h1 className="home-h1">Invest Commision-Free</h1>
                     <p>Invest in stocks, ETs, options and cryptocurrencies, all commission-free, right from your phone or desktop.</p>
                         <Link to="/signup" className="below-free">Sign up</Link>
                     <h3>Commisions Disclosure</h3>

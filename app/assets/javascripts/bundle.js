@@ -410,7 +410,9 @@ function (_React$Component) {
         className: "home-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "home-free"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Invest Commision-Free"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Invest in stocks, ETs, options and cryptocurrencies, all commission-free, right from your phone or desktop."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "home-h1"
+      }, "Invest Commision-Free"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Invest in stocks, ETs, options and cryptocurrencies, all commission-free, right from your phone or desktop."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/signup",
         className: "below-free"
       }, "Sign up"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Commisions Disclosure")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
