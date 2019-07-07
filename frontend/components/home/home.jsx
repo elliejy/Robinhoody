@@ -20,13 +20,12 @@ class Home extends React.Component {
         //     this.props.fetchUserInfo( this.currentUser );
         // }
     }
-    render() {
-       
-        // if ( this.currentUser) {
-        //   return (this.loggedInPath())
-        // }else {
+    render() {    
+        if ( this.currentUser) {
+          return (this.loggedInPath())
+        }else {
           return (this.loggedOutPath())
-        // }
+        }
     }
 
     loggedInPath(){
@@ -35,7 +34,7 @@ class Home extends React.Component {
             <header className="header">
                 <Link to="/" className="header-link">
                     <img src={ window.images.logowhite } className="logowhite" />
-                    <div className="search-bar-black">
+                    <div className="search-black">
                         <img src={ window.images.magwhite } className="magwhite" />
                         <input type="search" placeholder="Search" className="search-input-black" />
                     </div>
@@ -53,7 +52,7 @@ class Home extends React.Component {
             <header className="header">
                 <Link to="/" className="header-link">
                     <img src={ window.images.logo } className="logo" /><h4>robinhoody</h4>
-                    <div className="search-bar">
+                    <div className="default-searchbar">
                         <img src={ window.images.maggrey } className="mag" />
                         <input type="search" placeholder="Search" className="search-input" />
                     </div>

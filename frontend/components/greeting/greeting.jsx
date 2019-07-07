@@ -32,11 +32,14 @@ class Greeting extends React.Component {
 
   accountDropDown() {
     return(
-
+      <div className="dropdown">
+        <button class="dropbtn">Your Account</button>
+        <div class="dropdown-content">
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
           <button className="logout-button" onClick={ this.handleLogout }><h6>Log out</h6></button>
-      //   </div>
-        
-      // </div>
+        </div>
+      </div>
     )
   };
   

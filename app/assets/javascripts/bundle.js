@@ -218,11 +218,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
     exact: true,
     path: "/login",
     component: _session_form_login_form_container__WEBPACK_IMPORTED_MODULE_5__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["AuthRoute"], {
     exact: true,
     path: "/signup",
     component: _session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_4__["default"]
@@ -324,12 +324,20 @@ function (_React$Component) {
   }, {
     key: "accountDropDown",
     value: function accountDropDown() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "dropdown"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        "class": "dropbtn"
+      }, "Your Account"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        "class": "dropdown-content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#"
+      }, "Link 1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#"
+      }, "Link 2"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "logout-button",
         onClick: this.handleLogout
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Log out")) //   </div>
-      // </div>
-      ;
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Log out"))));
     }
   }, {
     key: "render",
@@ -451,10 +459,11 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      // if ( this.currentUser) {
-      //   return (this.loggedInPath())
-      // }else {
-      return this.loggedOutPath(); // }
+      if (this.currentUser) {
+        return this.loggedInPath();
+      } else {
+        return this.loggedOutPath();
+      }
     }
   }, {
     key: "loggedInPath",
@@ -470,7 +479,7 @@ function (_React$Component) {
         src: window.images.logowhite,
         className: "logowhite"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "search-bar-black"
+        className: "search-black"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: window.images.magwhite,
         className: "magwhite"
@@ -498,7 +507,7 @@ function (_React$Component) {
         src: window.images.logo,
         className: "logo"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "robinhoody"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "search-bar"
+        className: "default-searchbar"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: window.images.maggrey,
         className: "mag"

@@ -16,8 +16,8 @@ import HomeContainer from './home/home_container';
 const App = () => (
   <div>
     <Switch>
-      <Route exact path="/login" component={LogInFormContainer} />
-      <Route exact path="/signup" component={SignUpFormContainer} />  
+      <AuthRoute exact path="/login" component={LogInFormContainer} />
+      <AuthRoute exact path="/signup" component={SignUpFormContainer} />  
       <Route exact path='/' component={ HomeContainer } />
       <Redirect to='/' />
     </Switch>
