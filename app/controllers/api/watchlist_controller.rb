@@ -1,7 +1,7 @@
 class Api::WatchlistController < ApplicationController
 
-    def new
-
+    def index
+        @watchlists = Watchlist.all
     end
 
     def update

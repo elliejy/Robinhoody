@@ -12,12 +12,14 @@ import SignUpFormContainer from './session_form/signup_form_container';
 import LogInFormContainer from './session_form/login_form_container';
 import GreetingContainer from './greeting/greeting_container';
 import HomeContainer from './home/home_container';
+import CompanyContainer from './company/company_container';
 
 const App = () => (
   <div>
     <Switch>
       <AuthRoute exact path="/login" component={LogInFormContainer} />
       <AuthRoute exact path="/signup" component={SignUpFormContainer} />  
+      <ProtectedRoute exact path="/stocks/:ticker" component={ CompanyContainer } />
       <Route exact path='/' component={ HomeContainer } />
       <Redirect to='/' />
     </Switch>
