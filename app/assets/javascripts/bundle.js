@@ -324,20 +324,16 @@ function (_React$Component) {
   }, {
     key: "accountDropDown",
     value: function accountDropDown() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        id: "menu",
         className: "dropdown"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        "class": "dropbtn"
-      }, "Your Account"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "class": "dropdown-content"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#"
-      }, "Link 1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#"
-      }, "Link 2"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "logout-button",
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "account-drop"
+      }, "Account"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "dropdown-content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Link 1")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Link 2")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         onClick: this.handleLogout
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Log out"))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Log out")))));
     }
   }, {
     key: "render",
@@ -489,11 +485,53 @@ function (_React$Component) {
         className: "search-input-black"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_greeting_greeting_container__WEBPACK_IMPORTED_MODULE_2__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("body", {
         className: "loggedin-body"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "loggedin-h1"
+      }, "Welcome to Robinhoody"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "default-chart",
         src: window.images.defchart,
         alt: "Default Chart"
-      }))));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "company-watchlist"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "watchlist-ul"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Watchlist")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "company-ul"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "TICKER"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graph"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "$$Price")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "company-ul"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "TICKER"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graph"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "$$Price")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "company-ul"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "TICKER"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graph"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "$$Price")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "company-ul"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "TICKER"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graph"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "$$Price")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "company-ul"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "TICKER"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graph"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "$$Price")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "company-ul"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "TICKER"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graph"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "$$Price")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "company-ul"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "TICKER"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graph"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "$$Price")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "company-ul"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "TICKER"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graph"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "$$Price")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "company-ul"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "TICKER"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graph"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "$$Price"))))));
     }
   }, {
     key: "loggedOutPath",
@@ -781,7 +819,9 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit,
         className: "login-form-box"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Welcome to Robinhoody"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "session-welcome"
+      }, "Welcome to Robinhoody"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "login-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Username"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
@@ -1071,6 +1111,21 @@ document.addEventListener('DOMContentLoaded', function () {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_3__["default"], {
     store: store
   }), root);
+
+  window.onclick = function (event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  };
 });
 
 /***/ }),

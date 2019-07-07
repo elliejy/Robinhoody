@@ -42,7 +42,69 @@ class Home extends React.Component {
                 </Link>
             </header>
             <body className="loggedin-body">
+                <h1 className="loggedin-h1">Welcome to Robinhoody</h1>
                 <img className="default-chart" src={window.images.defchart} alt="Default Chart"/>
+                <div className="company-watchlist">
+                    <ul className="watchlist-ul">
+                        <li>Watchlist</li>
+                        {/* <li>...</li> */}
+                    </ul>
+                    <ul className="company-ul">
+                        <a href="#"></a>
+                        <li>TICKER</li>
+                        <li>Graph</li>
+                        <li>$$Price</li>
+                    </ul>
+                    <ul className="company-ul">
+                        <a href="#"></a>
+                        <li>TICKER</li>
+                        <li>Graph</li>
+                        <li>$$Price</li>
+                    </ul>
+                    <ul className="company-ul">
+                        <a href="#"></a>
+                        <li>TICKER</li>
+                        <li>Graph</li>
+                        <li>$$Price</li>
+                    </ul>
+                    <ul className="company-ul">
+                        <a href="#"></a>
+                        <li>TICKER</li>
+                        <li>Graph</li>
+                        <li>$$Price</li>
+                    </ul>
+                    <ul className="company-ul">
+                        <a href="#"></a>
+                        <li>TICKER</li>
+                        <li>Graph</li>
+                        <li>$$Price</li>
+                    </ul>
+                    <ul className="company-ul">
+                        <a href="#"></a>
+                        <li>TICKER</li>
+                        <li>Graph</li>
+                        <li>$$Price</li>
+                    </ul>
+                    <ul className="company-ul">
+                        <a href="#"></a>
+                        <li>TICKER</li>
+                        <li>Graph</li>
+                        <li>$$Price</li>
+                    </ul>
+                    <ul className="company-ul">
+                        <a href="#"></a>
+                        <li>TICKER</li>
+                        <li>Graph</li>
+                        <li>$$Price</li>
+                    </ul>
+                    <ul className="company-ul">
+                        <a href="#"></a>
+                        <li>TICKER</li>
+                        <li>Graph</li>
+                        <li>$$Price</li>
+                    </ul>
+                </div>
+            
             </body>
             </div>
         </>)

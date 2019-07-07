@@ -1,59 +1,62 @@
 header {
   padding-bottom: 2%;
   display: inline;
+  width: 100vw;
+  min-height: 10vh;
 }
-// body {
-//   height: 100%;
-//   background-color: black;
-// }
+body {
+  height: 100%;
+  margin: 0;
+}
 
 .header-link {
   text-decoration: none;
-  margin-left: 10%;
+  margin-left: 7%;
   font-family: 'Roboto', sans-serif;
   display:inline;
-
+  width: 100vw;
+}
 
 /*LOGGEDIN*/
 .loggedin{
-    background: #1b1b1d;
-
+    background-color: #1b1b1d;
+    width: 100vw;
+    height: 100vh;
   }
-.loggedin-body{
-  background-color: #1b1b1d;
-  height: 100px;
-  width: 200px;
-}
+
+
 .search-black {
   display: inline;
-  width: 30vw;
+  width: 35vw;
   margin-left: 7%;
-  border: 0.7px solid rgba(128, 128, 128, 0.405);
+  border: 0.7px solid black;
   padding: 8px 11px;
   border-radius: 3px;
   transition: box-shadow 0.3s ease-in-out;
-  background-color: 1b1b1d;
+  background-color: #1b1b1d;
 
 }
 .search-input-black{
   border: none;
-  color: white;
+  background-color: #1b1b1d;
+  width: 30vw;
+  font-size: 14px;
 }
 
-.search-bar-black:hover {
+.search-black:hover {
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   border: none;
   color: white;
 }
-.search-bar-black:focus{
+.search-black:focus{
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   border: none;
   color: white;
 }
 .magwhite{
-  width: 1%;
-  height: 1%;
-  padding: 0 9px;
+  width: 1.5%;
+  height: 1.8%;
+  padding: 0 6px;
 }
 
 .logowhite {
@@ -63,19 +66,105 @@ header {
   margin-left: 1%;
   margin-top: 8px;
 }
-.loggedin-body{
-  // position: relative;
-}
-.default-chart{
-  // position: absolute;
-  // display: inline-block;
-  height:30vh;
-  width:50vw;
-  background:#1b1b1d;
+
+.dropdown {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  width: 10vw;
+  margin-left: 25vw;
 }
 
-/*LOGGEDOUT*/
+.dropdown > li {
+  position: relative;
+  
 }
+
+.account-drop{
+  border-bottom: 2px solid transparent;
+}
+.account-drop:hover {
+  border-bottom: 2px solid aquamarine;
+  width: 76%;
+}
+
+h3 {
+  color: white;
+}
+h3:hover {
+  color: aquamarine;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background: #1b1b1d;
+  white-space: nowrap;
+  color: white;
+  min-width: 200px;
+  overflow: hidden;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  right: 25px;
+  top: 47px;
+  
+}
+
+li:hover .dropdown-content {
+  display: block;
+}
+
+.loggedin-body{
+  margin: 2vw 15vw;
+}
+
+.loggedin-h1{
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  margin-left: 1vw;
+  margin-bottom: 0;
+}
+.default-chart{
+  position: absolute;
+  display: inline-block;
+  width: 50vw;
+  height: 40vh;
+  background-color:#1b1b1d;
+  margin-top: 20px;
+  
+}
+.company-watchlist {
+  margin-top: -20px;
+  margin-left: 53vw;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,1.5);
+}
+.watchlist-ul{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  padding: 10px 20px;
+} 
+.watchlist-ul > li {
+  color: white;
+
+}
+.company-ul{
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  margin: 3px 0 0px 3px;
+}
+.company-ul:hover {
+  background: black;
+}
+.company-ul > li {
+  color: white;
+}
+
+
+
+/*LOGGEDOUT*/
+
 .header-link > h4 {
   display: inline-block;
   font-size: 27px;

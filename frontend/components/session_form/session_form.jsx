@@ -57,7 +57,7 @@ class SessionForm extends React.Component {
         <div className="login-form-container">
           <img src={ window.images.loginpic } className="login-pic" />
           <form onSubmit={this.handleSubmit} className="login-form-box">
-            <h1 >Welcome to Robinhoody</h1>
+            <h1 className="session-welcome">Welcome to Robinhoody</h1>
             <div className="login-form">
               <br />
               <label><h6>Username</h6>

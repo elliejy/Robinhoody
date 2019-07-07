@@ -13,6 +13,7 @@ class Greeting extends React.Component {
     this.sessionLinks = this.sessionLinks.bind(this)
     this.accountDropDown = this.accountDropDown.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
+
   }
   
 
@@ -32,14 +33,16 @@ class Greeting extends React.Component {
 
   accountDropDown() {
     return(
-      <div className="dropdown">
-        <button class="dropbtn">Your Account</button>
-        <div class="dropdown-content">
-          <a href="#">Link 1</a>
-          <a href="#">Link 2</a>
-          <button className="logout-button" onClick={ this.handleLogout }><h6>Log out</h6></button>
-        </div>
-      </div>
+        <ul id="menu" className="dropdown">
+          <li>
+            <h3 className="account-drop">Account</h3>
+            <ul className="dropdown-content">
+              <li><h3>Link 1</h3></li>
+              <li><h3>Link 2</h3></li>
+              <li onClick={ this.handleLogout }><h3>Log out</h3></li> 
+            </ul>
+          </li>
+        </ul>
     )
   };
   
