@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :users, only: [:create, :show]
       get '/users/:id/info', to: 'users#info'
       get '/users/:id/watchlist', to: 'users#watchlist'
-    resources :companies, only [:index, :show]
+    resources :companies, only:[:index, :show]
   end
 
   root to: "static_pages#root"

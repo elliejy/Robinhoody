@@ -13,11 +13,12 @@ export const fetchCompany = (ticker)=>(
 export const fetchDailyData = (ticker) => (
     $.ajax( {
         method: "get",
-        url: `https://api.iextrading.com/1.0/stock/${ ticker }/chart/5y`
+        url: `https://cloud.iexapis.com/stable/stock/${ticker}/quote?token=pk_e2ad3af5721a4d25b06e77544acf3362`
     } )
 );
 export const fetchStockInfo = ticker => (
     $.ajax( {
-        url: `https://api.iextrading.com/1.0/stock/market/batch?symbols=${ ticker }&types=quote,company,info`
+        method: "get",
+        url: `https://cloud.iexapis.com/stable/stock/${ ticker}/company?token=pk_e2ad3af5721a4d25b06e77544acf3362`
     } )
 );

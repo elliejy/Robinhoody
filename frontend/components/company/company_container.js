@@ -4,7 +4,7 @@ import { logout } from '../../actions/session_actions';
 import {
     fetchStock,
     fetchStockInfo,
-} from '../../actions/stock_actions';
+} from '../../actions/company_actions';
 
 const mapStateToProps = ( state, ownProps ) => {
     return {

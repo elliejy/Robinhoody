@@ -14,11 +14,13 @@ const companiesReducer = (state={}, action) => {
             newState.companies = action.companies
             return newState;
         case RECEIVE_COMPANY:
-            newState[action.company.ticker] = action.company
+            newState[action.ticker] = action.ticker
             return newState;
         case RECEIVE_STOCK_INFO:
-            nextState[action.ticker]= action.stockInfo.company;
+            newState[action.ticker]= action.data;
             return newState;
+        default:
+            return state;
     }
 }
 

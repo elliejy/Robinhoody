@@ -7,20 +7,20 @@ export const RECEIVE_STOCKS = "RECEIVE_STOCKS";
 export const RECEIVE_STOCK_INFO = "RECEIVE_STOCK_INFO";
 
 
-const receiveCompanies = ({
+const receiveCompanies = (companies)=> ({
     type: RECEIVE_COMPANIES,
     companies
 })
-const receiveCompany = ({
+const receiveCompany = ( company ) =>({
     type: RECEIVE_COMPANY,
     company
 })
-const receiveStock = ({
+const receiveStock = (ticker,data) =>({
     type: RECEIVE_STOCK,
     ticker,
     data
 })
-const receiveStockInfp = ({
+const receiveStockInfo = (ticker, data)=>({
     type: RECEIVE_STOCK_INFO,
     ticker,
     data
@@ -41,6 +41,6 @@ export const fetchStock = (ticker) => dispatch =>(
 );
 
 export const fetchStockInfo = ticker => dispatch => (
-    StockApiUtil.fetchStockInfo( ticker )
-        .then( info => dispatch( receiveStockInfo( ticker, info[ticker] ) ) )
+    CompanyApiUtils.fetchStockInfo( ticker )
+        .then( data => dispatch( receiveStockInfo( ticker, data ) ) )
 );

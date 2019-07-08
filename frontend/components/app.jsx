@@ -19,7 +19,7 @@ const App = () => (
     <Switch>
       <AuthRoute exact path="/login" component={LogInFormContainer} />
       <AuthRoute exact path="/signup" component={SignUpFormContainer} />  
-      <ProtectedRoute exact path="/stocks/:ticker" component={ CompanyContainer } />
+      <Route exact path="/companies/:ticker" component={ CompanyContainer } />
       <Route exact path='/' component={ HomeContainer } />
       <Redirect to='/' />
     </Switch>
