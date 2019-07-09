@@ -47,7 +47,7 @@ export const fetchUserWatchlist = user => (
 export const createUserWatchlist = ticker => (
     $.ajax({
         method: 'post',
-        url: `/api/users/${user.id}/watchlist`,
+        url: `/api/users/${user.id}`,
         data: ticker
     })
 )

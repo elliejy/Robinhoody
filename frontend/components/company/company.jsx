@@ -11,6 +11,7 @@ class Company extends React.Component {
         this.state = {
             loading: true
         }
+        this.handleClick = this.handleClick.bind(this)
     }
 
     componentDidMount() {
@@ -38,6 +39,10 @@ class Company extends React.Component {
         // } else {
         //     this.setState({loading:false})
         }
+    }
+    handleClick(e){
+        e.preventDefault();
+        
     }
     render(){
         
@@ -80,7 +85,7 @@ class Company extends React.Component {
                     <h5 id="pcahnge">{ this.props.company.stock.changePercent }%</h5> 
 
 
-                <LineChart width={ 730 } height={ 250 } data={ Object.values(this.props.company.stocks) }
+                <LineChart width={ 1030 } height={ 250 } data={ Object.values(this.props.company.stocks) }
                     margin={ { top: 5, right: 30, left: 20, bottom: 5 } }>
             
                     <XAxis dataKey="dateTime" hide={ true } />
@@ -92,10 +97,18 @@ class Company extends React.Component {
 
                 <div className="about">
                     <h2 id="about">About</h2>
-                    <p>{ this.props.company.info.description }</p>
+                    <p id="description">{ this.props.company.info.description }</p>
                             <h5>{ this.props.company.info.CEO }</h5>
 
+                </div>
 
+                <div className="add">
+                    {/* <h5>Buy { this.props.ticker}</h5>
+                    <p>Unavailable</p>
+                    <p id="appr">You can start trading once your account is approved</p> */}
+                    <div id="addwatch">
+                        <button onClick={this.handleClick}><p id="addp">Add to Watchlist</p></button>
+                    </div>
                 </div>
               </div>
             </div>

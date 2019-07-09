@@ -384,9 +384,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -412,6 +412,7 @@ function (_React$Component) {
     _this.state = {
       loading: true
     };
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -445,6 +446,11 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading..."); // } else {
         //     this.setState({loading:false})
       }
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(e) {
+      e.preventDefault();
     }
   }, {
     key: "render",
@@ -502,7 +508,7 @@ function (_React$Component) {
       }, "$", this.props.company.stock.latestPrice), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         id: "pcahnge"
       }, this.props.company.stock.changePercent, "%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
-        width: 730,
+        width: 1030,
         height: 250,
         data: Object.values(this.props.company.stocks),
         margin: {
@@ -528,7 +534,17 @@ function (_React$Component) {
         className: "about"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         id: "about"
-      }, "About"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.company.info.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, this.props.company.info.CEO)))));
+      }, "About"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        id: "description"
+      }, this.props.company.info.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, this.props.company.info.CEO)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "add"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "addwatch"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.handleClick
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        id: "addp"
+      }, "Add to Watchlist")))))));
     }
   }]);
 
@@ -1641,7 +1657,7 @@ var fetchUserWatchlist = function fetchUserWatchlist(user) {
 var createUserWatchlist = function createUserWatchlist(ticker) {
   return $.ajax({
     method: 'post',
-    url: "/api/users/".concat(user.id, "/watchlist"),
+    url: "/api/users/".concat(user.id),
     data: ticker
   });
 };

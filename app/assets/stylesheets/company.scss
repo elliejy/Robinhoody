@@ -1,5 +1,6 @@
 .company-container{
     margin: 6vw 10vw;
+    position: relative;
 }
 
 
@@ -35,8 +36,38 @@ h5 {
      color: white;
     font-size: 36px;
     font-weight: 100;
+    max-width: 60%;
 }
-p {
+#description {
     font-size: 20px;
     letter-spacing: 1px;
+    max-width: 50%;
+}
+.add {
+    position: absolute;
+    top: 1vh;
+    left: 55vw;
+    min-width: 13vw;
+}
+#appr{
+    width:80%;
+}
+
+#addwatch{
+    border: 1px solid aquamarine;
+    border-radius: 4px;
+    padding: 6px 8px;
+
+    min-height: 2vw;
+    text-align: center;
+
+}
+#addp {
+    color: aquamarine;
+    margin-top: 9px;
+    font-weight: bold;
+}
+button {
+    background: none;
+    border: none;
 }
