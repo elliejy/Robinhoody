@@ -1,92 +1,105 @@
 import React from 'react';
+// import NavContainer from '../nav/nav_container';
 import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line} from 'recharts';
+import GreetingContainer from '../greeting/greeting_container';
+import {Link} from 'react-router-dom'
 
 class Company extends React.Component {
     constructor(props){
         super(props)
+
+        this.state = {
+            loading: true
+        }
     }
 
     componentDidMount() {
         const ticker = this.props.match.params.ticker;
-        if ( !this.props.company || this.props.company.ticker !== this.props.match.params.ticker ) {
-            this.props.fetchStockInfo( ticker );
+        if ( !this.props.company || this.props.ticker !== ticker ) {
+                this.props.fetchStockInfo( ticker )
+                this.props.fetchStock( ticker )
+                this.props.fetch1mStock(ticker)
         }
     }
     componentDidUpdate(prevProps){
-        if ( prevProps.company && prevProps.company.ticker !== this.props.match.params.ticker){
-            this.props.fetchStockInfo( this.props.match.params.ticker);
+        const ticker = this.props.match.params.ticker;
+        if ( prevProps.ticker!==this.props.ticker){
+            this.props.fetchStockInfo( this.props.match.params.ticker)
+            this.props.fetchStock( this.props.match.params.ticker);
+            this.props.fetch1mStock( this.props.match.params.ticker )
+
         }
     }
+    //  && prevProps.company.info.symbol.toLowerCase() !== this.props.match.params.ticker
 
+    handleLoading(){
+        if ( !this.props.company || !this.props.company.info || !this.props.company.stock || !this.props.company.stocks ) {
+            return <div>Loading...</div>
+        // } else {
+        //     this.setState({loading:false})
+        }
+    }
     render(){
-        const data = [{
-            "name": "Page A",
-            "uv": 4000,
-            "pv": 2400,
-            "amt": 2400
-        },
-            {
-                "name": "Page B",
-                "uv": 3000,
-                "pv": 1398,
-                "amt": 2210
-            },
-            {
-                "name": "Page C",
-                "uv": 2000,
-                "pv": 9800,
-                "amt": 2290
-            },
-            {
-                "name": "Page D",
-                "uv": 2780,
-                "pv": 3908,
-                "amt": 2000
-            },
-            {
-                "name": "Page E",
-                "uv": 1890,
-                "pv": 4800,
-                "amt": 2181
-            },
-            {
-                "name": "Page F",
-                "uv": 2390,
-                "pv": 3800,
-                "amt": 2500
-            },
-            {
-                "name": "Page G",
-                "uv": 3490,
-                "pv": 4300,
-                "amt": 2100
-            }]
-        console.log(this.props)
-        if( !this.props.company){
+        
+        // if (this.state.loading === true){
+        //     this.handleLoading()
+        // }
+        if ( !this.props.company || !this.props.company.info || !this.props.company.stock || !this.props.company.stocks ) {
             return <div>Loading...</div>
         }
-        return (
-            <div>
-                <ul>
-                    <li>{ this.props.company.companyName }</li> 
-                    <li>{ this.props.company.symbol }</li> 
-                    <li>{ this.props.company.CEO}</li>
-                    <li>{ this.props.company.description}</li> 
-                    
+        const close = Object.values( this.props.company.stocks ).map( stock => ( stock.close ) )
+        let min = -Infinity
+        let max = Infinity
+        if ( close.length >= 1 ) {
+            min = close.reduce( ( acc, el ) => ( Math.min( acc, el ) ) )
+            max = close.reduce( ( acc, el ) => ( Math.max( acc, el ) ) )
 
-                </ul>
-                <LineChart width={ 730 } height={ 250 } data={ data }
+            Object.values( this.props.company.stocks ).forEach( stock => { stock.datetime = stock.date + ' ' + ( stock.minute || '' ) } )
+
+        }
+   
+
+        return (
+            <>
+                <div className="loggedin">
+                    <header className="header">
+                        <Link to="/" className="header-link">
+                            <img src={ window.images.logowhite } className="logowhite" />
+                            <div className="search-black">
+                                <img src={ window.images.magwhite } className="magwhite" />
+                                <input type="search" placeholder="Search" className="search-input-black" />
+                            </div>
+                            <GreetingContainer />
+                        </Link>
+                    </header>
+                
+
+               <div className='company-container'>
+                    <h2 id="company-name">{ this.props.company.info.companyName }</h2> 
+                    <h5 id="price">${ this.props.company.stock.latestPrice }</h5> 
+                    <h5 id="pcahnge">{ this.props.company.stock.changePercent }%</h5> 
+
+
+                <LineChart width={ 730 } height={ 250 } data={ Object.values(this.props.company.stocks) }
                     margin={ { top: 5, right: 30, left: 20, bottom: 5 } }>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
+            
+                    <XAxis dataKey="dateTime" hide={ true } />
+                    <YAxis dateKey="close" hide={true} domain={[min, max]}/>
                     <Tooltip />
-                    <Legend />
-                    <Line type="monotone" dataKey="pv" stroke="#8884d8" />
-                    <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+
+                    <Line type="monotone" dataKey="close" dot={ false } stroke='#21ce99' yAxisId={ 0 } />
                 </LineChart>
+
+                <div className="about">
+                    <h2 id="about">About</h2>
+                    <p>{ this.props.company.info.description }</p>
+                            <h5>{ this.props.company.info.CEO }</h5>
+
+
+                </div>
+              </div>
             </div>
-  
+            </>
         )
         
     }

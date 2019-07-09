@@ -6,7 +6,7 @@ class Home extends React.Component {
     constructor(props){
         super(props)
         this.currentUser = this.props.currentUser;
-        this.logout = this.props.logout;
+        this.logout = this.props.logout;   
         this.state = {
             loggedIn: Boolean( this.props.loggedIn),
             currentUser: this.currentUser
@@ -16,7 +16,9 @@ class Home extends React.Component {
     componentDidMount() {
         // console.log( this.currentUser)
         // console.log(this.props)
+   
         // if ( this.currentUser ) {
+
         //     this.props.fetchUserInfo( this.currentUser );
         // }
     }
@@ -29,6 +31,13 @@ class Home extends React.Component {
     }
 
     loggedInPath(){
+        // const appl = this.props.fetchStock( 'aapl' );
+        // const tsla = this.props.fetchStock( 'tsla' );
+        // const nflx = this.props.fetchStock( 'nflx' );
+        // const fb = this.props.fetchStock( 'fb' );
+        // const msft = this.props.fetchStock( 'msft' );
+        // const dis = this.props.fetchStock( 'dis' );
+        // const gpro = this.props.fetchStock( 'gpro' );
         return(<>
            <div className="loggedin">
             <header className="header">
@@ -50,10 +59,10 @@ class Home extends React.Component {
                         {/* <li>...</li> */}
                     </ul>
                     <ul className="company-ul">
-                        <a href="#"></a>
-                        <li>TICKER</li>
+                        <Link to="/companies/appl"></Link>
+                        <li>AAPL</li>
                         <li>Graph</li>
-                        <li>$$Price</li>
+                            <li>$$Price</li>
                     </ul>
                     <ul className="company-ul">
                         <a href="#"></a>

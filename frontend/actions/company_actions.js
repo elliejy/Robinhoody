@@ -15,10 +15,16 @@ const receiveCompany = ( company ) =>({
     type: RECEIVE_COMPANY,
     company
 })
-const receiveStock = (ticker,data) =>({
+const receiveStock = (ticker,stock) =>({
     type: RECEIVE_STOCK,
     ticker,
-    data
+    stock
+})
+
+const receiveStocks = (ticker, stocks) => ({
+    type: RECEIVE_STOCKS, 
+    ticker, 
+    stocks
 })
 const receiveStockInfo = (ticker, data)=>({
     type: RECEIVE_STOCK_INFO,
@@ -37,10 +43,24 @@ export const fetchCompany = (ticker) => dispatch => (
 
 export const fetchStock = (ticker) => dispatch =>(
     CompanyApiUtils.fetchDailyData(ticker)
-    .then((data)=> dispatch(receiveStock(ticker, data)))
+    .then((stock)=> dispatch(receiveStock(ticker, stock)))
+);
+export const fetch1mStock = (ticker) => dispatch =>(
+    CompanyApiUtils.fetch1mData(ticker)
+    .then((stocks)=> dispatch(receiveStocks(ticker, stocks)))
 );
 
 export const fetchStockInfo = ticker => dispatch => (
     CompanyApiUtils.fetchStockInfo( ticker )
         .then( data => dispatch( receiveStockInfo( ticker, data ) ) )
 );
+
+export const fetchAllStockData = ticker => dispatch => {
+    const performFetches = () => Promise.all([
+        dispatch(fetchStockInfo(ticker)),
+        dispatch(fetchStock(ticker))
+    ]);
+
+
+    performFetches().then( stock => dispatch( receiveStock( ticker, stock ) ))
+}
