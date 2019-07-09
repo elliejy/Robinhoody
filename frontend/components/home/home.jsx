@@ -14,15 +14,17 @@ class Home extends React.Component {
     }
     
     componentDidMount() {
+
         // console.log( this.currentUser)
         // console.log(this.props)
    
         // if ( this.currentUser ) {
 
-        //     this.props.fetchUserInfo( this.currentUser );
+        //     this.props.fetchWatchlists( this.currentUser );
         // }
     }
     render() {    
+
         if ( this.currentUser) {
           return (this.loggedInPath())
         }else {
@@ -31,6 +33,7 @@ class Home extends React.Component {
     }
 
     loggedInPath(){
+
         // const appl = this.props.fetchStock( 'aapl' );
         // const tsla = this.props.fetchStock( 'tsla' );
         // const nflx = this.props.fetchStock( 'nflx' );
@@ -119,6 +122,7 @@ class Home extends React.Component {
         </>)
     }
     loggedOutPath(){
+        debugger
         return ( <>
             <header className="header">
                 <Link to="/" className="header-link">
@@ -134,7 +138,7 @@ class Home extends React.Component {
             <div className="home-container">
                 <div className="home-free">
                     <h1 className="home-h1">Invest Commision-Free</h1>
-                    <p>Invest in stocks, ETs, options and cryptocurrencies, all commission-free, right from your phone or desktop.</p>
+                    <p className="home-p">Invest in stocks, ETs, options and cryptocurrencies, all commission-free, right from your phone or desktop.</p>
                     <Link to="/signup" className="below-free">Sign up</Link>
                     <h3>Commisions Disclosure</h3>
                 </div>

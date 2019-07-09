@@ -38,5 +38,51 @@ User.create!(
           password: 'password',
           name: 'Ronil Stach'}
 )
+Watchlist.create! (
+  {   watcher_id: demo_user.id, 
+      ticker: 'aapl',
+      following: true}
+)
+Watchlist.create! (
+  {   watcher_id: demo_user.id, 
+      ticker: 'tsla',
+      following: true}
+)
+Watchlist.create! (
+  {   watcher_id: demo_user.id, 
+      ticker: 'nflx',
+      following: true}
+)
+Watchlist.create! (
+  {   watcher_id: demo_user.id, 
+      ticker: 'fb',
+      following: true}
+)
+Watchlist.create! (
+  {   watcher_id: demo_user.id, 
+      ticker: 'msft',
+      following: true}
+)
+Watchlist.create! (
+  {   watcher_id: demo_user.id, 
+      ticker: 'dis',
+      following: true}
+)
+Watchlist.create! (
+  {   watcher_id: demo_user.id, 
+      ticker: 'gopro',
+      following: true}
+)
+Watchlist.create! (
+  {   watcher_id: demo_user.id, 
+      ticker: 'sbux',
+      following: true}
+)
+Watchlist.create! (
+  {   watcher_id: demo_user.id, 
+      ticker: 'baba',
+      following: true}
+)
+
 
  end

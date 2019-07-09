@@ -1,19 +1,24 @@
 import Watchlist from './watchlist';
-import {connect} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import {createWatchlist, fetchWatchlists, removeWatchlist} from '../../actions/watchlist_actions';
 
 
-const mapStateToProps = (state, ownProps) => ({
-    watchlists: Object.values(state.watchlists),
-    ticker: ownProps.match.params.ticker,
-    currentUserId: state.session.id
-});
+const mapStateToProps = (state, ownProps) => {
 
-const mapDispatchToProps = dispatch => ({
- createWatchlist: dispatch(createWatchlist(ticker)),
- fetchWatchlists: dispatch(fetchWatchlists(user)),
- removeWatchlist: dispatch(removeWatchlist(user, ticker))
-});
+    return {
+        watchlists: state.watchlists,
+        ticker: ownProps.ticker,
+        currentUserId: state.session.currentUserId}
+};
+
+const mapDispatchToProps = dispatch => {
+    return ({
+    createWatchlist: ( currentUserId, ticker ) => dispatch( createWatchlist(currentUserId, ticker)),
+    fetchWatchlists: ( currentUserId) => dispatch( fetchWatchlists( currentUserId)),
+//  removeWatchlist: (ticke)=>dispatch(removeWatchlist(ticker))
+    })
+};
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Watchlist);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Watchlist));

@@ -7,10 +7,10 @@ Rails.application.routes.draw do
      get '/companies/:ticker', to: 'company#show'
     resources :users, only: [:create, :show] do
       get '/users/:id/info', to: 'users#info'
-      get '/users/:id/watchlists', to: 'users#watchlists'
+      # get '/users/:id/watchlists', to: 'users#watchlists'
       resources :watchlists, only: [:show, :destroy]
     end
-    resources :watchlists, only: [:create]
-
+    resources :watchlists, only: [:create, :index]
+  end
   root to: "static_pages#root"
 end

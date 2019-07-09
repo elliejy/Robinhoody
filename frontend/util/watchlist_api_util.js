@@ -1,15 +1,21 @@
-export const postWatchlist = (ticker)=> ({
+
+
+
+export const postWatchlist = (currentUserId, ticker)=> (
+    $.ajax({
     method: "post",
     url: `/api/watchlists`,
-    ticker: ticker
-})
-export const getWatchlists = (user)=> ({
+    ticker})
+)
+export const getWatchlists = (id)=> (
+    $.ajax({
     method: "get",
-    url: `/api/users/${user.id}/watchlists`,
-
-})
-export const deleteWatchlists = (user, ticker)=> ({
+    url: `/api/watchlists`,
+    })
+)
+export const deleteWatchlist = (id, ticker)=> (
+    $.ajax({
     method: "delete",
-    url: `/api/users/${user.id}/watchlists`,
+    url: `/api/users/${id}/watchlists`,
+}))
 
-})

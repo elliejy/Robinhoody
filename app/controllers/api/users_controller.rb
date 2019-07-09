@@ -19,12 +19,13 @@ class Api::UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def watchlist
-    @user = User.find(params[:id])
+  def watchlists
+     @watchlists = Watchlist.find_by(watcher_id: params[:id])
+        render :json: {}
   end
 
   private
   def user_params
-    params.require(:user).permit(:password, :username, :name)
+    params.require(:users).permit(:password, :username, :name, :id)
   end
 end

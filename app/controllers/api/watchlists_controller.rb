@@ -2,14 +2,14 @@ class Api::WatchlistsController < ApplicationController
 
     def index
         watcher_id = current_user.id
-        @watchlists = Watchlist.find_by(watcher_id: watcher_id)
+        @watchlists = Watchlist.where(watcher_id: watcher_id)
     end
 
     def create
         @watchlist = Watchlist.new(ticker:params[:ticker])
         @watchlist.watcher_id = current_user.id
         @watchlist.following = true
-        if @watchlist.save
+        if @watchlist.save!
             render json: {}
         end
     end

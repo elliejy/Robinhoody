@@ -10,10 +10,7 @@
 #
 
 class Watchlist < ApplicationRecord
-    belongs_to :watcher,
+    belongs_to :user,
     foreign_key: :watcher_id,
     class_name: :User
-    belongs_to :company,
-    foreign_key: :comapny_id,
-    class_name: :Company
 end

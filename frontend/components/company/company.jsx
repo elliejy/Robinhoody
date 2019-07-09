@@ -3,15 +3,15 @@ import React from 'react';
 import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line} from 'recharts';
 import GreetingContainer from '../greeting/greeting_container';
 import {Link} from 'react-router-dom'
+import WatchlistContainer from '../watchlist/watchlist_container';
 
 class Company extends React.Component {
     constructor(props){
         super(props)
-
+        this.ticker= this.props.ticker
         this.state = {
             loading: true
         }
-        this.handleClick = this.handleClick.bind(this)
     }
 
     componentDidMount() {
@@ -33,17 +33,14 @@ class Company extends React.Component {
     }
     //  && prevProps.company.info.symbol.toLowerCase() !== this.props.match.params.ticker
 
-    handleLoading(){
-        if ( !this.props.company || !this.props.company.info || !this.props.company.stock || !this.props.company.stocks ) {
-            return <div>Loading...</div>
-        // } else {
-        //     this.setState({loading:false})
-        }
-    }
-    handleClick(e){
-        e.preventDefault();
-        
-    }
+    // handleLoading(){
+    //     if ( !this.props.company || !this.props.company.info || !this.props.company.stock || !this.props.company.stocks ) {
+    //         return <div>Loading...</div>
+    //     // } else {
+    //     //     this.setState({loading:false})
+    //     }
+    // }
+
     render(){
         
         // if (this.state.loading === true){
@@ -107,7 +104,7 @@ class Company extends React.Component {
                     <p>Unavailable</p>
                     <p id="appr">You can start trading once your account is approved</p> */}
                     <div id="addwatch">
-                        <button onClick={this.handleClick}><p id="addp">Add to Watchlist</p></button>
+                        <WatchlistContainer ticker={this.ticker}/>
                     </div>
                 </div>
               </div>
