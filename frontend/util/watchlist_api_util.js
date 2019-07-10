@@ -1,11 +1,12 @@
 
 
 
-export const postWatchlist = (currentUserId, ticker)=> (
+export const postWatchlist = (ticker)=> (
     $.ajax({
     method: "post",
     url: `/api/watchlists`,
-    ticker})
+    data: ticker
+})
 )
 export const getWatchlists = (id)=> (
     $.ajax({
@@ -13,7 +14,7 @@ export const getWatchlists = (id)=> (
     url: `/api/watchlists`,
     })
 )
-export const deleteWatchlist = (id, ticker)=> (
+export const deleteWatchlist = (id)=> (
     $.ajax({
     method: "delete",
     url: `/api/users/${id}/watchlists`,

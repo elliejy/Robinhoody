@@ -8,18 +8,17 @@ const watchlistsReducer = (state={}, action) => {
 
     switch(action.type) {
         case POST_WATCHLIST:
-            newState[watchlist] = action.ticker
+            newState[watchlists] = action.watchlist
             return newState;
         case GET_WATCHLISTS:
             newState = action.watchlists
             return newState;
         case DELETE_WATCHLIST:
-            newState[watchlist].ticker = undefined
+            newState[watchlists] = undefined
             return newState;
         default:
             return state;
     }
-
 }
 
 export default watchlistsReducer;

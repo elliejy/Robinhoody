@@ -9,9 +9,11 @@ class Api::WatchlistsController < ApplicationController
         @watchlist = Watchlist.new(ticker:params[:ticker])
         @watchlist.watcher_id = current_user.id
         @watchlist.following = true
-        if @watchlist.save!
-            render json: {}
-        end
+        @watchlist.save!
+    end
+
+    def show
+        @watchlist = Watchlist.find_by(params[:ticker])
     end
 
     def destroy

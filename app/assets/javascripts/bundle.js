@@ -90,7 +90,7 @@
 /*!*********************************************!*\
   !*** ./frontend/actions/company_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_COMPANIES, RECEIVE_COMPANY, RECEIVE_STOCK, RECEIVE_STOCKS, RECEIVE_STOCK_INFO, fetchCompanies, fetchCompany, fetchStock, fetch1mStock, fetchStockInfo, fetchAllStockData */
+/*! exports provided: RECEIVE_COMPANIES, RECEIVE_COMPANY, RECEIVE_STOCK, RECEIVE_STOCKS, RECEIVE_STOCK_INFO, RECEIVE_MULTI_STOCKS, fetchCompanies, fetchCompany, fetchStock, fetch1mStock, fetchStockInfo, fetchBatchStocks */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -100,12 +100,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK", function() { return RECEIVE_STOCK; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCKS", function() { return RECEIVE_STOCKS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_INFO", function() { return RECEIVE_STOCK_INFO; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_MULTI_STOCKS", function() { return RECEIVE_MULTI_STOCKS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCompanies", function() { return fetchCompanies; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCompany", function() { return fetchCompany; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchStock", function() { return fetchStock; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch1mStock", function() { return fetch1mStock; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchStockInfo", function() { return fetchStockInfo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAllStockData", function() { return fetchAllStockData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBatchStocks", function() { return fetchBatchStocks; });
 /* harmony import */ var _util_company_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/company_api_util */ "./frontend/util/company_api_util.js");
 
 var RECEIVE_COMPANIES = "RECEIVE_COMPANIES";
@@ -113,6 +114,7 @@ var RECEIVE_COMPANY = "RECEIVE_COMPANY";
 var RECEIVE_STOCK = "RECEIVE_STOCK";
 var RECEIVE_STOCKS = "RECEIVE_STOCKS";
 var RECEIVE_STOCK_INFO = "RECEIVE_STOCK_INFO";
+var RECEIVE_MULTI_STOCKS = "RECEIVE_MULTI_STOCKS";
 
 var receiveCompanies = function receiveCompanies(companies) {
   return {
@@ -152,6 +154,13 @@ var receiveStockInfo = function receiveStockInfo(ticker, data) {
   };
 };
 
+var receiveMulti1MStocks = function receiveMulti1MStocks(payload) {
+  return {
+    type: RECEIVE_MULTI_STOCKS,
+    payload: payload
+  };
+};
+
 var fetchCompanies = function fetchCompanies() {
   return function (dispatch) {
     return _util_company_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchCompanies"]().then(function (companies) {
@@ -187,14 +196,10 @@ var fetchStockInfo = function fetchStockInfo(ticker) {
     });
   };
 };
-var fetchAllStockData = function fetchAllStockData(ticker) {
+var fetchBatchStocks = function fetchBatchStocks(tickers) {
   return function (dispatch) {
-    var performFetches = function performFetches() {
-      return Promise.all([dispatch(fetchStockInfo(ticker)), dispatch(fetchStock(ticker))]);
-    };
-
-    performFetches().then(function (stock) {
-      return dispatch(receiveStock(ticker, stock));
+    return _util_company_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchBatchStocks"](tickers).then(function (payload) {
+      return dispatch(receiveMulti1MStocks(payload));
     });
   };
 };
@@ -326,10 +331,10 @@ var POST_WATCHLIST = "POST_WATCHLIST";
 var GET_WATCHLISTS = "GET_WATCHLISTS";
 var DELETE_WATCHLIST = "DELETE_WATCHLIST";
 
-var postWatchlist = function postWatchlist(ticker) {
+var postWatchlist = function postWatchlist(watchlist) {
   return {
     type: POST_WATCHLIST,
-    ticker: ticker
+    watchlist: watchlist
   };
 };
 
@@ -346,16 +351,16 @@ var deleteWatchlist = function deleteWatchlist() {
   };
 };
 
-var createWatchlist = function createWatchlist(currentUserId, ticker) {
+var createWatchlist = function createWatchlist(ticker) {
   return function (dispatch) {
-    return _util_watchlist_api_util__WEBPACK_IMPORTED_MODULE_0__["postWatchlist"](currentUserId, ticker).then(function (ticker) {
-      return dispatch(postWatchlist(ticker));
+    return _util_watchlist_api_util__WEBPACK_IMPORTED_MODULE_0__["postWatchlist"](ticker).then(function (watchlist) {
+      return dispatch(postWatchlist(watchlist));
     });
   };
 };
-var fetchWatchlists = function fetchWatchlists(currentUserId) {
+var fetchWatchlists = function fetchWatchlists() {
   return function (dispatch) {
-    return _util_watchlist_api_util__WEBPACK_IMPORTED_MODULE_0__["getWatchlists"](currentUserId).then(function (watchlists) {
+    return _util_watchlist_api_util__WEBPACK_IMPORTED_MODULE_0__["getWatchlists"]().then(function (watchlists) {
       return dispatch(getWatchlists(watchlists));
     });
   };
@@ -425,6 +430,68 @@ var App = function App() {
 
 /***/ }),
 
+/***/ "./frontend/components/chart/chart.jsx":
+/*!*********************************************!*\
+  !*** ./frontend/components/chart/chart.jsx ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
+
+
+var Chart = function Chart(props) {
+  debugger;
+  var close = Object.values(props.stocks).map(function (stock) {
+    return stock.close;
+  });
+  var min = -Infinity;
+  var max = Infinity;
+
+  if (close.length >= 1) {
+    min = close.reduce(function (acc, el) {
+      return Math.min(acc, el);
+    });
+    max = close.reduce(function (acc, el) {
+      return Math.max(acc, el);
+    });
+    Object.values(props.stocks).forEach(function (stock) {
+      stock.datetime = stock.date + ' ' + (stock.minute || '');
+    });
+  }
+
+  return React.createElement(recharts__WEBPACK_IMPORTED_MODULE_0__["LineChart"], {
+    width: 1030,
+    height: 250,
+    data: Object.values(props.stocks),
+    margin: {
+      top: 5,
+      right: 30,
+      left: 20,
+      bottom: 5
+    }
+  }, React.createElement(recharts__WEBPACK_IMPORTED_MODULE_0__["XAxis"], {
+    dataKey: "dateTime",
+    hide: true
+  }), React.createElement(recharts__WEBPACK_IMPORTED_MODULE_0__["YAxis"], {
+    dateKey: "close",
+    hide: true,
+    domain: [min, max]
+  }), React.createElement(recharts__WEBPACK_IMPORTED_MODULE_0__["Tooltip"], null), React.createElement(recharts__WEBPACK_IMPORTED_MODULE_0__["Line"], {
+    type: "monotone",
+    dataKey: "close",
+    dot: false,
+    stroke: "#21ce99",
+    yAxisId: 0
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Chart);
+
+/***/ }),
+
 /***/ "./frontend/components/company/company.jsx":
 /*!*************************************************!*\
   !*** ./frontend/components/company/company.jsx ***!
@@ -436,10 +503,11 @@ var App = function App() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
+/* harmony import */ var _chart_chart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../chart/chart */ "./frontend/components/chart/chart.jsx");
 /* harmony import */ var _greeting_greeting_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../greeting/greeting_container */ "./frontend/components/greeting/greeting_container.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _watchlist_watchlist_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../watchlist/watchlist_container */ "./frontend/components/watchlist/watchlist_container.js");
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -459,6 +527,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
  // import NavContainer from '../nav/nav_container';
+
 
 
 
@@ -568,7 +637,7 @@ function (_React$Component) {
         id: "price"
       }, "$", this.props.company.stock.latestPrice), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         id: "pcahnge"
-      }, this.props.company.stock.changePercent, "%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
+      }, this.props.company.stock.changePercent, "%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["LineChart"], {
         width: 1030,
         height: 250,
         data: Object.values(this.props.company.stocks),
@@ -578,14 +647,14 @@ function (_React$Component) {
           left: 20,
           bottom: 5
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["XAxis"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["XAxis"], {
         dataKey: "dateTime",
         hide: true
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["YAxis"], {
         dateKey: "close",
         hide: true,
         domain: [min, max]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Line"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["Tooltip"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["Line"], {
         type: "monotone",
         dataKey: "close",
         dot: false,
@@ -825,6 +894,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _greeting_greeting_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../greeting/greeting_container */ "./frontend/components/greeting/greeting_container.js");
+/* harmony import */ var _watchlist_watchlist_items_containers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../watchlist/watchlist_items_containers */ "./frontend/components/watchlist/watchlist_items_containers.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -847,6 +917,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var Home =
 /*#__PURE__*/
 function (_React$Component) {
@@ -864,6 +935,11 @@ function (_React$Component) {
       loggedIn: Boolean(_this.props.loggedIn),
       currentUser: _this.currentUser
     };
+
+    if (_this.state.loggedIn) {
+      _this.watchlists = _this.props.fetchWatchlists();
+    }
+
     return _this;
   }
 
@@ -887,13 +963,7 @@ function (_React$Component) {
   }, {
     key: "loggedInPath",
     value: function loggedInPath() {
-      // const appl = this.props.fetchStock( 'aapl' );
-      // const tsla = this.props.fetchStock( 'tsla' );
-      // const nflx = this.props.fetchStock( 'nflx' );
-      // const fb = this.props.fetchStock( 'fb' );
-      // const msft = this.props.fetchStock( 'msft' );
-      // const dis = this.props.fetchStock( 'dis' );
-      // const gpro = this.props.fetchStock( 'gpro' );
+      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "loggedin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
@@ -925,43 +995,7 @@ function (_React$Component) {
         className: "company-watchlist"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "watchlist-ul"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Watchlist")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "company-ul"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/companies/appl"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "AAPL"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graph"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "$$Price")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "company-ul"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "TICKER"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graph"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "$$Price")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "company-ul"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "TICKER"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graph"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "$$Price")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "company-ul"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "TICKER"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graph"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "$$Price")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "company-ul"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "TICKER"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graph"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "$$Price")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "company-ul"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "TICKER"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graph"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "$$Price")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "company-ul"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "TICKER"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graph"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "$$Price")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "company-ul"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "TICKER"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graph"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "$$Price")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "company-ul"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "TICKER"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graph"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "$$Price"))))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Watchlist")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watchlist_watchlist_items_containers__WEBPACK_IMPORTED_MODULE_3__["default"], null)))));
     }
   }, {
     key: "loggedOutPath",
@@ -1026,6 +1060,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./home */ "./frontend/components/home/home.jsx");
 /* harmony import */ var _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/watchlist_actions */ "./frontend/actions/watchlist_actions.js");
+/* harmony import */ var _actions_company_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/company_actions */ "./frontend/actions/company_actions.js");
+
 
 
 
@@ -1037,8 +1073,7 @@ var mapStateToProps = function mapStateToProps(_ref) {
       session = _ref.session;
   return {
     loggedIn: Boolean(session.currentUserId),
-    currentUser: session.currentUserId // company: entities.companies[action.ticker]
-
+    currentUser: session.currentUserId
   };
 };
 
@@ -1047,8 +1082,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     logout: function logout() {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["logout"])());
     },
-    fetchWatchlists: function fetchWatchlists(user) {
-      return dispatch(Object(_actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_4__["fetchWatchlists"])(user));
+    fetchWatchlists: function fetchWatchlists() {
+      return dispatch(Object(_actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_4__["fetchWatchlists"])());
     }
   };
 };
@@ -1337,10 +1372,10 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
-/***/ "./frontend/components/watchlist/watchlist.jsx":
-/*!*****************************************************!*\
-  !*** ./frontend/components/watchlist/watchlist.jsx ***!
-  \*****************************************************/
+/***/ "./frontend/components/watchlist/watchlist_button.jsx":
+/*!************************************************************!*\
+  !*** ./frontend/components/watchlist/watchlist_button.jsx ***!
+  \************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1348,6 +1383,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _reducers_selector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../reducers/selector */ "./frontend/reducers/selector.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1368,54 +1404,86 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var Watchlist =
+
+var WatchlistButton =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(Watchlist, _React$Component);
+  _inherits(WatchlistButton, _React$Component);
 
-  function Watchlist(props) {
+  function WatchlistButton(props) {
     var _this;
 
-    _classCallCheck(this, Watchlist);
+    _classCallCheck(this, WatchlistButton);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Watchlist).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(WatchlistButton).call(this, props));
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
-
-    var watchlists = _this.props.fetchWatchlists();
-
-    console.log(watchlists);
+    _this.watchlists = _this.props.fetchWatchlists();
     _this.ticker = _this.props.ticker;
-    _this.state = {};
+    _this.state = {
+      following: _this.checkFollowing()
+    };
     return _this;
   }
 
-  _createClass(Watchlist, [{
+  _createClass(WatchlistButton, [{
     key: "handleClick",
     value: function handleClick(e) {
-      e.preventDefault(); // this.props.createWatchlist(this.props.currentUserId, this.ticker)
+      var _this2 = this;
+
+      e.preventDefault();
+
+      if (e.target.value === "Add to Watchlist") {
+        this.props.createWatchlist(this.ticker).then(function () {
+          return _this2.setState({
+            following: true
+          });
+        });
+      } else if (e.target.value === "Remove from Watchlist") {
+        this.props.removeWatchlist(this.ticker).then(function () {
+          return _this2.setState({
+            following: false
+          });
+        });
+      }
     }
   }, {
     key: "componentDidMount",
-    value: function componentDidMount() {
-      debugger;
-      this.props.fetchWatchlists(this.props.currentUserId);
-      console.log(this.props.watchlists);
+    value: function componentDidMount() {}
+  }, {
+    key: "checkFollowing",
+    value: function checkFollowing() {
+      var _this3 = this;
+
+      var arrlists = Object(_reducers_selector__WEBPACK_IMPORTED_MODULE_1__["asArray"])(this.watchlists);
+      arrlists.map(function (watchlist) {
+        if (watchlist.ticker === _this3.ticker) {
+          return watchlist.following;
+        }
+      });
     }
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.handClick
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        id: "addp"
-      }, "Add to Watchlist"));
+      if (this.state.following) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "submit",
+          onClick: this.handleClick,
+          value: "Remove from Watchlist"
+        });
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "submit",
+          onClick: this.handleClick,
+          value: "Add to Watchlist"
+        });
+      }
     }
   }]);
 
-  return Watchlist;
+  return WatchlistButton;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (Watchlist);
+/* harmony default export */ __webpack_exports__["default"] = (WatchlistButton);
 
 /***/ }),
 
@@ -1428,10 +1496,12 @@ function (_React$Component) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _watchlist__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./watchlist */ "./frontend/components/watchlist/watchlist.jsx");
+/* harmony import */ var _watchlist_button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./watchlist_button */ "./frontend/components/watchlist/watchlist_button.jsx");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/watchlist_actions */ "./frontend/actions/watchlist_actions.js");
+/* harmony import */ var _reducers_selector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../reducers/selector */ "./frontend/reducers/selector.js");
+
 
 
 
@@ -1447,17 +1517,178 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    createWatchlist: function createWatchlist(currentUserId, ticker) {
-      return dispatch(Object(_actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__["createWatchlist"])(currentUserId, ticker));
+    createWatchlist: function createWatchlist(ticker) {
+      return dispatch(Object(_actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__["createWatchlist"])(ticker));
     },
-    fetchWatchlists: function fetchWatchlists(currentUserId) {
-      return dispatch(Object(_actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__["fetchWatchlists"])(currentUserId));
-    } //  removeWatchlist: (ticke)=>dispatch(removeWatchlist(ticker))
-
+    fetchWatchlists: function fetchWatchlists() {
+      return dispatch(Object(_actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__["fetchWatchlists"])());
+    },
+    removeWatchlist: function removeWatchlist(ticker) {
+      return dispatch(Object(_actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__["removeWatchlist"])(ticker));
+    }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(_watchlist__WEBPACK_IMPORTED_MODULE_0__["default"])));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(_watchlist_button__WEBPACK_IMPORTED_MODULE_0__["default"])));
+
+/***/ }),
+
+/***/ "./frontend/components/watchlist/watchlist_items.jsx":
+/*!***********************************************************!*\
+  !*** ./frontend/components/watchlist/watchlist_items.jsx ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _chart_chart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../chart/chart */ "./frontend/components/chart/chart.jsx");
+/* harmony import */ var _reducers_selector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../reducers/selector */ "./frontend/reducers/selector.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var WatchlistItems =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(WatchlistItems, _React$Component);
+
+  function WatchlistItems(props) {
+    var _this;
+
+    _classCallCheck(this, WatchlistItems);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(WatchlistItems).call(this, props));
+    _this.watchlists = _this.props.fetchWatchlists();
+    _this.tickers = _this.getTickers();
+    _this.batchStocks = _this.props.fetchBatchStocks(tickers);
+    return _this;
+  } // if(!props.watchlists) {
+  //     debugger
+  //      watchlists = Object.values(props.fetchWatchlists())
+  // }else { watchlists = Object.values(props.watchlists)}
+
+
+  _createClass(WatchlistItems, [{
+    key: "getTickers",
+    value: function getTickers() {
+      var tickers = [];
+
+      if (!this.watchlists) {
+        this.watchlists = this.props.fetchWatchlists();
+      } else {
+        this.watchlists.map(function (watchlist) {
+          tickers.push(watchlist.ticker);
+          return tickers;
+        });
+      }
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (this.props.watchlists.length !== prevProps.watchlists.length) {
+        var batchStocks = this.props.fetchBatchStocks(this.tickers);
+        this.getAllTheInfo(batchStocks);
+      }
+    }
+  }, {
+    key: "getAllTheInfo",
+    value: function getAllTheInfo(multistocks) {
+      arrStocks = Object(_reducers_selector__WEBPACK_IMPORTED_MODULE_2__["asArray"])(multistocks);
+      arrStocks.map(function (stock) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: "home-watchlist-items",
+          key: stock.quote[symbol]
+        }, stock.quote[symbol], react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_chart_chart__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          props: stock.chart
+        }), stock.quote[close]);
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var getwatchlists = this.getAllTheInfo(this.batchStocks);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "home-watchlist-items"
+      }, getwatchlists);
+    }
+  }]);
+
+  return WatchlistItems;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (WatchlistItems);
+
+/***/ }),
+
+/***/ "./frontend/components/watchlist/watchlist_items_containers.js":
+/*!*********************************************************************!*\
+  !*** ./frontend/components/watchlist/watchlist_items_containers.js ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _watchlist_items__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./watchlist_items */ "./frontend/components/watchlist/watchlist_items.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/watchlist_actions */ "./frontend/actions/watchlist_actions.js");
+/* harmony import */ var _actions_company_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/company_actions */ "./frontend/actions/company_actions.js");
+/* harmony import */ var _reducers_selector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../reducers/selector */ "./frontend/reducers/selector.js");
+
+
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(props) {
+  return {
+    watchlists: Object(_reducers_selector__WEBPACK_IMPORTED_MODULE_5__["asArray"])(props.entities.watchlists),
+    currentUserId: props.session.currentUserId,
+    multiStocks: props.entities.companies
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchWatchlists: function fetchWatchlists() {
+      return dispatch(Object(_actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__["fetchWatchlists"])());
+    },
+    fetchStock: function fetchStock(ticker) {
+      return dispatch(Object(_actions_company_actions__WEBPACK_IMPORTED_MODULE_4__["fetchStock"])(ticker));
+    },
+    fetch1mStock: function fetch1mStock(ticker) {
+      return dispatch(Object(_actions_company_actions__WEBPACK_IMPORTED_MODULE_4__["fetch1mStock"])(ticker));
+    },
+    fetchBatchStocks: function fetchBatchStocks(tickers) {
+      return dispatch(Object(_actions_company_actions__WEBPACK_IMPORTED_MODULE_4__["fetchBatchStocks"])(tickers));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(_watchlist_items__WEBPACK_IMPORTED_MODULE_0__["default"])));
 
 /***/ }),
 
@@ -1507,6 +1738,10 @@ var companiesReducer = function companiesReducer() {
       newState[action.ticker] = {
         info: action.data
       };
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["merge"])({}, state, newState);
+
+    case _actions_company_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_MULTI_STOCKS"]:
+      newState = action.payload;
       return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["merge"])({}, state, newState);
 
     default:
@@ -1601,6 +1836,24 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   errors: _errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/selector.js":
+/*!***************************************!*\
+  !*** ./frontend/reducers/selector.js ***!
+  \***************************************/
+/*! exports provided: asArray */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "asArray", function() { return asArray; });
+var asArray = function asArray(object) {
+  return Object.keys(object).map(function (key) {
+    return object[key];
+  });
+};
 
 /***/ }),
 
@@ -1706,7 +1959,7 @@ var watchlistsReducer = function watchlistsReducer() {
 
   switch (action.type) {
     case _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_0__["POST_WATCHLIST"]:
-      newState[watchlist] = action.ticker;
+      newState[watchlists] = action.watchlist;
       return newState;
 
     case _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_0__["GET_WATCHLISTS"]:
@@ -1714,7 +1967,7 @@ var watchlistsReducer = function watchlistsReducer() {
       return newState;
 
     case _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_0__["DELETE_WATCHLIST"]:
-      newState[watchlist].ticker = undefined;
+      newState[watchlists] = undefined;
       return newState;
 
     default:
@@ -1825,7 +2078,7 @@ var configureStore = function configureStore() {
 /*!*******************************************!*\
   !*** ./frontend/util/company_api_util.js ***!
   \*******************************************/
-/*! exports provided: fetchCompanies, fetchCompany, fetchDailyData, fetch1mData, fetc5yData, fetchStockInfo, fetchUserWatchlist, createUserWatchlist */
+/*! exports provided: fetchCompanies, fetchCompany, fetchDailyData, fetch1mData, fetch5yData, fetchStockInfo, fetchBatchStocks */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1834,10 +2087,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCompany", function() { return fetchCompany; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchDailyData", function() { return fetchDailyData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch1mData", function() { return fetch1mData; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetc5yData", function() { return fetc5yData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch5yData", function() { return fetch5yData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchStockInfo", function() { return fetchStockInfo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUserWatchlist", function() { return fetchUserWatchlist; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createUserWatchlist", function() { return createUserWatchlist; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBatchStocks", function() { return fetchBatchStocks; });
 var fetchCompanies = function fetchCompanies() {
   return $.ajax({
     method: "get",
@@ -1862,7 +2114,7 @@ var fetch1mData = function fetch1mData(ticker) {
     url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/chart/1m?token=Tsk_6f506030b36145d69d8d9de043cd9e68")
   });
 };
-var fetc5yData = function fetc5yData(ticker) {
+var fetch5yData = function fetch5yData(ticker) {
   return $.ajax({
     method: "get",
     url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/quote?token=Tsk_6f506030b36145d69d8d9de043cd9e68")
@@ -1874,17 +2126,11 @@ var fetchStockInfo = function fetchStockInfo(ticker) {
     url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/company?token=Tpk_a8dfb5b5d8cc45589e011267f749a13b")
   });
 };
-var fetchUserWatchlist = function fetchUserWatchlist(user) {
+var fetchBatchStocks = function fetchBatchStocks(tickers) {
+  var commatickers = tickers.join(',');
   return $.ajax({
-    method: 'get',
-    url: "/api/users/".concat(user.id, "/watchlist")
-  });
-};
-var createUserWatchlist = function createUserWatchlist(ticker) {
-  return $.ajax({
-    method: 'post',
-    url: "/api/users/".concat(user.id),
-    data: ticker
+    method: "get",
+    url: "https://sandbox.iexapis.com/stable/stock/market/batch?symbols=".concat(commatickers, "&types=quote,news,chart&range=1m&last=5&token=Tpk_a8dfb5b5d8cc45589e011267f749a13b")
   });
 };
 
@@ -2014,11 +2260,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postWatchlist", function() { return postWatchlist; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getWatchlists", function() { return getWatchlists; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteWatchlist", function() { return deleteWatchlist; });
-var postWatchlist = function postWatchlist(currentUserId, ticker) {
+var postWatchlist = function postWatchlist(ticker) {
   return $.ajax({
     method: "post",
     url: "/api/watchlists",
-    ticker: ticker
+    data: ticker
   });
 };
 var getWatchlists = function getWatchlists(id) {
@@ -2027,7 +2273,7 @@ var getWatchlists = function getWatchlists(id) {
     url: "/api/watchlists"
   });
 };
-var deleteWatchlist = function deleteWatchlist(id, ticker) {
+var deleteWatchlist = function deleteWatchlist(id) {
   return $.ajax({
     method: "delete",
     url: "/api/users/".concat(id, "/watchlists")

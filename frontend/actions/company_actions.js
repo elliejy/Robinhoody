@@ -5,6 +5,7 @@ export const RECEIVE_COMPANY = "RECEIVE_COMPANY";
 export const RECEIVE_STOCK = "RECEIVE_STOCK";
 export const RECEIVE_STOCKS = "RECEIVE_STOCKS";
 export const RECEIVE_STOCK_INFO = "RECEIVE_STOCK_INFO";
+export const RECEIVE_MULTI_STOCKS = "RECEIVE_MULTI_STOCKS";
 
 
 const receiveCompanies = (companies)=> ({
@@ -31,6 +32,10 @@ const receiveStockInfo = (ticker, data)=>({
     ticker,
     data
 })
+const receiveMulti1MStocks = (payload)=> ({
+    type: RECEIVE_MULTI_STOCKS,
+    payload
+})
 
 export const fetchCompanies = () => dispatch => (
     CompanyApiUtils.fetchCompanies()
@@ -55,12 +60,7 @@ export const fetchStockInfo = ticker => dispatch => (
         .then( data => dispatch( receiveStockInfo( ticker, data ) ) )
 );
 
-export const fetchAllStockData = ticker => dispatch => {
-    const performFetches = () => Promise.all([
-        dispatch(fetchStockInfo(ticker)),
-        dispatch(fetchStock(ticker))
-    ]);
-
-
-    performFetches().then( stock => dispatch( receiveStock( ticker, stock ) ))
-}
+export const fetchBatchStocks = tickers => dispatch=> (
+    CompanyApiUtils.fetchBatchStocks(tickers)
+        .then( payload => dispatch( receiveMulti1MStocks(payload)))
+)

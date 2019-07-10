@@ -3,7 +3,8 @@ import {
     RECEIVE_COMPANY, 
     RECEIVE_STOCK, 
     RECEIVE_STOCKS, 
-    RECEIVE_STOCK_INFO} from '../actions/company_actions';
+    RECEIVE_STOCK_INFO,
+    RECEIVE_MULTI_STOCKS} from '../actions/company_actions';
 import {merge} from 'lodash'
 
 const companiesReducer = (state={}, action) => { 
@@ -24,6 +25,9 @@ const companiesReducer = (state={}, action) => {
             return merge( {}, state, newState );
         case RECEIVE_STOCK_INFO:
             newState[action.ticker] = {info: action.data}
+            return merge( {}, state, newState );
+        case RECEIVE_MULTI_STOCKS:
+            newState= action.payload
             return merge( {}, state, newState );
         default:
             return state;

@@ -34,13 +34,14 @@ body {
   border-radius: 3px;
   transition: box-shadow 0.3s ease-in-out;
   background-color: #1b1b1d;
+  min-height: 4vh;
 
 }
 .search-input-black{
   border: none;
   background-color: #1b1b1d;
   width: 30vw;
-  font-size: 14px;
+  font-size: 17px;
 }
 
 .search-black:hover {
@@ -55,7 +56,7 @@ body {
 }
 .magwhite{
   width: 1.5%;
-  height: 1.8%;
+  height: 1.5%;
   padding: 0 6px;
 }
 

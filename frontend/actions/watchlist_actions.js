@@ -3,9 +3,9 @@ import * as WatchListUtil from '../util/watchlist_api_util';
 export const POST_WATCHLIST = "POST_WATCHLIST";
 export const GET_WATCHLISTS = "GET_WATCHLISTS";
 export const DELETE_WATCHLIST = "DELETE_WATCHLIST"
-const postWatchlist = (ticker) => ({
+const postWatchlist = (watchlist) => ({
         type: POST_WATCHLIST,
-        ticker
+        watchlist
 });
 
 const getWatchlists = (watchlists) => ({
@@ -16,15 +16,15 @@ const deleteWatchlist = () => ({
     type: DELETE_WATCHLIST,
 
 });
-export const createWatchlist = (currentUserId, ticker) => dispatch => {
+export const createWatchlist = (ticker) => dispatch => {
     return(
-    WatchListUtil.postWatchlist(currentUserId, ticker)
-    .then((ticker)=> dispatch(postWatchlist(ticker))))
+    WatchListUtil.postWatchlist(ticker)
+    .then((watchlist)=> dispatch(postWatchlist(watchlist))))
 };
 
-export const fetchWatchlists = (currentUserId) => dispatch => {
+export const fetchWatchlists = () => dispatch => {
     return(
-    WatchListUtil.getWatchlists( currentUserId)
+    WatchListUtil.getWatchlists( )
     .then( ( watchlists ) => dispatch( getWatchlists( watchlists ) ) ) )
 };
 export const removeWatchlist = (ticker) => dispatch => (

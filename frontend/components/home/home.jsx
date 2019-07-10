@@ -1,20 +1,28 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import GreetingContainer from '../greeting/greeting_container';
+import WatchlistItemsContainer from '../watchlist/watchlist_items_containers';
 
 class Home extends React.Component {
     constructor(props){
         super(props)
         this.currentUser = this.props.currentUser;
         this.logout = this.props.logout;   
+        
         this.state = {
             loggedIn: Boolean( this.props.loggedIn),
-            currentUser: this.currentUser
+            currentUser: this.currentUser,
+
         }
+        if ( this.state.loggedIn ) {
+            this.watchlists = this.props.fetchWatchlists() }
     }
+
+        
+    
     
     componentDidMount() {
-
+    
         // console.log( this.currentUser)
         // console.log(this.props)
    
@@ -33,14 +41,7 @@ class Home extends React.Component {
     }
 
     loggedInPath(){
-
-        // const appl = this.props.fetchStock( 'aapl' );
-        // const tsla = this.props.fetchStock( 'tsla' );
-        // const nflx = this.props.fetchStock( 'nflx' );
-        // const fb = this.props.fetchStock( 'fb' );
-        // const msft = this.props.fetchStock( 'msft' );
-        // const dis = this.props.fetchStock( 'dis' );
-        // const gpro = this.props.fetchStock( 'gpro' );
+        debugger
         return(<>
            <div className="loggedin">
             <header className="header">
@@ -61,60 +62,7 @@ class Home extends React.Component {
                         <li>Watchlist</li>
                         {/* <li>...</li> */}
                     </ul>
-                    <ul className="company-ul">
-                        <Link to="/companies/appl"></Link>
-                        <li>AAPL</li>
-                        <li>Graph</li>
-                            <li>$$Price</li>
-                    </ul>
-                    <ul className="company-ul">
-                        <a href="#"></a>
-                        <li>TICKER</li>
-                        <li>Graph</li>
-                        <li>$$Price</li>
-                    </ul>
-                    <ul className="company-ul">
-                        <a href="#"></a>
-                        <li>TICKER</li>
-                        <li>Graph</li>
-                        <li>$$Price</li>
-                    </ul>
-                    <ul className="company-ul">
-                        <a href="#"></a>
-                        <li>TICKER</li>
-                        <li>Graph</li>
-                        <li>$$Price</li>
-                    </ul>
-                    <ul className="company-ul">
-                        <a href="#"></a>
-                        <li>TICKER</li>
-                        <li>Graph</li>
-                        <li>$$Price</li>
-                    </ul>
-                    <ul className="company-ul">
-                        <a href="#"></a>
-                        <li>TICKER</li>
-                        <li>Graph</li>
-                        <li>$$Price</li>
-                    </ul>
-                    <ul className="company-ul">
-                        <a href="#"></a>
-                        <li>TICKER</li>
-                        <li>Graph</li>
-                        <li>$$Price</li>
-                    </ul>
-                    <ul className="company-ul">
-                        <a href="#"></a>
-                        <li>TICKER</li>
-                        <li>Graph</li>
-                        <li>$$Price</li>
-                    </ul>
-                    <ul className="company-ul">
-                        <a href="#"></a>
-                        <li>TICKER</li>
-                        <li>Graph</li>
-                        <li>$$Price</li>
-                    </ul>
+                        <WatchlistItemsContainer  />
                 </div>
             
             </body>

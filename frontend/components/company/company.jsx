@@ -1,9 +1,11 @@
 import React from 'react';
 // import NavContainer from '../nav/nav_container';
-import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line} from 'recharts';
+import Chart from '../chart/chart';
 import GreetingContainer from '../greeting/greeting_container';
 import {Link} from 'react-router-dom'
 import WatchlistContainer from '../watchlist/watchlist_container';
+import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from 'recharts';
+
 
 class Company extends React.Component {
     constructor(props){
@@ -49,6 +51,7 @@ class Company extends React.Component {
         if ( !this.props.company || !this.props.company.info || !this.props.company.stock || !this.props.company.stocks ) {
             return <div>Loading...</div>
         }
+       
         const close = Object.values( this.props.company.stocks ).map( stock => ( stock.close ) )
         let min = -Infinity
         let max = Infinity
@@ -59,8 +62,6 @@ class Company extends React.Component {
             Object.values( this.props.company.stocks ).forEach( stock => { stock.datetime = stock.date + ' ' + ( stock.minute || '' ) } )
 
         }
-   
-
         return (
             <>
                 <div className="loggedin">
@@ -82,15 +83,16 @@ class Company extends React.Component {
                     <h5 id="pcahnge">{ this.props.company.stock.changePercent }%</h5> 
 
 
-                <LineChart width={ 1030 } height={ 250 } data={ Object.values(this.props.company.stocks) }
-                    margin={ { top: 5, right: 30, left: 20, bottom: 5 } }>
-            
-                    <XAxis dataKey="dateTime" hide={ true } />
-                    <YAxis dateKey="close" hide={true} domain={[min, max]}/>
-                    <Tooltip />
+                        
+                        <LineChart width={ 1030 } height={ 250 } data={ Object.values( this.props.company.stocks ) }
+                            margin={ { top: 5, right: 30, left: 20, bottom: 5 } }>
 
-                    <Line type="monotone" dataKey="close" dot={ false } stroke='#21ce99' yAxisId={ 0 } />
-                </LineChart>
+                            <XAxis dataKey="dateTime" hide={ true } />
+                            <YAxis dateKey="close" hide={ true } domain={ [min, max] } />
+                            <Tooltip />
+
+                            <Line type="monotone" dataKey="close" dot={ false } stroke='#21ce99' yAxisId={ 0 } />
+                        </LineChart>
 
                 <div className="about">
                     <h2 id="about">About</h2>
