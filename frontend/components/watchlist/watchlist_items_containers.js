@@ -6,12 +6,12 @@ import { fetch1mStock, fetchStock, fetchBatchStocks} from '../../actions/company
 import {asArray} from '../../reducers/selector';
 
 
-const mapStateToProps = ( props ) => {
+const mapStateToProps = ( state ) => {
 
     return {
-        watchlists: asArray(props.entities.watchlists),
-        currentUserId: props.session.currentUserId,
-        multiStocks: props.entities.companies
+        watchlists: asArray(state.entities.watchlists),
+        currentUserId: state.session.currentUserId,
+        multiStocks: asArray(state.entities.companies)
     }
 };
 
@@ -25,4 +25,4 @@ const mapDispatchToProps = dispatch => {
 };
 
 
-export default withRouter( connect( mapStateToProps, mapDispatchToProps )( WatchlistItems ) );
+export default connect( mapStateToProps, mapDispatchToProps )( WatchlistItems );

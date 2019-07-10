@@ -4,60 +4,37 @@ import {asArray} from '../../reducers/selector';
 
 
 class WatchlistItems extends React.Component{
-    constructor(props){
-        super(props)
-        this.watchlists= this.props.fetchWatchlists();
-        this.tickers = this.getTickers();
-        this.batchStocks = this.props.fetchBatchStocks( tickers )
+  
+    componentDidUpdate(prevProps) {
+
+        if ( this.props.watchlists.length !== prevProps.watchlists.length ) {
+            this.props.fetchBatchStocks(
+                this.props.watchlists.map(watchlist=>watchlist.ticker)
+                )
+        }
+
     }
-    // if(!props.watchlists) {
-    //     debugger
-    //      watchlists = Object.values(props.fetchWatchlists())
-    // }else { watchlists = Object.values(props.watchlists)}
 
-    getTickers(){
-        let tickers = [];
-        if(!this.watchlists){
-            this.watchlists = this.props.fetchWatchlists()
-        } else {
-        this.watchlists.map( ( watchlist ) => {
-        tickers.push( watchlist.ticker )
-        return tickers
-        })
-    }
-}
-
-    componentDidUpdate(prevProps){
-
-        if(this.props.watchlists.length!==prevProps.watchlists.length){
-            
-            const batchStocks = this.props.fetchBatchStocks( this.tickers )
-            this.getAllTheInfo(batchStocks);
-    }}
-
-    getAllTheInfo(multistocks){
-        arrStocks = asArray(multistocks);
-        arrStocks.map(stock=>{
-            return (
-                <li className="home-watchlist-items" key={stock.quote[symbol]}>
-                {stock.quote[symbol]} 
-                <Chart props={ stock.chart } />
-                {stock.quote[close]}</li>
-            )
-        })
-        
-    }
     render()  {
-
-        const getwatchlists = this.getAllTheInfo( this.batchStocks)
-
+        
+        if(!this.props.watchlists.length){
+            return ( 
+                <div>Loading...</div>
+            )
+        }
         return (
             <ul className="home-watchlist-items">
-                {getwatchlists}
+               { this.props.multiStocks.map( stock => {
+                return (
+                <li className="home-watchlist-items" key={ stock.quote.symbol  }>
+                    { stock.quote.symbol}
+                    <Chart chart={stock.chart} className="home-chart" />
+                    { stock.quote.close }
+                </li>
+                )}
+            )}
             </ul> )
         }
-    
-
 }
 
 

@@ -15,7 +15,7 @@ class Home extends React.Component {
 
         }
         if ( this.state.loggedIn ) {
-            this.watchlists = this.props.fetchWatchlists() }
+            this.props.fetchWatchlists() }
     }
 
         
@@ -41,7 +41,6 @@ class Home extends React.Component {
     }
 
     loggedInPath(){
-        debugger
         return(<>
            <div className="loggedin">
             <header className="header">
@@ -54,7 +53,7 @@ class Home extends React.Component {
                     <GreetingContainer />
                 </Link>
             </header>
-            <body className="loggedin-body">
+            <div className="loggedin-body">
                 <h1 className="loggedin-h1">Welcome to Robinhoody</h1>
                 <img className="default-chart" src={window.images.defchart} alt="Default Chart"/>
                 <div className="company-watchlist">
@@ -65,12 +64,12 @@ class Home extends React.Component {
                         <WatchlistItemsContainer  />
                 </div>
             
-            </body>
+            </div>
             </div>
         </>)
     }
     loggedOutPath(){
-        debugger
+
         return ( <>
             <header className="header">
                 <Link to="/" className="header-link">

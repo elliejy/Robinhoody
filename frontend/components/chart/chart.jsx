@@ -1,20 +1,21 @@
+import React from 'react';
 import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from 'recharts';
 
-const Chart =(props) => {
-    debugger
-    const close = Object.values( props.stocks ).map( stock => ( stock.close ) )
+
+const Chart =({chart}) => {
+    const close = Object.values( chart ).map( stock => ( stock.close ) )
     let min = -Infinity
     let max = Infinity
     if ( close.length >= 1 ) {
         min = close.reduce( ( acc, el ) => ( Math.min( acc, el ) ) )
         max = close.reduce( ( acc, el ) => ( Math.max( acc, el ) ) )
 
-        Object.values( props.stocks ).forEach( stock => { stock.datetime = stock.date + ' ' + ( stock.minute || '' ) } )
+        Object.values( chart ).forEach( stock => { stock.datetime = stock.date + ' ' + ( stock.minute || '' ) } )
 
     }
 
     return (
-     <LineChart width={ 1030 } height={ 250 } data={ Object.values( props.stocks ) }
+     <LineChart width={ 1030 } height={ 250 } data={ Object.values( chart ) }
         margin={ { top: 5, right: 30, left: 20, bottom: 5 } }>
 
         <XAxis dataKey="dateTime" hide={ true } />

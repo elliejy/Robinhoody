@@ -439,12 +439,15 @@ var App = function App() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
 
 
-var Chart = function Chart(props) {
-  debugger;
-  var close = Object.values(props.stocks).map(function (stock) {
+
+var Chart = function Chart(_ref) {
+  var chart = _ref.chart;
+  var close = Object.values(chart).map(function (stock) {
     return stock.close;
   });
   var min = -Infinity;
@@ -457,29 +460,29 @@ var Chart = function Chart(props) {
     max = close.reduce(function (acc, el) {
       return Math.max(acc, el);
     });
-    Object.values(props.stocks).forEach(function (stock) {
+    Object.values(chart).forEach(function (stock) {
       stock.datetime = stock.date + ' ' + (stock.minute || '');
     });
   }
 
-  return React.createElement(recharts__WEBPACK_IMPORTED_MODULE_0__["LineChart"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
     width: 1030,
     height: 250,
-    data: Object.values(props.stocks),
+    data: Object.values(chart),
     margin: {
       top: 5,
       right: 30,
       left: 20,
       bottom: 5
     }
-  }, React.createElement(recharts__WEBPACK_IMPORTED_MODULE_0__["XAxis"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["XAxis"], {
     dataKey: "dateTime",
     hide: true
-  }), React.createElement(recharts__WEBPACK_IMPORTED_MODULE_0__["YAxis"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
     dateKey: "close",
     hide: true,
     domain: [min, max]
-  }), React.createElement(recharts__WEBPACK_IMPORTED_MODULE_0__["Tooltip"], null), React.createElement(recharts__WEBPACK_IMPORTED_MODULE_0__["Line"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Line"], {
     type: "monotone",
     dataKey: "close",
     dot: false,
@@ -937,7 +940,7 @@ function (_React$Component) {
     };
 
     if (_this.state.loggedIn) {
-      _this.watchlists = _this.props.fetchWatchlists();
+      _this.props.fetchWatchlists();
     }
 
     return _this;
@@ -963,7 +966,6 @@ function (_React$Component) {
   }, {
     key: "loggedInPath",
     value: function loggedInPath() {
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "loggedin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
@@ -983,7 +985,7 @@ function (_React$Component) {
         type: "search",
         placeholder: "Search",
         className: "search-input-black"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_greeting_greeting_container__WEBPACK_IMPORTED_MODULE_2__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("body", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_greeting_greeting_container__WEBPACK_IMPORTED_MODULE_2__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "loggedin-body"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "loggedin-h1"
@@ -1000,7 +1002,6 @@ function (_React$Component) {
   }, {
     key: "loggedOutPath",
     value: function loggedOutPath() {
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
         className: "header"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -1573,64 +1574,39 @@ var WatchlistItems =
 function (_React$Component) {
   _inherits(WatchlistItems, _React$Component);
 
-  function WatchlistItems(props) {
-    var _this;
-
+  function WatchlistItems() {
     _classCallCheck(this, WatchlistItems);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(WatchlistItems).call(this, props));
-    _this.watchlists = _this.props.fetchWatchlists();
-    _this.tickers = _this.getTickers();
-    _this.batchStocks = _this.props.fetchBatchStocks(tickers);
-    return _this;
-  } // if(!props.watchlists) {
-  //     debugger
-  //      watchlists = Object.values(props.fetchWatchlists())
-  // }else { watchlists = Object.values(props.watchlists)}
-
+    return _possibleConstructorReturn(this, _getPrototypeOf(WatchlistItems).apply(this, arguments));
+  }
 
   _createClass(WatchlistItems, [{
-    key: "getTickers",
-    value: function getTickers() {
-      var tickers = [];
-
-      if (!this.watchlists) {
-        this.watchlists = this.props.fetchWatchlists();
-      } else {
-        this.watchlists.map(function (watchlist) {
-          tickers.push(watchlist.ticker);
-          return tickers;
-        });
-      }
-    }
-  }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       if (this.props.watchlists.length !== prevProps.watchlists.length) {
-        var batchStocks = this.props.fetchBatchStocks(this.tickers);
-        this.getAllTheInfo(batchStocks);
+        this.props.fetchBatchStocks(this.props.watchlists.map(function (watchlist) {
+          return watchlist.ticker;
+        }));
       }
-    }
-  }, {
-    key: "getAllTheInfo",
-    value: function getAllTheInfo(multistocks) {
-      arrStocks = Object(_reducers_selector__WEBPACK_IMPORTED_MODULE_2__["asArray"])(multistocks);
-      arrStocks.map(function (stock) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "home-watchlist-items",
-          key: stock.quote[symbol]
-        }, stock.quote[symbol], react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_chart_chart__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          props: stock.chart
-        }), stock.quote[close]);
-      });
     }
   }, {
     key: "render",
     value: function render() {
-      var getwatchlists = this.getAllTheInfo(this.batchStocks);
+      if (!this.props.watchlists.length) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...");
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "home-watchlist-items"
-      }, getwatchlists);
+      }, this.props.multiStocks.map(function (stock) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: "home-watchlist-items",
+          key: stock.quote.symbol
+        }, stock.quote.symbol, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_chart_chart__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          chart: stock.chart,
+          className: "home-chart"
+        }), stock.quote.close);
+      }));
     }
   }]);
 
@@ -1663,11 +1639,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mapStateToProps = function mapStateToProps(props) {
+var mapStateToProps = function mapStateToProps(state) {
   return {
-    watchlists: Object(_reducers_selector__WEBPACK_IMPORTED_MODULE_5__["asArray"])(props.entities.watchlists),
-    currentUserId: props.session.currentUserId,
-    multiStocks: props.entities.companies
+    watchlists: Object(_reducers_selector__WEBPACK_IMPORTED_MODULE_5__["asArray"])(state.entities.watchlists),
+    currentUserId: state.session.currentUserId,
+    multiStocks: Object(_reducers_selector__WEBPACK_IMPORTED_MODULE_5__["asArray"])(state.entities.companies)
   };
 };
 
@@ -1688,7 +1664,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(_watchlist_items__WEBPACK_IMPORTED_MODULE_0__["default"])));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(_watchlist_items__WEBPACK_IMPORTED_MODULE_0__["default"]));
 
 /***/ }),
 
