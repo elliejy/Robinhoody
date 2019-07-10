@@ -4,43 +4,46 @@ import { asArray } from '../../reducers/selector';
 class WatchlistButton extends React.Component {
     constructor(props){
         super(props)
-        this.handleClick = this.handleClick.bind(this);
-        this.watchlists = this.props.fetchWatchlists()
+        this.handleSubmit = this.handleSubmit.bind(this);
 
-        this.ticker = this.props.ticker
         this.state={
-            following: this.checkFollowing()
+            following: true
         }
     }
-    handleClick( e ){
+    handleSubmit( e ){
         e.preventDefault();
-        if ( e.target.value === "Add to Watchlist"){
-            this.props.createWatchlist( this.ticker ).then(()=>this.setState({following:true}))
-        } else if ( e.target.value ==="Remove from Watchlist"){
-            this.props.removeWatchlist( this.ticker ).then( () => this.setState( { following: false } ) )
+        debugger
+        if ( e.target.innerHTML === '<input type="submit" value="Add to Watchlist">'){
+            this.props.createWatchlist( this.props.ticker ).then(()=> this.setState({ following: false }))
+        } else if ( e.target.innerHTML === '<input type="submit" value="Remove from Watchlist">'){
+            this.props.removeWatchlist( this.props.currentUserId).then( () => this.setState( { following: true } ) )
         }
 
     }
 
     componentDidMount() {  
- 
-    }
-
-    checkFollowing(){
-        const arrlists = asArray(this.watchlists)
-        arrlists.map(watchlist=>{
-           if(watchlist.ticker === this.ticker){
-               return watchlist.following
-           }
-        })
+        this.props.watchlists.map( watchlist => {
+            if ( watchlist.ticker === this.props.ticker.toLowerCase() && watchlist.following !== this.state.following ) {
+                if( watchlist.following === true){
+                    this.setState( { following: true } )
+                }else{
+                    this.setState( {following: false})
+                }
+            }
+        } )
     }
 
     render(){ 
         if(this.state.following){
-            return <input type="submit" onClick={ this.handleClick } value="Remove from Watchlist"/>
+            return(
+            <form onSubmit={ this.handleSubmit }>
+                <input type="submit" value="Remove from Watchlist"/>
+            </form>)
         }else {
             return (
-                <input type="submit" onClick={ this.handleClick } value="Add to Watchlist"/>
+            <form onSubmit={ this.handleSubmit }>
+                <input type="submit" value="Add to Watchlist"/>
+            </form>
         )}
     }
   

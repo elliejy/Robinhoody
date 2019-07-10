@@ -11,8 +11,9 @@ class Company extends React.Component {
     constructor(props){
         super(props)
         this.ticker= this.props.ticker
-        this.state = {
-            loading: true
+        
+        if ( this.props.loggedIn ) {
+            this.props.fetchWatchlists()
         }
     }
 
@@ -27,6 +28,7 @@ class Company extends React.Component {
     componentDidUpdate(prevProps){
         const ticker = this.props.match.params.ticker;
         if ( prevProps.ticker!==this.props.ticker){
+  
             this.props.fetchStockInfo( this.props.match.params.ticker)
             this.props.fetchStock( this.props.match.params.ticker);
             this.props.fetch1mStock( this.props.match.params.ticker )

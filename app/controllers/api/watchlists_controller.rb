@@ -17,10 +17,14 @@ class Api::WatchlistsController < ApplicationController
     end
 
     def destroy
-        @watchlist= Watchlist.find_by(watcher_id:current_user.id)
-        company = @watchlist.find_by(ticker:params[:ticker])
+        @watchlists= Watchlist.where(watcher_id:current_user.id)
+        company = @watchlists.find_by(ticker:params[:ticker])
         company.following=false
         company.save
+    end
+
+    def update
+        
     end
      private
   def company_params

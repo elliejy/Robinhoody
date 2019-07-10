@@ -7,7 +7,8 @@ import {asArray} from '../../reducers/selector';
 const mapStateToProps = (state, ownProps) => {
 
     return {
-        watchlists: state.watchlists,
+      
+        watchlists: asArray( state.entities.watchlists ),
         ticker: ownProps.ticker,
         currentUserId: state.session.currentUserId
     }
@@ -17,7 +18,7 @@ const mapDispatchToProps = dispatch => {
     return ({
     createWatchlist: ( ticker ) => dispatch( createWatchlist(ticker)),
     fetchWatchlists: ( ) => dispatch( fetchWatchlists()),
-    removeWatchlist: (ticker)=>dispatch(removeWatchlist(ticker))
+    removeWatchlist: ()=>dispatch(removeWatchlist()),
     })
 };
 

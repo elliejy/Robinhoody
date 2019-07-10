@@ -27,7 +27,7 @@ export const fetchWatchlists = () => dispatch => {
     WatchListUtil.getWatchlists( )
     .then( ( watchlists ) => dispatch( getWatchlists( watchlists ) ) ) )
 };
-export const removeWatchlist = (ticker) => dispatch => (
-    WatchListUtil.deleteWatchlist(ticker)
+export const removeWatchlist = (currentUserID) => dispatch => (
+    WatchListUtil.deleteWatchlist( currentUserID)
     .then(()=> dispatch(deleteWatchlist()))
 );

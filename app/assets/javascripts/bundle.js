@@ -365,9 +365,9 @@ var fetchWatchlists = function fetchWatchlists() {
     });
   };
 };
-var removeWatchlist = function removeWatchlist(ticker) {
+var removeWatchlist = function removeWatchlist(currentUserID) {
   return function (dispatch) {
-    return _util_watchlist_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteWatchlist"](ticker).then(function () {
+    return _util_watchlist_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteWatchlist"](currentUserID).then(function () {
       return dispatch(deleteWatchlist());
     });
   };
@@ -550,9 +550,11 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Company).call(this, props));
     _this.ticker = _this.props.ticker;
-    _this.state = {
-      loading: true
-    };
+
+    if (_this.props.loggedIn) {
+      _this.props.fetchWatchlists();
+    }
+
     return _this;
   }
 
@@ -700,6 +702,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _company__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./company */ "./frontend/components/company/company.jsx");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _actions_company_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/company_actions */ "./frontend/actions/company_actions.js");
+/* harmony import */ var _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/watchlist_actions */ "./frontend/actions/watchlist_actions.js");
+
 
 
 
@@ -709,13 +713,16 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var ticker = ownProps.match.params.ticker;
   return {
     company: state.entities.companies[ticker],
-    ticker: ownProps.match.params.ticker
+    ticker: ownProps.match.params.ticker,
+    loggedIn: Boolean(state.session.currentUserId)
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    // fetchAllStockData: ticker => dispatch(fetchAllStockData(ticker)),
+    fetchWatchlists: function fetchWatchlists() {
+      return dispatch(Object(_actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_4__["fetchWatchlists"])());
+    },
     fetchStock: function fetchStock(ticker) {
       return dispatch(Object(_actions_company_actions__WEBPACK_IMPORTED_MODULE_3__["fetchStock"])(ticker));
     },
@@ -1422,48 +1429,51 @@ function (_React$Component) {
     _classCallCheck(this, WatchlistButton);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(WatchlistButton).call(this, props));
-    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
-    _this.watchlists = _this.props.fetchWatchlists();
-    _this.ticker = _this.props.ticker;
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.state = {
-      following: _this.checkFollowing()
+      following: true
     };
     return _this;
   }
 
   _createClass(WatchlistButton, [{
-    key: "handleClick",
-    value: function handleClick(e) {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
       var _this2 = this;
 
       e.preventDefault();
+      debugger;
 
-      if (e.target.value === "Add to Watchlist") {
-        this.props.createWatchlist(this.ticker).then(function () {
-          return _this2.setState({
-            following: true
-          });
-        });
-      } else if (e.target.value === "Remove from Watchlist") {
-        this.props.removeWatchlist(this.ticker).then(function () {
+      if (e.target.innerHTML === '<input type="submit" value="Add to Watchlist">') {
+        this.props.createWatchlist(this.props.ticker).then(function () {
           return _this2.setState({
             following: false
+          });
+        });
+      } else if (e.target.innerHTML === '<input type="submit" value="Remove from Watchlist">') {
+        this.props.removeWatchlist(this.props.currentUserId).then(function () {
+          return _this2.setState({
+            following: true
           });
         });
       }
     }
   }, {
     key: "componentDidMount",
-    value: function componentDidMount() {}
-  }, {
-    key: "checkFollowing",
-    value: function checkFollowing() {
+    value: function componentDidMount() {
       var _this3 = this;
 
-      var arrlists = Object(_reducers_selector__WEBPACK_IMPORTED_MODULE_1__["asArray"])(this.watchlists);
-      arrlists.map(function (watchlist) {
-        if (watchlist.ticker === _this3.ticker) {
-          return watchlist.following;
+      this.props.watchlists.map(function (watchlist) {
+        if (watchlist.ticker === _this3.props.ticker.toLowerCase() && watchlist.following !== _this3.state.following) {
+          if (watchlist.following === true) {
+            _this3.setState({
+              following: true
+            });
+          } else {
+            _this3.setState({
+              following: false
+            });
+          }
         }
       });
     }
@@ -1471,17 +1481,19 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       if (this.state.following) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+          onSubmit: this.handleSubmit
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "submit",
-          onClick: this.handleClick,
           value: "Remove from Watchlist"
-        });
+        }));
       } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+          onSubmit: this.handleSubmit
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "submit",
-          onClick: this.handleClick,
           value: "Add to Watchlist"
-        });
+        }));
       }
     }
   }]);
@@ -1515,7 +1527,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    watchlists: state.watchlists,
+    watchlists: Object(_reducers_selector__WEBPACK_IMPORTED_MODULE_4__["asArray"])(state.entities.watchlists),
     ticker: ownProps.ticker,
     currentUserId: state.session.currentUserId
   };
@@ -1529,8 +1541,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     fetchWatchlists: function fetchWatchlists() {
       return dispatch(Object(_actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__["fetchWatchlists"])());
     },
-    removeWatchlist: function removeWatchlist(ticker) {
-      return dispatch(Object(_actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__["removeWatchlist"])(ticker));
+    removeWatchlist: function removeWatchlist() {
+      return dispatch(Object(_actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__["removeWatchlist"])());
     }
   };
 };
