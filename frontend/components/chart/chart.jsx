@@ -2,7 +2,7 @@ import React from 'react';
 import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from 'recharts';
 
 
-const Chart =({chart}) => {
+const Chart =({chart, percentChange}) => {
     const close = Object.values( chart ).map( stock => ( stock.close ) )
     let min = -Infinity
     let max = Infinity
@@ -15,14 +15,12 @@ const Chart =({chart}) => {
     }
 
     return (
-     <LineChart width={ 1030 } height={ 250 } data={ Object.values( chart ) }
+     <LineChart width={ 140 } height={50 } data={ Object.values( chart ) }
         margin={ { top: 5, right: 30, left: 20, bottom: 5 } }>
 
         <XAxis dataKey="dateTime" hide={ true } />
         <YAxis dateKey="close" hide={ true } domain={ [min, max] } />
-        <Tooltip />
-
-        <Line type="monotone" dataKey="close" dot={ false } stroke='#21ce99' yAxisId={ 0 } />
+        <Line type="monotone" dataKey="close" dot={ false } stroke={ percentChange > 0 ? '#21ce99' : '#ff0000'} yAxisId={ 0 } />
     </LineChart>
 )
 }

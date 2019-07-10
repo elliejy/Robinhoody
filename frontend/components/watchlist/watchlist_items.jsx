@@ -1,7 +1,7 @@
 import React from 'react';
 import Chart from '../chart/chart';
 import {asArray} from '../../reducers/selector';
-
+import {Link} from 'react-router-dom';
 
 class WatchlistItems extends React.Component{
   
@@ -23,17 +23,23 @@ class WatchlistItems extends React.Component{
             )
         }
         return (
-            <ul className="home-watchlist-items">
+            <>
                { this.props.multiStocks.map( stock => {
                 return (
-                <li className="home-watchlist-items" key={ stock.quote.symbol  }>
-                    { stock.quote.symbol}
-                    <Chart chart={stock.chart} className="home-chart" />
-                    { stock.quote.close }
-                </li>
-                )}
+                    <li className="company-li" key={stock.quote.symbol}>
+                        <Link to={`/companies/${stock.quote.symbol}`} id="watchlist-link">
+                            <div id="watch-item"> { stock.quote.symbol }</div>
+                            <div><Chart chart={ stock.chart } percentChange= {stock.quote.changePercent}className="watchlist-chart" /></div>
+                            <div id="watch-item">${ stock.quote.close }</div>
+                        </Link>
+                  
+                    </li> 
+                    )
+                }
+            
             )}
-            </ul> )
+            </>
+        )
         }
 }
 

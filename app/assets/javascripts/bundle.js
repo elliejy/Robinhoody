@@ -446,7 +446,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Chart = function Chart(_ref) {
-  var chart = _ref.chart;
+  var chart = _ref.chart,
+      percentChange = _ref.percentChange;
   var close = Object.values(chart).map(function (stock) {
     return stock.close;
   });
@@ -466,8 +467,8 @@ var Chart = function Chart(_ref) {
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
-    width: 1030,
-    height: 250,
+    width: 140,
+    height: 50,
     data: Object.values(chart),
     margin: {
       top: 5,
@@ -482,11 +483,11 @@ var Chart = function Chart(_ref) {
     dateKey: "close",
     hide: true,
     domain: [min, max]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Line"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Line"], {
     type: "monotone",
     dataKey: "close",
     dot: false,
-    stroke: "#21ce99",
+    stroke: percentChange > 0 ? '#21ce99' : '#ff0000',
     yAxisId: 0
   }));
 };
@@ -997,7 +998,9 @@ function (_React$Component) {
         className: "company-watchlist"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "watchlist-ul"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Watchlist")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watchlist_watchlist_items_containers__WEBPACK_IMPORTED_MODULE_3__["default"], null)))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        id: "watchlist-header"
+      }, "Watchlist"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watchlist_watchlist_items_containers__WEBPACK_IMPORTED_MODULE_3__["default"], null))))));
     }
   }, {
     key: "loggedOutPath",
@@ -1270,7 +1273,9 @@ function (_React$Component) {
   }, {
     key: "renderErrors",
     value: function renderErrors() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.errors.map(function (error) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "errors-ul"
+      }, this.props.errors.map(function (error) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: error,
           className: "error"
@@ -1547,6 +1552,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _chart_chart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../chart/chart */ "./frontend/components/chart/chart.jsx");
 /* harmony import */ var _reducers_selector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../reducers/selector */ "./frontend/reducers/selector.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1564,6 +1570,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1596,16 +1603,22 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...");
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "home-watchlist-items"
-      }, this.props.multiStocks.map(function (stock) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, this.props.multiStocks.map(function (stock) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "home-watchlist-items",
+          className: "company-li",
           key: stock.quote.symbol
-        }, stock.quote.symbol, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_chart_chart__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          to: "/companies/".concat(stock.quote.symbol),
+          id: "watchlist-link"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "watch-item"
+        }, " ", stock.quote.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_chart_chart__WEBPACK_IMPORTED_MODULE_1__["default"], {
           chart: stock.chart,
-          className: "home-chart"
-        }), stock.quote.close);
+          percentChange: stock.quote.changePercent,
+          className: "watchlist-chart"
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "watch-item"
+        }, "$", stock.quote.close)));
       }));
     }
   }]);

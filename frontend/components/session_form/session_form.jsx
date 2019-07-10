@@ -37,7 +37,7 @@ class SessionForm extends React.Component {
 
   renderErrors() {
     return (
-      <ul>
+      <ul className="errors-ul">
         { this.props.errors.map( ( error) => (
           <li key={ error } className= "error">
             <img className="exclamation" src={window.images.exclamation} />

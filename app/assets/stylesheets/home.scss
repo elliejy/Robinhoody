@@ -137,29 +137,52 @@ li:hover .dropdown-content {
 .company-watchlist {
   margin-top: -20px;
   margin-left: 53vw;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,1.5);
+
+  position: relative;
+  
 }
 .watchlist-ul{
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid black;
-  padding: 10px 20px;
+  list-style-type: none;
+  position: absolute;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,1.5);
+  min-width: 20vw;
 } 
+ul.watchlist-ul {
+  margin-left: 0;
+  padding-inline-start: 0px;
+}
+#watchlist-header{
+  padding: 10% 7%;
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 1px solid black;
+}
 .watchlist-ul > li {
   color: white;
+  width: 87%;
+  height: 87%;
+
+  margin: auto;
+}
+.company-li{
+  padding: 3% 7%;
+  margin: 3px 0 0px 3px;
+  font-size: 17px;
 
 }
-.company-ul{
-  display: flex;
-  justify-content: space-around;
-  padding: 10px;
-  margin: 3px 0 0px 3px;
+.company-li:hover {
+  background: rgb(12, 12, 12);
 }
-.company-ul:hover {
-  background: black;
-}
-.company-ul > li {
+
+#watchlist-link{
   color: white;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+#watch-item{
+  padding-top: 4.3%;
 }
 
 

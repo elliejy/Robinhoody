@@ -58,10 +58,9 @@ class Home extends React.Component {
                 <img className="default-chart" src={window.images.defchart} alt="Default Chart"/>
                 <div className="company-watchlist">
                     <ul className="watchlist-ul">
-                        <li>Watchlist</li>
-                        {/* <li>...</li> */}
-                    </ul>
+                        <li id="watchlist-header">Watchlist</li>
                         <WatchlistItemsContainer  />
+                     </ul>
                 </div>
             
             </div>
