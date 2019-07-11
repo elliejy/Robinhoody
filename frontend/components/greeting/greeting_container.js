@@ -3,8 +3,9 @@ import { logout } from '../../actions/session_actions';
 import Greeting from './greeting';
 
 const mapStateToProps = (state,ownProps) => {
+
   return {
-    currentUser: state.entities.users[state.session.currentUserId],
+    currentUser: state.entities.users[state.session.currentUser],
     loggedIn: Boolean( state.session.currentUserId )
   };
 };

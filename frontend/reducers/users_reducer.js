@@ -4,9 +4,11 @@ import { RECEIVE_CURRENT_USER, RECEIVE_USER_INFO, RECEIVE_USER_WATCHLIST } from 
 export const usersReducer = (state ={}, action)=>{
   Object.freeze(state);
   let newState = Object.assign({}, state)
+  
   switch(action.type){
     case RECEIVE_CURRENT_USER:
-      newState = {curretUserId: action.user.id}
+      debugger
+      newState = {curretUser: action.user}
       return newState;
     case RECEIVE_USER_INFO:
       return newState = { [action.info.id]: action.info };

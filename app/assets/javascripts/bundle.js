@@ -307,6 +307,7 @@ var RECEIVE_USER_INFO = 'RECEIVE_USER_INFO';
 var RECEIVE_USER_WATCHLIST = 'RECEIVE_USER_WATCHLIST';
 
 var receiveCurrentUser = function receiveCurrentUser(user) {
+  debugger;
   return {
     type: RECEIVE_CURRENT_USER,
     user: user
@@ -639,11 +640,9 @@ function (_React$Component) {
     _classCallCheck(this, Company);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Company).call(this, props));
-    _this.ticker = _this.props.ticker;
-
-    if (_this.props.loggedIn) {
-      _this.props.fetchWatchlists();
-    }
+    _this.ticker = _this.props.ticker; // if ( this.props.loggedIn ) {
+    //     this.props.fetchWatchlists()
+    // }
 
     return _this;
   }
@@ -723,8 +722,8 @@ function (_React$Component) {
       }, this.props.company.info.companyName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         id: "price"
       }, "$", this.props.company.stock.latestPrice), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-        id: "pcahnge"
-      }, this.props.company.stock.changePercent, "%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["LineChart"], {
+        id: "pchange"
+      }, this.props.company.stock.changePercent.toFixed(2), "%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["LineChart"], {
         width: 1030,
         height: 250,
         data: Object.values(this.props.company.stocks),
@@ -785,7 +784,7 @@ function (_React$Component) {
         id: "about"
       }, "About"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         id: "description"
-      }, this.props.company.info.description), this.props.company.info.CEO), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.props.company.info.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "CEO"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Employees"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Headquarters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Founded")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, this.props.company.info.CEO), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, this.props.company.info.employees, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Headquarters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Founded"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "add"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "addwatch"
@@ -919,7 +918,8 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Greeting).call(this, props));
     _this.logout = _this.props.logout;
     _this.state = {
-      loggedIn: Boolean(_this.props.loggedIn)
+      loggedIn: Boolean(_this.props.loggedIn),
+      open: false
     };
     _this.sessionLinks = _this.sessionLinks.bind(_assertThisInitialized(_this));
     _this.accountDropDown = _this.accountDropDown.bind(_assertThisInitialized(_this));
@@ -953,18 +953,32 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "handleDropDown",
+    value: function handleDropDown() {
+      this.setState(function (state) {
+        return {
+          open: !state.open
+        };
+      });
+    }
+  }, {
     key: "accountDropDown",
     value: function accountDropDown() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        id: "menu",
+      var _this3 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dropdown"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-        className: "account-drop"
-      }, "Account"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this3.handleDropDown();
+        },
+        className: "account-button"
+      }, "Account"), this.state.open && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dropdown-content"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Link 1")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Link 2")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, this.props.currentUser ? this.props.currentUser.username : "Aloha~*")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Help")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Disclosure")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        id: "li-logout",
         onClick: this.handleLogout
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Log out")))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Log out")))));
     }
   }, {
     key: "render",
@@ -1003,7 +1017,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    currentUser: state.entities.users[state.session.currentUserId],
+    currentUser: state.entities.users[state.session.currentUser],
     loggedIn: Boolean(state.session.currentUserId)
   };
 };
@@ -1722,7 +1736,7 @@ function (_React$Component) {
           className: "company-li",
           key: stock.quote.symbol
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-          to: "/companies/".concat(stock.quote.symbol),
+          to: "/companies/".concat(stock.quote.symbol.toLowerCase()),
           id: "watchlist-link"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           id: "watch-item"
@@ -2024,8 +2038,9 @@ var usersReducer = function usersReducer() {
 
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
+      debugger;
       newState = {
-        curretUserId: action.user.id
+        curretUser: action.user
       };
       return newState;
 
@@ -71209,7 +71224,7 @@ exports.default = _ResizeDetector2.default;
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

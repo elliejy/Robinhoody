@@ -5,8 +5,11 @@ header {
   min-height: 10vh;
 }
 body {
-  height: 100%;
+  min-height: 200%;
   margin: 0;
+}
+main {
+  min-height: 200%;
 }
 
 .header-link {
@@ -20,8 +23,8 @@ body {
 /*LOGGEDIN*/
 .loggedin{
     background-color: #1b1b1d;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 200%;
   }
 
 
@@ -74,49 +77,45 @@ body {
   z-index: 1;
   width: 10vw;
   margin-left: 25vw;
+  list-style-type: none;
 }
 
-.dropdown > li {
-  position: relative;
-  
-}
-
-.account-drop{
+.account-button{
   border-bottom: 2px solid transparent;
-}
-.account-drop:hover {
-  border-bottom: 2px solid aquamarine;
-  width: 76%;
-}
-
-h3 {
+  font-size: 13px;
   color: white;
+  font-weight:bold;
+  margin-left: 54%;
+  letter-spacing: 1px;
 }
-h3:hover {
+.account-button:hover {
+  border-bottom: 2px solid aquamarine;
   color: aquamarine;
+
 }
 
 .dropdown-content {
-  display: none;
   position: absolute;
-  background: #1b1b1d;
-  white-space: nowrap;
+  top: 100%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  border: none;
   color: white;
-  min-width: 200px;
-  overflow: hidden;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  right: 25px;
-  top: 47px;
-  
+  background-color: #1b1b1d;
+  min-width: 17vw;
+  left: -7vw;
 }
 
-li:hover .dropdown-content {
-  display: block;
+.dropdown-content > ul {
+  list-style-type: none;
 }
 
+#li-logout:hover {
+  background:rgb(21, 20, 20);
+}
 .loggedin-body{
   margin: 2vw 15vw;
+  background: #1b1b1d;
+  min-height: 150vh;
 }
 
 .loggedin-h1{
@@ -146,6 +145,7 @@ li:hover .dropdown-content {
   position: absolute;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,1.5);
   min-width: 20vw;
+  background: #1b1b1d;
 } 
 ul.watchlist-ul {
   margin-left: 0;
@@ -184,7 +184,6 @@ ul.watchlist-ul {
 #watch-item{
   padding-top: 4.3%;
 }
-
 
 
 /*LOGGEDOUT*/

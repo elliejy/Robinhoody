@@ -27,7 +27,7 @@ class WatchlistItems extends React.Component{
                { this.props.multiStocks.map( stock => {
                 return (
                     <li className="company-li" key={stock.quote.symbol}>
-                        <Link to={`/companies/${stock.quote.symbol}`} id="watchlist-link">
+                        <Link to={`/companies/${stock.quote.symbol.toLowerCase()}`} id="watchlist-link">
                             <div id="watch-item"> { stock.quote.symbol }</div>
                             <div><Chart chart={ stock.chart } percentChange= {stock.quote.changePercent}className="watchlist-chart" /></div>
                             <div id="watch-item">${ stock.quote.close }</div>

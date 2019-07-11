@@ -6,10 +6,12 @@ export const RECEIVE_ERRORS = 'RECEIVE_ERRORS';
 export const RECEIVE_USER_INFO = 'RECEIVE_USER_INFO';
 export const RECEIVE_USER_WATCHLIST = 'RECEIVE_USER_WATCHLIST';
 
-const receiveCurrentUser = user => ( {
+const receiveCurrentUser = user =>  {
+  debugger
+  return {
   type: RECEIVE_CURRENT_USER,
-  user
-} );
+  user}
+} ;
 
 const logoutCurrentUser = () => ( {
   type: LOGOUT_CURRENT_USER

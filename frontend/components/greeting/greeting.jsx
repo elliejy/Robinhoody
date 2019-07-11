@@ -8,7 +8,8 @@ class Greeting extends React.Component {
     super(props)
     this.logout = this.props.logout
     this.state = {
-      loggedIn: Boolean( this.props.loggedIn)
+      loggedIn: Boolean( this.props.loggedIn),
+      open: false,
     }
     this.sessionLinks = this.sessionLinks.bind(this)
     this.accountDropDown = this.accountDropDown.bind(this)
@@ -31,18 +32,28 @@ class Greeting extends React.Component {
     this.logout().then( () => this.setState( { loggedIn: false } ) )
   };
 
+  handleDropDown() {
+    this.setState(state => {
+      return { open: !state.open}
+    });
+  }
   accountDropDown() {
+
     return(
-        <ul id="menu" className="dropdown">
-          <li>
-            <h3 className="account-drop">Account</h3>
-            <ul className="dropdown-content">
-              <li><h3>Link 1</h3></li>
-              <li><h3>Link 2</h3></li>
-              <li onClick={ this.handleLogout }><h3>Log out</h3></li> 
+        <div className="dropdown">
+    
+          <button onClick= {()=>this.handleDropDown()} className="account-button">Account</button>
+           {this.state.open && (
+           <div className="dropdown-content">
+            <ul >
+              <li><h4>{this.props.currentUser ? this.props.currentUser.username : "Aloha~*"}</h4></li>
+              <li><h4>Help</h4></li>
+              <li><h4>Disclosure</h4></li>
+              <li id= "li-logout"onClick={ this.handleLogout }><h4>Log out</h4></li> 
             </ul>
-          </li>
-        </ul>
+           </div>
+           )}
+        </div>
     )
   };
   

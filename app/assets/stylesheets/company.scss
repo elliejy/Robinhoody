@@ -1,6 +1,7 @@
 .company-container{
     margin: 6vw 10vw;
     position: relative;
+    background: #1b1b1d;
 }
 
 
@@ -16,9 +17,14 @@
 #price {
     font-size: 45px;
     margin-top: -30px;
+    display: inline;
+
 }
 #pchange {
-   margin-top: -67px;
+    position: absolute;
+    margin-top: 68px;
+    display: inline-block;
+    left: 0px;
 }
 
 h2, h5, p {
@@ -45,6 +51,7 @@ h5 {
     top: 1vh;
     left: 55vw;
     min-width: 13vw;
+    float: right;
 }
 #appr{
     width:80%;
@@ -64,8 +71,26 @@ h5 {
     margin-top: 9px;
     font-weight: bold;
 }
+.chart-range{
+    padding: 1% 1% 1% 0;
+    border-bottom: 1px solid black;
+    width: 50%;
+    box-sizing: border-box;
+    // position: relative;
+
+}
 button {
     background: none;
     border: none;
     color: white;
+    font-size: 14px;
+    padding: 0 2% 0 0;
+    font-weight: bold;
+    
+}
+button:focus {
+    color: aquamarine;
+    padding-bottom: 3%;
+    border-bottom: 1px solid aquamarine;
+    // position: absolute;
 }
