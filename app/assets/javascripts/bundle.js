@@ -90,7 +90,7 @@
 /*!*********************************************!*\
   !*** ./frontend/actions/company_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_COMPANIES, RECEIVE_COMPANY, RECEIVE_STOCK, RECEIVE_STOCKS, RECEIVE_STOCK_INFO, RECEIVE_MULTI_STOCKS, fetchCompanies, fetchCompany, fetchStock, fetch1mStock, fetchStockInfo, fetchBatchStocks */
+/*! exports provided: RECEIVE_COMPANIES, RECEIVE_COMPANY, RECEIVE_STOCK, RECEIVE_STOCKS, RECEIVE_1D_STOCKS, RECEIVE_1W_STOCKS, RECEIVE_1M_STOCKS, RECEIVE_3M_STOCKS, RECEIVE_1Y_STOCKS, RECEIVE_5Y_STOCKS, RECEIVE_STOCK_INFO, RECEIVE_MULTI_STOCKS, fetchCompanies, fetchCompany, fetchStock, fetch1mStock, fetch1dStock, fetch1wStock, fetch3mStock, fetch1yStock, fetch5yStock, fetchStockInfo, fetchBatchStocks */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -99,12 +99,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_COMPANY", function() { return RECEIVE_COMPANY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK", function() { return RECEIVE_STOCK; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCKS", function() { return RECEIVE_STOCKS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_1D_STOCKS", function() { return RECEIVE_1D_STOCKS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_1W_STOCKS", function() { return RECEIVE_1W_STOCKS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_1M_STOCKS", function() { return RECEIVE_1M_STOCKS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_3M_STOCKS", function() { return RECEIVE_3M_STOCKS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_1Y_STOCKS", function() { return RECEIVE_1Y_STOCKS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_5Y_STOCKS", function() { return RECEIVE_5Y_STOCKS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_INFO", function() { return RECEIVE_STOCK_INFO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_MULTI_STOCKS", function() { return RECEIVE_MULTI_STOCKS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCompanies", function() { return fetchCompanies; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCompany", function() { return fetchCompany; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchStock", function() { return fetchStock; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch1mStock", function() { return fetch1mStock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch1dStock", function() { return fetch1dStock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch1wStock", function() { return fetch1wStock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch3mStock", function() { return fetch3mStock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch1yStock", function() { return fetch1yStock; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch5yStock", function() { return fetch5yStock; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchStockInfo", function() { return fetchStockInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBatchStocks", function() { return fetchBatchStocks; });
 /* harmony import */ var _util_company_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/company_api_util */ "./frontend/util/company_api_util.js");
@@ -113,6 +124,12 @@ var RECEIVE_COMPANIES = "RECEIVE_COMPANIES";
 var RECEIVE_COMPANY = "RECEIVE_COMPANY";
 var RECEIVE_STOCK = "RECEIVE_STOCK";
 var RECEIVE_STOCKS = "RECEIVE_STOCKS";
+var RECEIVE_1D_STOCKS = "RECEIVE_1D_STOCKS";
+var RECEIVE_1W_STOCKS = "RECEIVE_1W_STOCKS";
+var RECEIVE_1M_STOCKS = "RECEIVE_1M_STOCKS";
+var RECEIVE_3M_STOCKS = "RECEIVE_3M_STOCKS";
+var RECEIVE_1Y_STOCKS = "RECEIVE_1Y_STOCKS";
+var RECEIVE_5Y_STOCKS = "RECEIVE_5Y_STOCKS";
 var RECEIVE_STOCK_INFO = "RECEIVE_STOCK_INFO";
 var RECEIVE_MULTI_STOCKS = "RECEIVE_MULTI_STOCKS";
 
@@ -144,7 +161,27 @@ var receiveStocks = function receiveStocks(ticker, stocks) {
     ticker: ticker,
     stocks: stocks
   };
-};
+}; // const receive1wStocks = (ticker, stocks) => ({
+//     type: RECEIVE_STOCKS, 
+//     ticker, 
+//     stocks
+// })
+// const receive3mStocks = (ticker, stocks) => ({
+//     type: RECEIVE_STOCKS, 
+//     ticker, 
+//     stocks
+// })
+// const receive1yStocks = (ticker, stocks) => ({
+//     type: RECEIVE_STOCKS, 
+//     ticker, 
+//     stocks
+// })
+// const receive5yStocks = (ticker, stocks) => ({
+//     type: RECEIVE_STOCKS, 
+//     ticker, 
+//     stocks
+// })
+
 
 var receiveStockInfo = function receiveStockInfo(ticker, data) {
   return {
@@ -185,6 +222,41 @@ var fetchStock = function fetchStock(ticker) {
 var fetch1mStock = function fetch1mStock(ticker) {
   return function (dispatch) {
     return _util_company_api_util__WEBPACK_IMPORTED_MODULE_0__["fetch1mData"](ticker).then(function (stocks) {
+      return dispatch(receiveStocks(ticker, stocks));
+    });
+  };
+};
+var fetch1dStock = function fetch1dStock(ticker) {
+  return function (dispatch) {
+    return _util_company_api_util__WEBPACK_IMPORTED_MODULE_0__["fetch1dData"](ticker).then(function (stocks) {
+      return dispatch(receiveStocks(ticker, stocks));
+    });
+  };
+};
+var fetch1wStock = function fetch1wStock(ticker) {
+  return function (dispatch) {
+    return _util_company_api_util__WEBPACK_IMPORTED_MODULE_0__["fetch1wData"](ticker).then(function (stocks) {
+      return dispatch(receiveStocks(ticker, stocks));
+    });
+  };
+};
+var fetch3mStock = function fetch3mStock(ticker) {
+  return function (dispatch) {
+    return _util_company_api_util__WEBPACK_IMPORTED_MODULE_0__["fetch3mData"](ticker).then(function (stocks) {
+      return dispatch(receiveStocks(ticker, stocks));
+    });
+  };
+};
+var fetch1yStock = function fetch1yStock(ticker) {
+  return function (dispatch) {
+    return _util_company_api_util__WEBPACK_IMPORTED_MODULE_0__["fetch1yData"](ticker).then(function (stocks) {
+      return dispatch(receiveStocks(ticker, stocks));
+    });
+  };
+};
+var fetch5yStock = function fetch5yStock(ticker) {
+  return function (dispatch) {
+    return _util_company_api_util__WEBPACK_IMPORTED_MODULE_0__["fetch5yData"](ticker).then(function (stocks) {
       return dispatch(receiveStocks(ticker, stocks));
     });
   };
@@ -601,6 +673,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       if (!this.props.company || !this.props.company.info || !this.props.company.stock || !this.props.company.stocks || !this.props.ticker) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...");
       }
@@ -674,6 +748,38 @@ function (_React$Component) {
         stroke: "#21ce99",
         yAxisId: 0
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "chart-range"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this2.props.fetch1dStock(_this2.props.ticker);
+        },
+        value: "1D"
+      }, "1D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this2.props.fetch1wStock(_this2.props.ticker);
+        },
+        value: "1W"
+      }, "1W"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this2.props.fetch1mStock(_this2.props.ticker);
+        },
+        value: "1M"
+      }, "1M"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this2.props.fetch3mStock(_this2.props.ticker);
+        },
+        value: "3M"
+      }, "3M"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this2.props.fetch1yStock(_this2.props.ticker);
+        },
+        value: "1Y"
+      }, "1Y"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this2.props.fetch5yStock(_this2.props.ticker);
+        },
+        value: "5Y"
+      }, "5Y")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "about"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         id: "about"
@@ -735,6 +841,21 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetch1mStock: function fetch1mStock(ticker) {
       return dispatch(Object(_actions_company_actions__WEBPACK_IMPORTED_MODULE_3__["fetch1mStock"])(ticker));
+    },
+    fetch1dStock: function fetch1dStock(ticker) {
+      return dispatch(Object(_actions_company_actions__WEBPACK_IMPORTED_MODULE_3__["fetch1dStock"])(ticker));
+    },
+    fetch1wStock: function fetch1wStock(ticker) {
+      return dispatch(Object(_actions_company_actions__WEBPACK_IMPORTED_MODULE_3__["fetch1wStock"])(ticker));
+    },
+    fetch3mStock: function fetch3mStock(ticker) {
+      return dispatch(Object(_actions_company_actions__WEBPACK_IMPORTED_MODULE_3__["fetch3mStock"])(ticker));
+    },
+    fetch1yStock: function fetch1yStock(ticker) {
+      return dispatch(Object(_actions_company_actions__WEBPACK_IMPORTED_MODULE_3__["fetch1yStock"])(ticker));
+    },
+    fetch5yStock: function fetch5yStock(ticker) {
+      return dispatch(Object(_actions_company_actions__WEBPACK_IMPORTED_MODULE_3__["fetch5yStock"])(ticker));
     },
     fetchStockInfo: function fetchStockInfo(ticker) {
       return dispatch(Object(_actions_company_actions__WEBPACK_IMPORTED_MODULE_3__["fetchStockInfo"])(ticker));
@@ -1462,17 +1583,7 @@ function (_React$Component) {
     }
   }, {
     key: "componentDidMount",
-    value: function componentDidMount() {// const watchlistArr = asArray( this.props.watchlists )
-      // watchlistArr.map( watchlist => {
-      //     if ( watchlist.ticker === this.props.ticker.toLowerCase() && watchlist.following !== this.state.following ) {
-      //         if ( watchlist.following === true ) {
-      //             this.setState( { following: true } )
-      //         } else {
-      //             this.setState( { following: false } )
-      //         }
-      //     }
-      // } )
-    }
+    value: function componentDidMount() {}
   }, {
     key: "render",
     value: function render() {
@@ -2070,7 +2181,7 @@ var configureStore = function configureStore() {
 /*!*******************************************!*\
   !*** ./frontend/util/company_api_util.js ***!
   \*******************************************/
-/*! exports provided: fetchCompanies, fetchCompany, fetchDailyData, fetch1mData, fetch5yData, fetchStockInfo, fetchBatchStocks */
+/*! exports provided: fetchCompanies, fetchCompany, fetchDailyData, fetch1dData, fetch1wData, fetch1mData, fetch3mData, fetch1yData, fetch5yData, fetchStockInfo, fetchBatchStocks */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2078,7 +2189,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCompanies", function() { return fetchCompanies; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCompany", function() { return fetchCompany; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchDailyData", function() { return fetchDailyData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch1dData", function() { return fetch1dData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch1wData", function() { return fetch1wData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch1mData", function() { return fetch1mData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch3mData", function() { return fetch3mData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch1yData", function() { return fetch1yData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetch5yData", function() { return fetch5yData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchStockInfo", function() { return fetchStockInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBatchStocks", function() { return fetchBatchStocks; });
@@ -2100,16 +2215,40 @@ var fetchDailyData = function fetchDailyData(ticker) {
     url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/quote?token=Tsk_6f506030b36145d69d8d9de043cd9e68")
   });
 };
+var fetch1dData = function fetch1dData(ticker) {
+  return $.ajax({
+    method: "get",
+    url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/chart/1d?token=Tsk_6f506030b36145d69d8d9de043cd9e68")
+  });
+};
+var fetch1wData = function fetch1wData(ticker) {
+  return $.ajax({
+    method: "get",
+    url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/chart/7d?token=Tsk_6f506030b36145d69d8d9de043cd9e68")
+  });
+};
 var fetch1mData = function fetch1mData(ticker) {
   return $.ajax({
     method: "get",
     url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/chart/1m?token=Tsk_6f506030b36145d69d8d9de043cd9e68")
   });
 };
+var fetch3mData = function fetch3mData(ticker) {
+  return $.ajax({
+    method: "get",
+    url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/chart/3m?token=Tsk_6f506030b36145d69d8d9de043cd9e68")
+  });
+};
+var fetch1yData = function fetch1yData(ticker) {
+  return $.ajax({
+    method: "get",
+    url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/chart/1y?token=Tsk_6f506030b36145d69d8d9de043cd9e68")
+  });
+};
 var fetch5yData = function fetch5yData(ticker) {
   return $.ajax({
     method: "get",
-    url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/quote?token=Tsk_6f506030b36145d69d8d9de043cd9e68")
+    url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/chart?token=Tsk_6f506030b36145d69d8d9de043cd9e68")
   });
 };
 var fetchStockInfo = function fetchStockInfo(ticker) {
@@ -71070,7 +71209,7 @@ exports.default = _ResizeDetector2.default;
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

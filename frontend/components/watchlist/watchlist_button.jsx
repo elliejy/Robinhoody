@@ -26,16 +26,7 @@ class WatchlistButton extends React.Component {
     }
 
     componentDidMount() {  
-        // const watchlistArr = asArray( this.props.watchlists )
-        // watchlistArr.map( watchlist => {
-        //     if ( watchlist.ticker === this.props.ticker.toLowerCase() && watchlist.following !== this.state.following ) {
-        //         if ( watchlist.following === true ) {
-        //             this.setState( { following: true } )
-        //         } else {
-        //             this.setState( { following: false } )
-        //         }
-        //     }
-        // } )
+   
     }
 
     render(){ 

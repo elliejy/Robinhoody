@@ -4,7 +4,13 @@ import { logout } from '../../actions/session_actions';
 import {
     fetchStock,
     fetchStockInfo,
-    fetch1mStock
+    fetch1mStock,
+    fetch5yStock,
+    fetch1dStock,
+    fetch3mStock,
+    fetch1yStock,
+    fetch1wStock
+    
 } from '../../actions/company_actions';
 import { fetchWatchlists} from '../../actions/watchlist_actions';
 
@@ -23,6 +29,11 @@ const mapDispatchToProps = dispatch => {
     fetchWatchlists: () => dispatch( fetchWatchlists() ),
     fetchStock: ticker => dispatch( fetchStock( ticker ) ),
     fetch1mStock: ticker => dispatch ( fetch1mStock(ticker)),
+    fetch1dStock: ticker => dispatch( fetch1dStock(ticker)),
+    fetch1wStock: ticker => dispatch( fetch1wStock(ticker)),
+    fetch3mStock: ticker => dispatch( fetch3mStock(ticker)),
+    fetch1yStock: ticker => dispatch( fetch1yStock(ticker)),
+    fetch5yStock: ticker => dispatch( fetch5yStock(ticker)),
     fetchStockInfo: ticker => dispatch( fetchStockInfo( ticker ) ),
     logout: () => dispatch(logout())}
 } ;

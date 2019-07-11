@@ -35,7 +35,7 @@ class Company extends React.Component {
 
         }
     }
-    
+
     render(){
         if ( !this.props.company || !this.props.company.info || !this.props.company.stock || !this.props.company.stocks || !this.props.ticker) {
             return <div>Loading...</div>
@@ -80,6 +80,16 @@ class Company extends React.Component {
                             <Line type="monotone" dataKey="close" dot={ false } stroke='#21ce99' yAxisId={ 0 } />
                         </LineChart>
 
+                    <div className="chart-range">
+             
+                            <button onClick={ ()=> this.props.fetch1dStock(this.props.ticker)} value="1D">1D</button>
+                            <button onClick={()=> this.props.fetch1wStock(this.props.ticker)} value="1W">1W</button>
+                            <button onClick={()=> this.props.fetch1mStock(this.props.ticker)} value="1M">1M</button>
+                            <button onClick={()=> this.props.fetch3mStock(this.props.ticker)} value="3M">3M</button>
+                            <button onClick={ () => this.props.fetch1yStock(this.props.ticker)} value="1Y">1Y</button>
+                            <button onClick={()=> this.props.fetch5yStock(this.props.ticker)} value="5Y">5Y</button>
+      
+                    </div>
                 <div className="about">
                     <h2 id="about">About</h2>
                     <p id="description">{ this.props.company.info.description }</p>

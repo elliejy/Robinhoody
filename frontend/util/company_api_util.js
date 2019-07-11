@@ -16,17 +16,41 @@ export const fetchDailyData = (ticker) => (
         url: `https://sandbox.iexapis.com/stable/stock/${ticker}/quote?token=Tsk_6f506030b36145d69d8d9de043cd9e68`
     } )
 );
+export const fetch1dData = (ticker) => (
+    $.ajax( {
+        method: "get",
+        url: `https://sandbox.iexapis.com/stable/stock/${ticker}/chart/1d?token=Tsk_6f506030b36145d69d8d9de043cd9e68`
+    } )
+);
+export const fetch1wData = (ticker) => (
+    $.ajax( {
+        method: "get",
+        url: `https://sandbox.iexapis.com/stable/stock/${ticker}/chart/7d?token=Tsk_6f506030b36145d69d8d9de043cd9e68`
+    } )
+);
 export const fetch1mData = (ticker) => (
     $.ajax( {
         method: "get",
         url: `https://sandbox.iexapis.com/stable/stock/${ticker}/chart/1m?token=Tsk_6f506030b36145d69d8d9de043cd9e68`
     } )
 );
+export const fetch3mData = (ticker) => (
+    $.ajax( {
+        method: "get",
+        url: `https://sandbox.iexapis.com/stable/stock/${ticker}/chart/3m?token=Tsk_6f506030b36145d69d8d9de043cd9e68`
+    } )
+);
+export const fetch1yData = (ticker) => (
+    $.ajax( {
+        method: "get",
+        url: `https://sandbox.iexapis.com/stable/stock/${ticker}/chart/1y?token=Tsk_6f506030b36145d69d8d9de043cd9e68`
+    } )
+);
 
 export const fetch5yData = (ticker) => (
     $.ajax( {
         method: "get",
-        url: `https://sandbox.iexapis.com/stable/stock/${ticker}/quote?token=Tsk_6f506030b36145d69d8d9de043cd9e68`
+        url: `https://sandbox.iexapis.com/stable/stock/${ticker}/chart?token=Tsk_6f506030b36145d69d8d9de043cd9e68`
     } )
 );
 
