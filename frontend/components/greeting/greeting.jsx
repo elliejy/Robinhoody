@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, Router } from 'react-router-dom';
-import ReactDOM from 'react-dom'
 
 
 class Greeting extends React.Component { 
@@ -13,7 +12,6 @@ class Greeting extends React.Component {
     }
     this.sessionLinks = this.sessionLinks.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
-    // this.handleDropDown = this.handleDropDown.bind(this)
 
   }
   
@@ -32,7 +30,8 @@ class Greeting extends React.Component {
     this.props.logout().then( () => window.location.reload());
   };
 
-  handleDropDown() {
+  handleDropDown(e) {
+    e.preventDefault();
     this.setState(state => {
       return { open: !state.open}
     });
@@ -42,7 +41,7 @@ class Greeting extends React.Component {
     return(
         <div className="dropdown">
 
-          <button onClick= {()=>this.handleDropDown()} className="account-button">Account</button>
+          <button onClick= {(e)=>this.handleDropDown(e)} className="account-button">Account</button>
            {this.state.open && (
             <ul className="dropdown-content">
               <li><h4>

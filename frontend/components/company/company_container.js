@@ -16,7 +16,7 @@ import { fetchWatchlists} from '../../actions/watchlist_actions';
 
 const mapStateToProps = ( state, ownProps ) => {
     const ticker = ownProps.match.params.ticker
-    debugger
+
     return {
         company: state.entities.companies[ticker],
 

@@ -830,7 +830,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   var ticker = ownProps.match.params.ticker;
-  debugger;
   return {
     company: state.entities.companies[ticker],
     ticker: ownProps.match.params.ticker,
@@ -889,8 +888,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -912,7 +909,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
 var Greeting =
 /*#__PURE__*/
 function (_React$Component) {
@@ -930,8 +926,7 @@ function (_React$Component) {
       open: false
     };
     _this.sessionLinks = _this.sessionLinks.bind(_assertThisInitialized(_this));
-    _this.handleLogout = _this.handleLogout.bind(_assertThisInitialized(_this)); // this.handleDropDown = this.handleDropDown.bind(this)
-
+    _this.handleLogout = _this.handleLogout.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -958,7 +953,8 @@ function (_React$Component) {
     }
   }, {
     key: "handleDropDown",
-    value: function handleDropDown() {
+    value: function handleDropDown(e) {
+      e.preventDefault();
       this.setState(function (state) {
         return {
           open: !state.open
@@ -973,8 +969,8 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dropdown"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          return _this2.handleDropDown();
+        onClick: function onClick(e) {
+          return _this2.handleDropDown(e);
         },
         className: "account-button"
       }, "Account"), this.state.open && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {

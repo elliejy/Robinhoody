@@ -18,9 +18,6 @@ class Home extends React.Component {
             this.props.fetchWatchlists() }
     }
 
-        
-    
-    
     componentDidMount() {
 
     }
