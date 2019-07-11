@@ -307,7 +307,6 @@ var RECEIVE_USER_INFO = 'RECEIVE_USER_INFO';
 var RECEIVE_USER_WATCHLIST = 'RECEIVE_USER_WATCHLIST';
 
 var receiveCurrentUser = function receiveCurrentUser(user) {
-  debugger;
   return {
     type: RECEIVE_CURRENT_USER,
     user: user
@@ -721,7 +720,7 @@ function (_React$Component) {
         id: "company-name"
       }, this.props.company.info.companyName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         id: "price"
-      }, "$", this.props.company.stock.latestPrice), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+      }, "$", this.props.company.stock.latestPrice.toFixed(2)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         id: "pchange"
       }, this.props.company.stock.changePercent.toFixed(2), "%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["LineChart"], {
         width: 700,
@@ -790,9 +789,9 @@ function (_React$Component) {
         className: "thead"
       }, "Employees"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "thead"
-      }, "Headquarters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      }, "Sector"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "thead"
-      }, "Founded")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, this.props.company.info.CEO), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, this.props.company.info.employees, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Headquarters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Founded"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Market Cap")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, this.props.company.info.CEO), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, this.props.company.info.employees, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, this.props.company.info.sector), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Market Ca"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "add"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "addwatch"
@@ -831,6 +830,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   var ticker = ownProps.match.params.ticker;
+  debugger;
   return {
     company: state.entities.companies[ticker],
     ticker: ownProps.match.params.ticker,
@@ -929,8 +929,8 @@ function (_React$Component) {
       loggedIn: Boolean(_this.props.loggedIn),
       open: false
     };
-    _this.sessionLinks = _this.sessionLinks.bind(_assertThisInitialized(_this)); // this.handleLogout = this.handleLogout.bind(this)
-    // this.handleDropDown = this.handleDropDown.bind(this)
+    _this.sessionLinks = _this.sessionLinks.bind(_assertThisInitialized(_this));
+    _this.handleLogout = _this.handleLogout.bind(_assertThisInitialized(_this)); // this.handleDropDown = this.handleDropDown.bind(this)
 
     return _this;
   }
@@ -951,13 +951,9 @@ function (_React$Component) {
   }, {
     key: "handleLogout",
     value: function handleLogout(e) {
-      var _this2 = this;
-
       e.preventDefault();
-      this.logout().then(function () {
-        return _this2.setState({
-          loggedIn: false
-        });
+      this.props.logout().then(function () {
+        return window.location.reload();
       });
     }
   }, {
@@ -972,29 +968,38 @@ function (_React$Component) {
   }, {
     key: "accountDropDown",
     value: function accountDropDown() {
-      var _this3 = this;
+      var _this2 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dropdown"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
-          return _this3.handleDropDown();
+          return _this2.handleDropDown();
         },
         className: "account-button"
       }, "Account"), this.state.open && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "dropdown-content"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, this.props.currentUser ? this.props.currentUser.username : "Aloha~*")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, this.props.currentUser ? this.props.currentUser.username : "Hi!", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        id: "logout-link",
+        to: "https://support.robinhood.com/hc/en-us?help=&zdc=10"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: window.images.help,
         className: "dropdown-img"
-      }), " Help")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }), "Help"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        id: "logout-link",
+        to: "https://brokerage-static.s3.amazonaws.com/disclosures/WebDisclosures.pdf"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: window.images.disclose,
         className: "dropdown-img"
-      }), "Disclosure")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      }), "Disclosure"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         onClick: this.handleLogout
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/",
+        id: "logout-link"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: window.images.logouticon,
         className: "dropdown-img"
-      }), "Log out"))));
+      }), "Log out")))));
     }
   }, {
     key: "render",
@@ -1033,7 +1038,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    currentUser: state.entities.users[state.session.currentUser],
+    currentUser: state.entities.users.currentUser,
     loggedIn: Boolean(state.session.currentUserId)
   };
 };
@@ -1155,6 +1160,8 @@ function (_React$Component) {
         src: window.images.defchart,
         alt: "Default Chart"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "review"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Application Under Review"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "You'll have a free stock soon. Get started by searching for your favorite companies")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "company-watchlist"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "watchlist-ul"
@@ -1418,12 +1425,9 @@ function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this4 = this;
-
       e.preventDefault();
-      debugger;
       this.props.processForm(this.state).then(function () {
-        return _this4.props.history.push('/');
+        return window.location.relaod;
       });
     }
   }, {

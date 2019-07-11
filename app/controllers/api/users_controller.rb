@@ -5,9 +5,14 @@ class Api::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    debugger
-
     if @user.save
+      Watchlist.create({ticker: 'aapl', watcher_id: @user.id, following: true})
+      Watchlist.create({ticker: 'tsla', watcher_id: @user.id, following: true})
+      Watchlist.create({ticker: 'nflx', watcher_id: @user.id, following: true})
+      Watchlist.create({ticker: 'fb', watcher_id: @user.id, following: true})
+      Watchlist.create({ticker: 'msft', watcher_id: @user.id, following: true})
+      Watchlist.create({ticker: 'dis', watcher_id: @user.id, following: true})
+      Watchlist.create({ticker: 'amzn', watcher_id: @user.id, following: true})
       sign_in(@user)
       render "api/users/show"
     else

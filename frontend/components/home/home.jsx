@@ -49,6 +49,10 @@ class Home extends React.Component {
             <div className="loggedin-body">
                 <h1 className="loggedin-h1">Welcome to Robinhoody</h1>
                 <img className="default-chart" src={window.images.defchart} alt="Default Chart"/>
+                <div className="review">
+                    <h6>Application Under Review</h6>
+                    <h6>You'll have a free stock soon. Get started by searching for your favorite companies</h6>
+                </div>
                 <div className="company-watchlist">
                     <ul className="watchlist-ul">
                         <li id="watchlist-header">Watchlist</li>

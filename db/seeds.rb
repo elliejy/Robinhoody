@@ -68,11 +68,7 @@ Watchlist.create! (
       ticker: 'dis',
       following: true}
 )
-Watchlist.create! (
-  {   watcher_id: demo_user.id, 
-      ticker: 'gopro',
-      following: true}
-)
+
 Watchlist.create! (
   {   watcher_id: demo_user.id, 
       ticker: 'sbux',
@@ -81,6 +77,11 @@ Watchlist.create! (
 Watchlist.create! (
   {   watcher_id: demo_user.id, 
       ticker: 'baba',
+      following: true}
+)
+Watchlist.create! (
+  {   watcher_id: demo_user.id, 
+      ticker: 'amzn',
       following: true}
 )
 

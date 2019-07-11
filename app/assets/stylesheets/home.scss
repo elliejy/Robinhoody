@@ -124,11 +124,18 @@ main {
 
 li > h6 {
   color: white;
+
+}
+
+#logout-link {
+  text-decoration: none;
+  color: white;
 }
 .loggedin-body{
   margin: 10vh 15vw;
   background: #1b1b1d;
   min-height: 150vh;
+  position: relative;
 }
 
 .loggedin-h1{
@@ -145,6 +152,19 @@ li > h6 {
   background-color:#1b1b1d;
   margin-top: 20px;
   
+}
+
+.review{
+  border: 1px solid black;
+  width: 69%;
+  height: 10%;
+  position: absolute;
+  top: 34%;
+  align-items: center;
+}
+
+.review > h6 {
+  color: white;
 }
 .company-watchlist {
   margin-top: -20px;

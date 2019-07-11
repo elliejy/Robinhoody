@@ -7,7 +7,6 @@ export const RECEIVE_USER_INFO = 'RECEIVE_USER_INFO';
 export const RECEIVE_USER_WATCHLIST = 'RECEIVE_USER_WATCHLIST';
 
 const receiveCurrentUser = user =>  {
-  debugger
   return {
   type: RECEIVE_CURRENT_USER,
   user}

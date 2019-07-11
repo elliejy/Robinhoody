@@ -43,7 +43,7 @@ h5 {
     max-width: 60%;
 }
 #description {
-    font-size: 20px;
+    font-size: 17px;
     letter-spacing: 1px;
     max-width: 50%;
 }
@@ -97,11 +97,13 @@ button:focus {
     // position: absolute;
 }
 table {
-    margin-left: -4vw;
+    margin-left: -3vw;
+    position: relative;
 }
 td {
     color: white;
-    padding: 1vh 3vw;
+    padding: 0.6vh 3vw;
+
 }
 .thead{
     font-weight: 1200;

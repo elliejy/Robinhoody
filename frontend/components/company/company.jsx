@@ -40,7 +40,7 @@ class Company extends React.Component {
 
             return <div>Loading...</div>
         }
-       
+
         const close = Object.values( this.props.company.stocks ).map( stock => ( stock.close ) )
         let min = -Infinity
         let max = Infinity
@@ -67,7 +67,7 @@ class Company extends React.Component {
 
                <div className='company-container'>
                     <h2 id="company-name">{ this.props.company.info.companyName }</h2> 
-                    <h5 id="price">${ this.props.company.stock.latestPrice }</h5> 
+                        <h5 id="price">${ this.props.company.stock.latestPrice.toFixed( 2 ) }</h5> 
                     <h5 id="pchange">{ this.props.company.stock.changePercent.toFixed( 2) }%</h5> 
 
                         <LineChart width={ 700 } height={ 250 } data={ Object.values( this.props.company.stocks ) }
@@ -92,20 +92,22 @@ class Company extends React.Component {
                     </div>
                 <div className="about">
                     <h2 id="about">About</h2>
-                    <p id="description">{ this.props.company.info.description }</p>
+                    <p id="description">
+                                { this.props.company.info.description }
+                    </p>
                         <table>
                             <tbody>
                             <tr>
                                 <td className="thead">CEO</td>
                                 <td className="thead">Employees</td>
-                                <td className="thead">Headquarters</td>
-                                <td className="thead">Founded</td>
+                                <td className="thead">Sector</td>
+                                <td className="thead">Market Cap</td>
                             </tr>
                             <tr>
                                 <td>{ this.props.company.info.CEO }</td>
-                                    <td>{ this.props.company.info.employees} </td>
-                                <td>Headquarters</td>
-                                <td>Founded</td>
+                                <td>{ this.props.company.info.employees} </td>
+                                <td>{ this.props.company.info.sector }</td>
+                                <td>Market Ca</td>
                             </tr>
                             </tbody>
                         </table>
