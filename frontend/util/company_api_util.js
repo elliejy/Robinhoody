@@ -25,7 +25,7 @@ export const fetch1dData = (ticker) => (
 export const fetch1wData = (ticker) => (
     $.ajax( {
         method: "get",
-        url: `https://sandbox.iexapis.com/stable/stock/${ticker}/chart/7d?token=Tsk_6f506030b36145d69d8d9de043cd9e68`
+        url: `https://sandbox.iexapis.com/stable/stock/${ticker}/chart/5d?token=Tsk_6f506030b36145d69d8d9de043cd9e68`
     } )
 );
 export const fetch1mData = (ticker) => (

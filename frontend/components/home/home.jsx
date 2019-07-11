@@ -22,14 +22,7 @@ class Home extends React.Component {
     
     
     componentDidMount() {
-    
-        // console.log( this.currentUser)
-        // console.log(this.props)
-   
-        // if ( this.currentUser ) {
 
-        //     this.props.fetchWatchlists( this.currentUser );
-        // }
     }
     render() {    
 

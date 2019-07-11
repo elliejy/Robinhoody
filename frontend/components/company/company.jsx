@@ -70,7 +70,7 @@ class Company extends React.Component {
                     <h5 id="price">${ this.props.company.stock.latestPrice }</h5> 
                     <h5 id="pchange">{ this.props.company.stock.changePercent.toFixed( 2) }%</h5> 
 
-                        <LineChart width={ 1030 } height={ 250 } data={ Object.values( this.props.company.stocks ) }
+                        <LineChart width={ 700 } height={ 250 } data={ Object.values( this.props.company.stocks ) }
                             margin={ { top: 5, right: 30, left: 20, bottom: 5 } }>
 
                             <XAxis dataKey="dateTime" hide={ true } />
@@ -96,10 +96,10 @@ class Company extends React.Component {
                         <table>
                             <tbody>
                             <tr>
-                                <td>CEO</td>
-                                <td>Employees</td>
-                                <td>Headquarters</td>
-                                <td>Founded</td>
+                                <td className="thead">CEO</td>
+                                <td className="thead">Employees</td>
+                                <td className="thead">Headquarters</td>
+                                <td className="thead">Founded</td>
                             </tr>
                             <tr>
                                 <td>{ this.props.company.info.CEO }</td>

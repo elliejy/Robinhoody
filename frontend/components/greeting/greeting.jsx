@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import ReactDOM from 'react-dom'
 
 
@@ -12,8 +12,8 @@ class Greeting extends React.Component {
       open: false,
     }
     this.sessionLinks = this.sessionLinks.bind(this)
-    this.accountDropDown = this.accountDropDown.bind(this)
-    this.handleLogout = this.handleLogout.bind(this)
+    // this.handleLogout = this.handleLogout.bind(this)
+    // this.handleDropDown = this.handleDropDown.bind(this)
 
   }
   
@@ -44,14 +44,12 @@ class Greeting extends React.Component {
     
           <button onClick= {()=>this.handleDropDown()} className="account-button">Account</button>
            {this.state.open && (
-           <div className="dropdown-content">
-            <ul >
+            <ul className="dropdown-content">
               <li><h4>{this.props.currentUser ? this.props.currentUser.username : "Aloha~*"}</h4></li>
-              <li><h4>Help</h4></li>
-              <li><h4>Disclosure</h4></li>
-              <li id= "li-logout"onClick={ this.handleLogout }><h4>Log out</h4></li> 
+              <li><h6><img src={window.images.help} className="dropdown-img"/> Help</h6></li>
+              <li><h6><img src={ window.images.disclose } className="dropdown-img" />Disclosure</h6></li>
+              <li onClick={ this.handleLogout }><h6><img src={ window.images.logouticon } className="dropdown-img"/>Log out</h6></li> 
             </ul>
-           </div>
            )}
         </div>
     )

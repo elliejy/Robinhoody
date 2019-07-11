@@ -24,6 +24,7 @@
     position: absolute;
     margin-top: 68px;
     display: inline-block;
+    font-size: 20px;
     left: 0px;
 }
 
@@ -61,8 +62,9 @@ h5 {
     border: 1px solid aquamarine;
     border-radius: 4px;
     padding: 6px 8px;
-
+    position:fixed;
     min-height: 2vw;
+    min-width: 13vw;
     text-align: center;
 
 }
@@ -73,7 +75,7 @@ h5 {
 }
 .chart-range{
     padding: 1% 1% 1% 0;
-    border-bottom: 1px solid black;
+    // border-bottom: 1px solid black;
     width: 50%;
     box-sizing: border-box;
     // position: relative;
@@ -84,7 +86,7 @@ button {
     border: none;
     color: white;
     font-size: 14px;
-    padding: 0 2% 0 0;
+    padding: 0 3% 0 0;
     font-weight: bold;
     
 }
@@ -93,4 +95,69 @@ button:focus {
     padding-bottom: 3%;
     border-bottom: 1px solid aquamarine;
     // position: absolute;
+}
+table {
+    margin-left: -4vw;
+}
+td {
+    color: white;
+    padding: 1vh 3vw;
+}
+.thead{
+    font-weight: 1200;
+}
+
+.dropdown {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  width: 10vw;
+  margin-left: 25vw;
+  list-style-type: none;
+}
+
+.account-button{
+  border-bottom: 2px solid transparent;
+  font-size: 13px;
+  color: white;
+  font-weight:bold;
+  margin-left: 54%;
+  letter-spacing: 1px;
+}
+.account-button:hover {
+  border-bottom: 2px solid aquamarine;
+  color: aquamarine;
+
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 40%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  border: none;
+  color: white;
+  background-color: #1b1b1d;
+  min-width: 17vw;
+  left: -7vw;
+  padding-inline-start: 0;
+}
+
+.dropdown-content {
+  list-style-type: none;
+}
+
+.dropdown-content > li {
+  padding: 15px;
+}
+.dropdown-img {
+  width: 6%;
+  height: 6%;
+  padding-right: 2vw;
+}
+.dropdown-content > li:hover  {
+  background:rgb(21, 20, 20);
+}
+
+li > h6 {
+  color: white;
 }

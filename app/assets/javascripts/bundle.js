@@ -724,7 +724,7 @@ function (_React$Component) {
       }, "$", this.props.company.stock.latestPrice), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         id: "pchange"
       }, this.props.company.stock.changePercent.toFixed(2), "%"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["LineChart"], {
-        width: 1030,
+        width: 700,
         height: 250,
         data: Object.values(this.props.company.stocks),
         margin: {
@@ -784,7 +784,15 @@ function (_React$Component) {
         id: "about"
       }, "About"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         id: "description"
-      }, this.props.company.info.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "CEO"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Employees"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Headquarters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Founded")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, this.props.company.info.CEO), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, this.props.company.info.employees, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Headquarters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Founded"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.props.company.info.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "thead"
+      }, "CEO"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "thead"
+      }, "Employees"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "thead"
+      }, "Headquarters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "thead"
+      }, "Founded")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, this.props.company.info.CEO), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, this.props.company.info.employees, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Headquarters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Founded"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "add"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "addwatch"
@@ -921,9 +929,9 @@ function (_React$Component) {
       loggedIn: Boolean(_this.props.loggedIn),
       open: false
     };
-    _this.sessionLinks = _this.sessionLinks.bind(_assertThisInitialized(_this));
-    _this.accountDropDown = _this.accountDropDown.bind(_assertThisInitialized(_this));
-    _this.handleLogout = _this.handleLogout.bind(_assertThisInitialized(_this));
+    _this.sessionLinks = _this.sessionLinks.bind(_assertThisInitialized(_this)); // this.handleLogout = this.handleLogout.bind(this)
+    // this.handleDropDown = this.handleDropDown.bind(this)
+
     return _this;
   }
 
@@ -973,12 +981,20 @@ function (_React$Component) {
           return _this3.handleDropDown();
         },
         className: "account-button"
-      }, "Account"), this.state.open && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Account"), this.state.open && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "dropdown-content"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, this.props.currentUser ? this.props.currentUser.username : "Aloha~*")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Help")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Disclosure")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        id: "li-logout",
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, this.props.currentUser ? this.props.currentUser.username : "Aloha~*")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: window.images.help,
+        className: "dropdown-img"
+      }), " Help")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: window.images.disclose,
+        className: "dropdown-img"
+      }), "Disclosure")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         onClick: this.handleLogout
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Log out")))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: window.images.logouticon,
+        className: "dropdown-img"
+      }), "Log out"))));
     }
   }, {
     key: "render",
@@ -1098,12 +1114,7 @@ function (_React$Component) {
 
   _createClass(Home, [{
     key: "componentDidMount",
-    value: function componentDidMount() {// console.log( this.currentUser)
-      // console.log(this.props)
-      // if ( this.currentUser ) {
-      //     this.props.fetchWatchlists( this.currentUser );
-      // }
-    }
+    value: function componentDidMount() {}
   }, {
     key: "render",
     value: function render() {
@@ -1410,6 +1421,7 @@ function (_React$Component) {
       var _this4 = this;
 
       e.preventDefault();
+      debugger;
       this.props.processForm(this.state).then(function () {
         return _this4.props.history.push('/');
       });
@@ -2038,7 +2050,6 @@ var usersReducer = function usersReducer() {
 
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
-      debugger;
       newState = {
         curretUser: action.user
       };
@@ -2239,7 +2250,7 @@ var fetch1dData = function fetch1dData(ticker) {
 var fetch1wData = function fetch1wData(ticker) {
   return $.ajax({
     method: "get",
-    url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/chart/7d?token=Tsk_6f506030b36145d69d8d9de043cd9e68")
+    url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/chart/5d?token=Tsk_6f506030b36145d69d8d9de043cd9e68")
   });
 };
 var fetch1mData = function fetch1mData(ticker) {

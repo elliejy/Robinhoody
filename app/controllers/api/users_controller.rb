@@ -5,6 +5,7 @@ class Api::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    debugger
 
     if @user.save
       sign_in(@user)
@@ -15,17 +16,17 @@ class Api::UsersController < ApplicationController
     end
   end
 
-  def info
-    @user = User.find(params[:id])
-  end
+  # def info
+  #   @user = User.find(params[:id])
+  # end
 
-  def watchlists
-     @watchlists = Watchlist.find_by(watcher_id: params[:id])
-        render :json: {}
-  end
+  # def watchlists
+  #    @watchlists = Watchlist.find_by(watcher_id: params[:id])
+  #       render json: {}
+  # end
 
   private
   def user_params
-    params.require(:users).permit(:password, :username, :name, :id)
+    params.require(:user).permit(:username, :password, :name)
   end
 end
