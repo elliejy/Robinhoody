@@ -5,18 +5,25 @@ export const postWatchlist = (ticker)=> (
     $.ajax({
     method: "post",
     url: `/api/watchlists`,
-    data: ticker
+    data: {ticker: ticker}
 })
 )
-export const getWatchlists = (id)=> (
+export const patchWatchlist = ()=> (
+    $.ajax({
+    method: "patch",
+    url: `/api/watchlists`,
+})
+)
+export const getWatchlists = ()=> (
     $.ajax({
     method: "get",
     url: `/api/watchlists`,
     })
 )
-export const deleteWatchlist = (id)=> (
+export const deleteWatchlist = (watchlistId)=> (
     $.ajax({
     method: "delete",
-    url: `/api/users/${id}/watchlists`,
+    url: `/api/watchlists/${ watchlistId}`,
 }))
+
 

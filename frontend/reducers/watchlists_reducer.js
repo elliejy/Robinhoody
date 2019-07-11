@@ -1,6 +1,6 @@
 
 
-import {POST_WATCHLIST, GET_WATCHLISTS, DELETE_WATCHLIST} from '../actions/watchlist_actions';
+import { POST_WATCHLIST, GET_WATCHLISTS, DELETE_WATCHLIST, UPDATE_WATCHLIST} from '../actions/watchlist_actions';
 
 const watchlistsReducer = (state={}, action) => {
     Object.freeze(state);
@@ -8,13 +8,13 @@ const watchlistsReducer = (state={}, action) => {
 
     switch(action.type) {
         case POST_WATCHLIST:
-            newState[watchlists] = action.watchlist
+            newState[action.watchlist.ticker] = action.watchlist
             return newState;
         case GET_WATCHLISTS:
             newState = action.watchlists
             return newState;
         case DELETE_WATCHLIST:
-            newState[watchlists] = undefined
+            delete newState[action.watchlist.ticker] 
             return newState;
         default:
             return state;

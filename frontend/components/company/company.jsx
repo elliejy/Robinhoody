@@ -35,22 +35,9 @@ class Company extends React.Component {
 
         }
     }
-    //  && prevProps.company.info.symbol.toLowerCase() !== this.props.match.params.ticker
-
-    // handleLoading(){
-    //     if ( !this.props.company || !this.props.company.info || !this.props.company.stock || !this.props.company.stocks ) {
-    //         return <div>Loading...</div>
-    //     // } else {
-    //     //     this.setState({loading:false})
-    //     }
-    // }
-
+    
     render(){
-        
-        // if (this.state.loading === true){
-        //     this.handleLoading()
-        // }
-        if ( !this.props.company || !this.props.company.info || !this.props.company.stock || !this.props.company.stocks ) {
+        if ( !this.props.company || !this.props.company.info || !this.props.company.stock || !this.props.company.stocks || !this.props.ticker) {
             return <div>Loading...</div>
         }
        
@@ -62,7 +49,6 @@ class Company extends React.Component {
             max = close.reduce( ( acc, el ) => ( Math.max( acc, el ) ) )
 
             Object.values( this.props.company.stocks ).forEach( stock => { stock.datetime = stock.date + ' ' + ( stock.minute || '' ) } )
-
         }
         return (
             <>
@@ -84,8 +70,6 @@ class Company extends React.Component {
                     <h5 id="price">${ this.props.company.stock.latestPrice }</h5> 
                     <h5 id="pcahnge">{ this.props.company.stock.changePercent }%</h5> 
 
-
-                        
                         <LineChart width={ 1030 } height={ 250 } data={ Object.values( this.props.company.stocks ) }
                             margin={ { top: 5, right: 30, left: 20, bottom: 5 } }>
 
@@ -99,7 +83,8 @@ class Company extends React.Component {
                 <div className="about">
                     <h2 id="about">About</h2>
                     <p id="description">{ this.props.company.info.description }</p>
-                            <h5>{ this.props.company.info.CEO }</h5>
+         
+                            { this.props.company.info.CEO }
 
                 </div>
 

@@ -6,28 +6,32 @@ class Api::WatchlistsController < ApplicationController
     end
 
     def create
-        @watchlist = Watchlist.new(ticker:params[:ticker])
+        
+        @watchlist = Watchlist.new(ticker: params[:ticker])
         @watchlist.watcher_id = current_user.id
         @watchlist.following = true
         @watchlist.save!
+        render :show
     end
 
     def show
-        @watchlist = Watchlist.find_by(params[:ticker])
+        @watchlist = Watchlist.find_by(params[:id])
     end
 
     def destroy
-        @watchlists= Watchlist.where(watcher_id:current_user.id)
-        company = @watchlists.find_by(ticker:params[:ticker])
-        company.following=false
-        company.save
+        @watchlist= Watchlist.find_by(id: params[:id])
+        @watchlist.destroy
+        render :show
     end
 
-    def update
-        
-    end
+    # def update
+    #     @watchlists= Watchlist.where(watcher_id:current_user.id)
+    #     company = @watchlists.find_by(ticker:params[:ticker])
+    #     company.following=true
+    #     company.save
+    # end
      private
   def company_params
-    params.require(:company).permit(:ticker)
+    params.require(:watchlists).permit( :ticker)
   end
 end

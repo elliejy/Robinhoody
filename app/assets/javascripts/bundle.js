@@ -314,7 +314,7 @@ var fetchUserWatchlist = function fetchUserWatchlist(user) {
 /*!***********************************************!*\
   !*** ./frontend/actions/watchlist_actions.js ***!
   \***********************************************/
-/*! exports provided: POST_WATCHLIST, GET_WATCHLISTS, DELETE_WATCHLIST, createWatchlist, fetchWatchlists, removeWatchlist */
+/*! exports provided: POST_WATCHLIST, GET_WATCHLISTS, DELETE_WATCHLIST, UPDATE_WATCHLIST, createWatchlist, updateWatchlist, fetchWatchlists, removeWatchlist */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -322,7 +322,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "POST_WATCHLIST", function() { return POST_WATCHLIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_WATCHLISTS", function() { return GET_WATCHLISTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_WATCHLIST", function() { return DELETE_WATCHLIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_WATCHLIST", function() { return UPDATE_WATCHLIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createWatchlist", function() { return createWatchlist; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateWatchlist", function() { return updateWatchlist; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchWatchlists", function() { return fetchWatchlists; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeWatchlist", function() { return removeWatchlist; });
 /* harmony import */ var _util_watchlist_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/watchlist_api_util */ "./frontend/util/watchlist_api_util.js");
@@ -330,6 +332,7 @@ __webpack_require__.r(__webpack_exports__);
 var POST_WATCHLIST = "POST_WATCHLIST";
 var GET_WATCHLISTS = "GET_WATCHLISTS";
 var DELETE_WATCHLIST = "DELETE_WATCHLIST";
+var UPDATE_WATCHLIST = "UPDATE_WATCHLIST";
 
 var postWatchlist = function postWatchlist(watchlist) {
   return {
@@ -345,9 +348,17 @@ var getWatchlists = function getWatchlists(watchlists) {
   };
 };
 
-var deleteWatchlist = function deleteWatchlist() {
+var deleteWatchlist = function deleteWatchlist(watchlist) {
   return {
-    type: DELETE_WATCHLIST
+    type: DELETE_WATCHLIST,
+    watchlist: watchlist
+  };
+};
+
+var patchWatchlist = function patchWatchlist(watchlist) {
+  return {
+    type: UPDATE_WATCHLIST,
+    watchlist: watchlist
   };
 };
 
@@ -358,6 +369,13 @@ var createWatchlist = function createWatchlist(ticker) {
     });
   };
 };
+var updateWatchlist = function updateWatchlist() {
+  return function (dispatch) {
+    return _util_watchlist_api_util__WEBPACK_IMPORTED_MODULE_0__["patchWatchlist"]().then(function (watchlist) {
+      return dispatch(patchWatchlist(watchlist));
+    });
+  };
+};
 var fetchWatchlists = function fetchWatchlists() {
   return function (dispatch) {
     return _util_watchlist_api_util__WEBPACK_IMPORTED_MODULE_0__["getWatchlists"]().then(function (watchlists) {
@@ -365,10 +383,10 @@ var fetchWatchlists = function fetchWatchlists() {
     });
   };
 };
-var removeWatchlist = function removeWatchlist(currentUserID) {
+var removeWatchlist = function removeWatchlist(watchlistId) {
   return function (dispatch) {
-    return _util_watchlist_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteWatchlist"](currentUserID).then(function () {
-      return dispatch(deleteWatchlist());
+    return _util_watchlist_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteWatchlist"](watchlistId).then(function (ticker) {
+      return dispatch(deleteWatchlist(ticker));
     });
   };
 };
@@ -579,22 +597,11 @@ function (_React$Component) {
         this.props.fetchStock(this.props.match.params.ticker);
         this.props.fetch1mStock(this.props.match.params.ticker);
       }
-    } //  && prevProps.company.info.symbol.toLowerCase() !== this.props.match.params.ticker
-    // handleLoading(){
-    //     if ( !this.props.company || !this.props.company.info || !this.props.company.stock || !this.props.company.stocks ) {
-    //         return <div>Loading...</div>
-    //     // } else {
-    //     //     this.setState({loading:false})
-    //     }
-    // }
-
+    }
   }, {
     key: "render",
     value: function render() {
-      // if (this.state.loading === true){
-      //     this.handleLoading()
-      // }
-      if (!this.props.company || !this.props.company.info || !this.props.company.stock || !this.props.company.stocks) {
+      if (!this.props.company || !this.props.company.info || !this.props.company.stock || !this.props.company.stocks || !this.props.ticker) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...");
       }
 
@@ -672,7 +679,7 @@ function (_React$Component) {
         id: "about"
       }, "About"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         id: "description"
-      }, this.props.company.info.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, this.props.company.info.CEO)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.props.company.info.description), this.props.company.info.CEO), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "add"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "addwatch"
@@ -1429,10 +1436,10 @@ function (_React$Component) {
     _classCallCheck(this, WatchlistButton);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(WatchlistButton).call(this, props));
-    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
-    _this.state = {
-      following: true
-    };
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this)); // this.state={
+    //     following: Boolean( this.props.company ? this.props.company.following : undefined),
+    // }
+
     return _this;
   }
 
@@ -1442,16 +1449,11 @@ function (_React$Component) {
       var _this2 = this;
 
       e.preventDefault();
-      debugger;
 
-      if (e.target.innerHTML === '<input type="submit" value="Add to Watchlist">') {
+      if (this.props.following) {
+        this.props.removeWatchlist(this.props.watchlists[this.props.ticker.toLowerCase()].id);
+      } else {
         this.props.createWatchlist(this.props.ticker).then(function () {
-          return _this2.setState({
-            following: false
-          });
-        });
-      } else if (e.target.innerHTML === '<input type="submit" value="Remove from Watchlist">') {
-        this.props.removeWatchlist(this.props.currentUserId).then(function () {
           return _this2.setState({
             following: true
           });
@@ -1460,41 +1462,26 @@ function (_React$Component) {
     }
   }, {
     key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this3 = this;
-
-      this.props.watchlists.map(function (watchlist) {
-        if (watchlist.ticker === _this3.props.ticker.toLowerCase() && watchlist.following !== _this3.state.following) {
-          if (watchlist.following === true) {
-            _this3.setState({
-              following: true
-            });
-          } else {
-            _this3.setState({
-              following: false
-            });
-          }
-        }
-      });
+    value: function componentDidMount() {// const watchlistArr = asArray( this.props.watchlists )
+      // watchlistArr.map( watchlist => {
+      //     if ( watchlist.ticker === this.props.ticker.toLowerCase() && watchlist.following !== this.state.following ) {
+      //         if ( watchlist.following === true ) {
+      //             this.setState( { following: true } )
+      //         } else {
+      //             this.setState( { following: false } )
+      //         }
+      //     }
+      // } )
     }
   }, {
     key: "render",
     value: function render() {
-      if (this.state.following) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-          onSubmit: this.handleSubmit
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "submit",
-          value: "Remove from Watchlist"
-        }));
-      } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-          onSubmit: this.handleSubmit
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "submit",
-          value: "Add to Watchlist"
-        }));
-      }
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "submit",
+        value: this.props.following ? "Remove from Watchlist" : "Add to Watchlist"
+      }));
     }
   }]);
 
@@ -1527,9 +1514,10 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    watchlists: Object(_reducers_selector__WEBPACK_IMPORTED_MODULE_4__["asArray"])(state.entities.watchlists),
+    watchlists: state.entities.watchlists,
     ticker: ownProps.ticker,
-    currentUserId: state.session.currentUserId
+    currentUserId: state.session.currentUserId,
+    following: Boolean(state.entities.watchlists[ownProps.ticker])
   };
 };
 
@@ -1541,8 +1529,11 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     fetchWatchlists: function fetchWatchlists() {
       return dispatch(Object(_actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__["fetchWatchlists"])());
     },
-    removeWatchlist: function removeWatchlist() {
-      return dispatch(Object(_actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__["removeWatchlist"])());
+    removeWatchlist: function removeWatchlist(id) {
+      return dispatch(Object(_actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__["removeWatchlist"])(id));
+    },
+    updateWatchlist: function updateWatchlist() {
+      return dispatch(Object(_actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__["updateWatchlist"])());
     }
   };
 };
@@ -1960,7 +1951,7 @@ var watchlistsReducer = function watchlistsReducer() {
 
   switch (action.type) {
     case _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_0__["POST_WATCHLIST"]:
-      newState[watchlists] = action.watchlist;
+      newState[action.watchlist.ticker] = action.watchlist;
       return newState;
 
     case _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_0__["GET_WATCHLISTS"]:
@@ -1968,7 +1959,7 @@ var watchlistsReducer = function watchlistsReducer() {
       return newState;
 
     case _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_0__["DELETE_WATCHLIST"]:
-      newState[watchlists] = undefined;
+      delete newState[action.watchlist.ticker];
       return newState;
 
     default:
@@ -2253,31 +2244,40 @@ var fetchUserWatchlist = function fetchUserWatchlist(user) {
 /*!*********************************************!*\
   !*** ./frontend/util/watchlist_api_util.js ***!
   \*********************************************/
-/*! exports provided: postWatchlist, getWatchlists, deleteWatchlist */
+/*! exports provided: postWatchlist, patchWatchlist, getWatchlists, deleteWatchlist */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postWatchlist", function() { return postWatchlist; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "patchWatchlist", function() { return patchWatchlist; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getWatchlists", function() { return getWatchlists; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteWatchlist", function() { return deleteWatchlist; });
 var postWatchlist = function postWatchlist(ticker) {
   return $.ajax({
     method: "post",
     url: "/api/watchlists",
-    data: ticker
+    data: {
+      ticker: ticker
+    }
   });
 };
-var getWatchlists = function getWatchlists(id) {
+var patchWatchlist = function patchWatchlist() {
+  return $.ajax({
+    method: "patch",
+    url: "/api/watchlists"
+  });
+};
+var getWatchlists = function getWatchlists() {
   return $.ajax({
     method: "get",
     url: "/api/watchlists"
   });
 };
-var deleteWatchlist = function deleteWatchlist(id) {
+var deleteWatchlist = function deleteWatchlist(watchlistId) {
   return $.ajax({
     method: "delete",
-    url: "/api/users/".concat(id, "/watchlists")
+    url: "/api/watchlists/".concat(watchlistId)
   });
 };
 
