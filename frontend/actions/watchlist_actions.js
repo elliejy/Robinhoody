@@ -19,10 +19,7 @@ const deleteWatchlist = (watchlist) => ({
     watchlist
 });
 
-const patchWatchlist = (watchlist) => ({
-    type: UPDATE_WATCHLIST,
-    watchlist
-})
+
 export const createWatchlist = (ticker) => dispatch => {
     return(
     WatchListUtil.postWatchlist(ticker)

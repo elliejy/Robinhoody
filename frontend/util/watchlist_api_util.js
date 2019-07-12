@@ -8,12 +8,7 @@ export const postWatchlist = (ticker)=> (
     data: {ticker: ticker}
 })
 )
-export const patchWatchlist = ()=> (
-    $.ajax({
-    method: "patch",
-    url: `/api/watchlists`,
-})
-)
+
 export const getWatchlists = ()=> (
     $.ajax({
     method: "get",

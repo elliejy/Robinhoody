@@ -17,7 +17,7 @@ class WatchlistItems extends React.Component{
 
     render()  {
         
-        if(!this.props.watchlists.length){
+        if(!this.props.watchlists.length ||!this.props.multiStocks){
             return ( 
                 <div>Loading...</div>
             )

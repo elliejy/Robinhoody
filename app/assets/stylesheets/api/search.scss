@@ -1,0 +1,21 @@
+// Place all the styles related to the api/search controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.result-drop-ul {
+    z-index: 1;
+    background: black;
+    color: aquamarine;
+}
+
+.result-li {
+    color: white;
+}
+.search-black{
+
+}
+.search-form{
+    margin-top: -4vh;
+    display: inline;
+}

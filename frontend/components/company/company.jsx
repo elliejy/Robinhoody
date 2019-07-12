@@ -5,6 +5,7 @@ import GreetingContainer from '../greeting/greeting_container';
 import {Link} from 'react-router-dom';
 import WatchlistContainer from '../watchlist/watchlist_container';
 import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from 'recharts';
+import SearchContainer from '../search/search_container';
 
 class Company extends React.Component {
     constructor(props){
@@ -56,10 +57,7 @@ class Company extends React.Component {
                     <header className="header">
                         <Link to="/" className="header-link">
                             <img src={ window.images.logowhite } className="logowhite" />
-                            <div className="search-black">
-                                <img src={ window.images.magwhite } className="magwhite" />
-                                <input type="search" placeholder="Search" className="search-input-black" />
-                            </div>
+                            <SearchContainer />
                             <GreetingContainer />
                         </Link>
                     </header>

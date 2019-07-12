@@ -1,0 +1,1 @@
+json.extract! @search, :ticker, :company_name

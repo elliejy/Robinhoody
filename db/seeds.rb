@@ -10,6 +10,8 @@ ActiveRecord::Base.transaction do
 User.destroy_all
   demo_user = User.new({ username: 'user', password: 'testing' })
   demo_user.save!
+Company.destroy_all
+Watchlist.destroy_all
 
 User.create!(
   {
@@ -85,5 +87,46 @@ Watchlist.create! (
       following: true}
 )
 
+Company.create! (
+  {
+    company_name: "Apple",
+    ticker: "aapl"
+  })
+
+Company.create! (
+  {
+    company_name: "Tesla",
+    ticker: "tsla"
+  })
+Company.create! (
+  {
+    company_name: "Netflix",
+    ticker: "nflx"
+  })
+Company.create! (
+  {
+    company_name: "Facebook",
+    ticker: "fb"
+  })
+Company.create! (
+  {
+    company_name: "Microsoft",
+    ticker: "msft"
+  })
+Company.create! (
+  {
+    company_name: "Starbucks",
+    ticker: "sbux"
+  })
+Company.create! (
+  {
+    company_name: "Alibaba",
+    ticker: "baba"
+  })
+Company.create! (
+  {
+    company_name: "Amazon",
+    ticker: "amzn"
+  })
 
  end
