@@ -19,18 +19,11 @@ const deleteWatchlist = (watchlist) => ({
     watchlist
 });
 
-
 export const createWatchlist = (ticker) => dispatch => {
     return(
     WatchListUtil.postWatchlist(ticker)
     .then((watchlist)=> dispatch(postWatchlist(watchlist))))
 };
-export const updateWatchlist = () => dispatch => {
-    return(
-    WatchListUtil.patchWatchlist()
-    .then((watchlist)=> dispatch(patchWatchlist(watchlist))))
-};
-
 export const fetchWatchlists = () => dispatch => {
     return(
     WatchListUtil.getWatchlists( )

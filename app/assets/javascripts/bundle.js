@@ -418,7 +418,7 @@ var fetchUserWatchlist = function fetchUserWatchlist(user) {
 /*!***********************************************!*\
   !*** ./frontend/actions/watchlist_actions.js ***!
   \***********************************************/
-/*! exports provided: POST_WATCHLIST, GET_WATCHLISTS, DELETE_WATCHLIST, UPDATE_WATCHLIST, createWatchlist, updateWatchlist, fetchWatchlists, removeWatchlist */
+/*! exports provided: POST_WATCHLIST, GET_WATCHLISTS, DELETE_WATCHLIST, UPDATE_WATCHLIST, createWatchlist, fetchWatchlists, removeWatchlist */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -428,7 +428,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_WATCHLIST", function() { return DELETE_WATCHLIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_WATCHLIST", function() { return UPDATE_WATCHLIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createWatchlist", function() { return createWatchlist; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateWatchlist", function() { return updateWatchlist; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchWatchlists", function() { return fetchWatchlists; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeWatchlist", function() { return removeWatchlist; });
 /* harmony import */ var _util_watchlist_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/watchlist_api_util */ "./frontend/util/watchlist_api_util.js");
@@ -463,13 +462,6 @@ var createWatchlist = function createWatchlist(ticker) {
   return function (dispatch) {
     return _util_watchlist_api_util__WEBPACK_IMPORTED_MODULE_0__["postWatchlist"](ticker).then(function (watchlist) {
       return dispatch(postWatchlist(watchlist));
-    });
-  };
-};
-var updateWatchlist = function updateWatchlist() {
-  return function (dispatch) {
-    return _util_watchlist_api_util__WEBPACK_IMPORTED_MODULE_0__["patchWatchlist"]().then(function (watchlist) {
-      return dispatch(patchWatchlist(watchlist));
     });
   };
 };
@@ -1353,6 +1345,7 @@ function (_React$Component) {
       value: ''
     };
     _this.handleSearch = _this.handleSearch.bind(_assertThisInitialized(_this));
+    _this.showResults = _this.showResults.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1369,16 +1362,7 @@ function (_React$Component) {
   }, {
     key: "showResults",
     value: function showResults() {
-      if (!!this.props.results.length) {
-        this.props.results.map(function (result) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-            className: "result-li",
-            key: result.ticker
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Link, {
-            to: "companies/".concat(result.ticker)
-          }, result.ticker.toUpperCase(), result.company_name));
-        });
-      }
+      if (!!this.props.results.length) {}
     }
   }, {
     key: "handleClick",
@@ -1388,6 +1372,19 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var results;
+
+      if (!this.props.results) {
+        results = this.props.results.map(function (result) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            className: "result-li",
+            key: result.ticker
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Link, {
+            to: "companies/".concat(result.ticker)
+          }, result.ticker.toUpperCase(), result.company_name));
+        });
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "search-black"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -1404,7 +1401,7 @@ function (_React$Component) {
         value: this.state.value
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "result-drop-ul"
-      }, this.showResults));
+      }, results));
     }
   }]);
 
@@ -1743,10 +1740,10 @@ function (_React$Component) {
     _classCallCheck(this, WatchlistButton);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(WatchlistButton).call(this, props));
-    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this)); // this.state={
-    //     following: Boolean( this.props.company ? this.props.company.following : undefined),
-    // }
-
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.state = {
+      following: _this.props.following
+    };
     return _this;
   }
 
@@ -1758,7 +1755,11 @@ function (_React$Component) {
       e.preventDefault();
 
       if (this.props.following) {
-        this.props.removeWatchlist(this.props.watchlists[this.props.ticker.toLowerCase()].id);
+        this.props.removeWatchlist(this.props.watchlists[this.props.ticker.toLowerCase()].id).then(function () {
+          return _this2.setState({
+            following: false
+          });
+        });
       } else {
         this.props.createWatchlist(this.props.ticker).then(function () {
           return _this2.setState({
@@ -1802,8 +1803,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/watchlist_actions */ "./frontend/actions/watchlist_actions.js");
-/* harmony import */ var _reducers_selector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../reducers/selector */ "./frontend/reducers/selector.js");
-
 
 
 
@@ -1814,7 +1813,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     watchlists: state.entities.watchlists,
     ticker: ownProps.ticker,
     currentUserId: state.session.currentUserId,
-    following: Boolean(state.entities.watchlists[ownProps.ticker])
+    following: Boolean(state.entities.watchlists[ownProps.ticker.toLowerCase()])
   };
 };
 
@@ -1828,9 +1827,6 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     removeWatchlist: function removeWatchlist(id) {
       return dispatch(Object(_actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__["removeWatchlist"])(id));
-    },
-    updateWatchlist: function updateWatchlist() {
-      return dispatch(Object(_actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__["updateWatchlist"])());
     }
   };
 };

@@ -5,11 +5,9 @@ class WatchlistButton extends React.Component {
     constructor(props){
         super(props)
         this.handleSubmit = this.handleSubmit.bind(this);
-
-        // this.state={
-        //     following: Boolean( this.props.company ? this.props.company.following : undefined),
-        // }
-        
+        this.state = {
+            following: this.props.following
+        }
     }
     handleSubmit( e ){
         e.preventDefault();
@@ -17,9 +15,10 @@ class WatchlistButton extends React.Component {
         if ( this.props.following){
             this.props.removeWatchlist( 
                 this.props.watchlists[this.props.ticker.toLowerCase()].id 
-            )
+            ).then(()=> this.setState({following: false}))
         } else {
-            this.props.createWatchlist(this.props.ticker).then( () => this.setState( { following: true} ) )
+            this.props.createWatchlist(this.props.ticker)
+            .then(()=> this.setState({following: true}))
             
         }
 

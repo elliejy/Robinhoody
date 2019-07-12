@@ -8,6 +8,7 @@ class Search extends React.Component {
             value: ''
         }
         this.handleSearch = this.handleSearch.bind(this)
+        this.showResults = this.showResults.bind(this)
     }
 
     handleSearch(e){
@@ -19,24 +20,27 @@ class Search extends React.Component {
     showResults(){
 
         if(!!(this.props.results.length)){
-            this.props.results.map(result => {
-            return (
-                <li className="result-li" key={result.ticker}>
-                    <Link to={`companies/${result.ticker}`}>
-                        { result.ticker.toUpperCase() }
-                        { result.company_name }
-                    </Link>
-                </li>
-            )
-            } )
+            
         }
     }
 
     handleClick(e){
         e.preventDefault();
     }
-    render (){
 
+    render (){
+        let results
+        if(! this.props.results){
+          results = this.props.results.map( result => {
+            return (
+                <li className="result-li" key={ result.ticker }>
+                    <Link to={ `companies/${ result.ticker }` }>
+                        { result.ticker.toUpperCase() }
+                        { result.company_name }
+                    </Link>
+                </li>
+            )
+        } )}
         return (
             <div className="search-black">
                 <img src={ window.images.magwhite } className="magwhite" />
@@ -48,7 +52,7 @@ class Search extends React.Component {
                         value={this.state.value} />
                 </form>
                 <ul className="result-drop-ul">
-                {this.showResults}
+                    { results}
                 </ul>
             </div>
             )

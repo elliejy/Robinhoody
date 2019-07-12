@@ -4,17 +4,18 @@
 
 
 .result-drop-ul {
-    z-index: 1;
-    background: black;
+
     color: aquamarine;
+    display: inline;
+
 }
 
 .result-li {
     color: white;
+    min-height: 4vh;
+    padding: 1vh 2vw;
 }
-.search-black{
 
-}
 .search-form{
     margin-top: -4vh;
     display: inline;
