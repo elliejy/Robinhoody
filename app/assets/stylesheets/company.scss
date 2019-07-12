@@ -94,7 +94,7 @@ button {
 button:focus {
     color: aquamarine;
     padding-bottom: 3%;
-    border-bottom: 1px solid aquamarine;
+
     // position: absolute;
 }
 table {
@@ -130,6 +130,7 @@ td {
 .account-button:hover {
   border-bottom: 2px solid aquamarine;
   color: aquamarine;
+  cursor: pointer;
 
 }
 
@@ -159,6 +160,7 @@ td {
 }
 .dropdown-content > li:hover  {
   background:rgb(21, 20, 20);
+  cursor: pointer;
 }
 
 li > h6 {

@@ -10,7 +10,7 @@
 }
 .login-pic {
   width: 50%;
-  height: 100%;
+  height: 120vh;
   background-image: url("loginpage.png");
 }
 .login-form-box{
@@ -36,20 +36,22 @@ h6 {
 }
 .login-input{
     margin: 1% 0;
-    padding: 2%;
+    padding: 1.3% 2%;
     width: 68%;
     height: 10%;
     border-radius: 5px;
     border: 1px solid whitesmoke;
     background-color: rgba(128, 128, 128, 0.05);
     color: black;
+    font-size: 17px;
 }
 
 .login-input:hover{
-  border: 1px solid aquamarine;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  cursor: pointer;
 }
 .login-input:focus{
-  background-color: rgba(143, 179, 245, 0.23);
+  border: 1px solid aquamarine;
 }
 
 .demo {
@@ -66,13 +68,14 @@ h6 {
 .demo:hover {
   color: white;
   background-color: rgb(140, 300, 212);
+  cursor: pointer;
 }
 .session-submit{
   margin-top: 5%;
   margin-right: 5%;
   padding: 3% 9%;
   color: white;
-  background-color: rgb(140, 300, 212);
+  background-color: #21ce99;
   font-size: 15px;
   border-radius: 5px;
   border: none;
@@ -80,9 +83,24 @@ h6 {
 }
 .session-submit:hover{
    color: black;
-  background-color: rgba(128, 128, 128, 0.05);
+  background-color: aquamarine;
+  cursor: pointer;
+}
+#sessionlink{
+  text-decoration: none;
+  color: #21ce99;
+  font-size: 13px;
+  letter-spacing: 0.2px;
+}
+#already{
+  color: #21ce99;
+  font-size: 13px;
+  letter-spacing: 0.2px;
 }
 
+.already{
+  margin-top: -10px;
+}
 .errors-ul > li  {
   border-radius: 10px;
   text-align: left;

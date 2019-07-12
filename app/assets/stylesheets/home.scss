@@ -51,6 +51,7 @@ main {
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   border: none;
   color: white;
+  cursor: pointer;
 }
 .search-black:focus{
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
@@ -92,6 +93,7 @@ main {
 .account-button:hover {
   border-bottom: 2px solid aquamarine;
   color: aquamarine;
+  cursor: pointer;
 
 }
 
@@ -121,6 +123,7 @@ main {
 }
 .dropdown-content > li:hover  {
   background:rgb(21, 20, 20);
+  cursor: pointer;
 }
 
 li > h6 {
@@ -212,6 +215,7 @@ ul.watchlist-ul {
 }
 .company-li:hover {
   background: rgb(12, 12, 12);
+  cursor: pointer;
 }
 
 #watchlist-link{
@@ -247,6 +251,7 @@ ul.watchlist-ul {
 .search-bar:hover {
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   border: none;
+  cursor: pointer;
 }
 .search-bar:focus{
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
@@ -270,7 +275,7 @@ ul.watchlist-ul {
 .home-free{
     width: 40%;
     margin-left: 8%;
-    margin-top: 90px;
+    margin-top: 19vh;
 }
 
 .home-h1 {
@@ -279,17 +284,18 @@ ul.watchlist-ul {
   font-size: 50px;
   margin-left: 7%;
   margin-bottom: 10px;
-  width: 66%;
+  width: 23vw;
   letter-spacing: 1.5px;
 }
 .home-p {
     margin-left: 8%;
     font-weight: 30;
-    width: 53%;
+    width: 16vw;
     margin-top: 20px;
     margin-bottom: 50px;
-    letter-spacing: 0.08em;
-    font-size: 18px;
+    letter-spacing: 0.02em;
+    font-size: 16px;
+    line-height: 30px;
     color: black;
 }
 
@@ -297,13 +303,24 @@ ul.watchlist-ul {
   margin: 19% 8%;;
   border-radius: 30px;
   padding: 15px 20px;
-  background-color: rgba(140, 500, 212, 1.5);
+  background-color: #21ce99;
   color: white;
+  text-decoration: none;
+  font-family:'Roboto', sans-serif;
+  font-weight: bold;
+}
+.below-free:hover {
+  text-decoration: underline;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 }
 
 .home-free > h3 {
   margin-left: 8%;
-  color: aquamarine;
+  color: #21ce99;;
+  font-size: 15px;
+  font-family:'Roboto', sans-serif;
+  font-weight: 100;
+  margin-top: 3vh;
 }
 .two-phones{
     margin-left: -5%;
@@ -359,22 +376,28 @@ h2 {
   padding-right: 2%;
   color:black;
   font-family: 'Roboto', sans-serif;
+  text-decoration: none;
 }
 .login-button:hover {
-  color: aquamarine;
+  color: #21ce99;
+  cursor: pointer;
+  text-decoration: underline;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 }
 .signup-button {
   color: white;
   font-weight: bold;
   border-radius: 50px;
   padding: 15px 20px;
-  background-color: rgba(140, 500, 212, 1.5);
+  background-color: #21ce99;
   font-family: 'Roboto', sans-serif;
-  
+  text-decoration: none;
 }
 
 .signup-button:hover{
   color: black;
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 }
 
 

@@ -9,7 +9,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     errors: state.errors,
     formType,
-    navLink: <Link to="/signup">Sign up here</Link>,
+    navLink: <Link to="/signup" id="sessionlink">Sign up here</Link>,
   };
 };
 

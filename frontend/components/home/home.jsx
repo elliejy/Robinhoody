@@ -91,7 +91,7 @@ class Home extends React.Component {
                     <h1 className="home-h1">Invest Commision-Free</h1>
                     <p className="home-p">Invest in stocks, ETs, options and cryptocurrencies, all commission-free, right from your phone or desktop.</p>
                     <Link to="/signup" className="below-free">Sign up</Link>
-                    <h3>Commisions Disclosure</h3>
+                    
                 </div>
                 <div className="two-phones">
                     <img src={ window.images.splash } alt="Splash" />

@@ -1216,7 +1216,7 @@ function (_React$Component) {
       }, "Invest in stocks, ETs, options and cryptocurrencies, all commission-free, right from your phone or desktop."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/signup",
         className: "below-free"
-      }, "Sign up"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Commisions Disclosure")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Sign up")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "two-phones"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: window.images.splash,
@@ -1483,7 +1483,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     errors: state.errors,
     formType: formType,
     navLink: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-      to: "/signup"
+      to: "/signup",
+      id: "sessionlink"
     }, "Sign up here")
   };
 };
@@ -1640,7 +1641,11 @@ function (_React$Component) {
         value: this.state.password,
         onChange: this.update('password'),
         className: "login-input"
-      })), this.renderErrors(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Already have an account?  ", this.props.navLink, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      })), this.renderErrors(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "already"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        id: "already"
+      }, "Already have an account?  ", this.props.navLink, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "session-submit",
         type: "submit",
         value: this.props.formType
@@ -1685,7 +1690,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     errors: state.errors,
     formType: formType,
     navLink: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-      to: "/login"
+      to: "/login",
+      id: "sessionlink"
     }, "Log in here.")
   };
 };
