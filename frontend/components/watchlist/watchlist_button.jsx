@@ -31,7 +31,7 @@ class WatchlistButton extends React.Component {
     render(){ 
         return (
                 <form onSubmit={ this.handleSubmit }>
-                    <input type="submit" value={ this.props.following ? "Remove from Watchlist" : "Add to Watchlist"}/>
+                    <input className="watchbutton" type="submit" value={ this.props.following ? "Remove from Watchlist" : "Add to Watchlist"}/>
                 </form>
         )
     }

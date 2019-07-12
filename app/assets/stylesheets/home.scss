@@ -14,7 +14,7 @@ main {
 
 .header-link {
   text-decoration: none;
-  margin-left: 7%;
+  margin-left: 13%;
   font-family: 'Roboto', sans-serif;
   display:inline;
   width: 100vw;
@@ -38,6 +38,7 @@ main {
   transition: box-shadow 0.3s ease-in-out;
   background-color: #1b1b1d;
   min-height: 4vh;
+  box-shadow: 0px -7px 10px #21ce99;
 
 }
 .search-input-black{
@@ -45,6 +46,7 @@ main {
   background-color: #1b1b1d;
   width: 30vw;
   font-size: 17px;
+  
 }
 
 .search-black:hover {
@@ -54,14 +56,17 @@ main {
   cursor: pointer;
 }
 .search-black:focus{
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  box-shadow: 0px -7px 10px #21ce99;
   border: none;
   color: white;
+  outline: none;
 }
 .magwhite{
-  width: 1.2%;
-  height: 1.2%;
+  width: 1%;
+  height: 1%;
   padding: 0 9px;
+  display: relative;
+  top: 3px;
 }
 
 .logowhite {
@@ -87,7 +92,6 @@ main {
   font-size: 13px;
   color: white;
   font-weight:bold;
-  margin-left: 54%;
   letter-spacing: 1px;
 }
 .account-button:hover {
@@ -105,7 +109,7 @@ main {
   color: white;
   background-color: #1b1b1d;
   min-width: 17vw;
-  left: -7vw;
+  right: 7vw;
   padding-inline-start: 0;
 }
 
@@ -202,7 +206,7 @@ ul.watchlist-ul {
 }
 .watchlist-ul > li {
   color: white;
-  width: 87%;
+  width: 86%;
   height: 87%;
 
   margin: auto;
@@ -214,7 +218,7 @@ ul.watchlist-ul {
 
 }
 .company-li:hover {
-  background: rgb(12, 12, 12);
+  background: #232326;
   cursor: pointer;
 }
 
@@ -239,7 +243,7 @@ ul.watchlist-ul {
 }
 .default-searchbar {
   display: inline;
-  width: 30vw;
+  // width: 30vw;
   margin-left: 7%;
   border: 0.7px solid rgba(128, 128, 128, 0.405);
   padding: 8px 11px;
@@ -258,6 +262,8 @@ ul.watchlist-ul {
   border: none;
 }
 .mag{
+  position: relative;
+  top: 3px;
   width: 1%;
   height: 1%;
   padding: 0 9px;
@@ -265,17 +271,22 @@ ul.watchlist-ul {
 .search-input{
  border:  none;
  font-size: 15px;
- width: 30vw;
+ width: 28vw;
+}
+.search-input:focus{
+ outline: none;
 }
 .home-container{
     display: flex;
     flex-direction: row;
     margin-top: 40px;
+     width: 72vw;
+    margin: auto;
 }
 .home-free{
     width: 40%;
-    margin-left: 8%;
-    margin-top: 19vh;
+    margin-top: 16vh;
+
 }
 
 .home-h1 {
@@ -284,25 +295,25 @@ ul.watchlist-ul {
   font-size: 50px;
   margin-left: 7%;
   margin-bottom: 10px;
-  width: 23vw;
+  max-width: 391px;
   letter-spacing: 1.5px;
 }
 .home-p {
     margin-left: 8%;
     font-weight: 30;
-    width: 16vw;
+    width: 300px;
     margin-top: 20px;
     margin-bottom: 50px;
     letter-spacing: 0.02em;
     font-size: 16px;
-    line-height: 30px;
+    line-height: 29px;
     color: black;
 }
 
 .below-free{
   margin: 19% 8%;;
   border-radius: 30px;
-  padding: 15px 20px;
+  padding: 12px 20px;
   background-color: #21ce99;
   color: white;
   text-decoration: none;
@@ -323,13 +334,12 @@ ul.watchlist-ul {
   margin-top: 3vh;
 }
 .two-phones{
-    margin-left: -5%;
     height: 100%;
     overflow:hidden;
 }
 .two-phones > img{
-  margin-top: 5%;
-  margin-left: -10%;
+      margin-top: 10%;
+    margin-left: -1%;
   transform: translateY(-10%);
   -webkit-transition: height 0.9s ease-in-out;
   transition: height 0.9s ease-in-out;
@@ -382,22 +392,20 @@ h2 {
   color: #21ce99;
   cursor: pointer;
   text-decoration: underline;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 }
 .signup-button {
   color: white;
   font-weight: bold;
   border-radius: 50px;
-  padding: 15px 20px;
+  padding: 12px 20px;
   background-color: #21ce99;
   font-family: 'Roboto', sans-serif;
   text-decoration: none;
 }
 
 .signup-button:hover{
-  color: black;
   cursor: pointer;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 2px rgba(0,0,0,0.3);
 }
 
 

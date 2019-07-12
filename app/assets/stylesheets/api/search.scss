@@ -8,10 +8,10 @@
     display: inline;
     list-style-type: none;
     position: absolute;
-    left: 19vw;
-    top: 5.4vh;
+    left: 27vw;
+    top: 5.7vh;
     z-index: 1;
-    min-width: 26vw;
+    min-width: 23vw;
     background: #1b1b1d;
     padding: 3vh 6vw 3vh 2vw;
 }
@@ -23,9 +23,13 @@
     min-width: 26vw;
 }
 
+
 .search-form{
     margin-top: -4vh;
     display: inline;
+}
+.search-input-black{
+    outline: none;
 }
 #search-link{
     text-decoration: none;

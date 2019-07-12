@@ -1379,7 +1379,7 @@ function (_React$Component) {
     value: function render() {
       var results;
 
-      if (this.props.results.length) {
+      if (this.props.results.length && this.state.value !== '') {
         results = this.props.results.map(function (result) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             className: "result-li",
@@ -1795,6 +1795,7 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "watchbutton",
         type: "submit",
         value: this.props.following ? "Remove from Watchlist" : "Add to Watchlist"
       }));

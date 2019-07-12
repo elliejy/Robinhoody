@@ -23,7 +23,7 @@ class Search extends React.Component {
 
     render (){
         let results
-        if(this.props.results.length){
+        if(this.props.results.length && this.state.value!==''){
           results = this.props.results.map( result => {
             return (
                 <li className="result-li" key={ result.ticker }>
