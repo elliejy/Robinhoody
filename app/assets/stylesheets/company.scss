@@ -13,6 +13,7 @@
     color: white;
     font-size: 45px;
     font-weight: 400;
+    min-width: 6vw;
 }
 #price {
     font-size: 45px;
@@ -135,7 +136,7 @@ td {
 .dropdown-content {
   position: absolute;
   top: 40%;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,2);
   border: none;
   color: white;
   background-color: #1b1b1d;

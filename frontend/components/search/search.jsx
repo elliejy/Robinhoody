@@ -27,7 +27,7 @@ class Search extends React.Component {
           results = this.props.results.map( result => {
             return (
                 <li className="result-li" key={ result.ticker }>
-                    <Link to={ `companies/${ result.ticker }` }>
+                    <Link to={ `/companies/${ result.ticker }` } id="search-link">
                         <div id="search-result-ticker">{ result.ticker }</div>
                         <div id="search-result-company">{ result.company_name }</div>
                     </Link>
@@ -45,6 +45,7 @@ class Search extends React.Component {
                         value={this.state.value} />
                 </form>
                 <ul className="result-drop-ul">
+  
                     { results}
                 </ul>
             </div>

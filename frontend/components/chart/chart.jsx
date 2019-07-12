@@ -4,8 +4,8 @@ import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from 'r
 
 const Chart =({chart, percentChange}) => {
     const close = Object.values( chart ).map( stock => ( stock.close ) )
-    let min = -Infinity
-    let max = Infinity
+    let min = 0
+    let max = 3000
     if ( close.length >= 1 ) {
         min = close.reduce( ( acc, el ) => ( Math.min( acc, el ) ) )
         max = close.reduce( ( acc, el ) => ( Math.max( acc, el ) ) )

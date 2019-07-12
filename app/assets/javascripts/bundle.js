@@ -558,8 +558,8 @@ var Chart = function Chart(_ref) {
   var close = Object.values(chart).map(function (stock) {
     return stock.close;
   });
-  var min = -Infinity;
-  var max = Infinity;
+  var min = 0;
+  var max = 3000;
 
   if (close.length >= 1) {
     min = close.reduce(function (acc, el) {
@@ -1385,7 +1385,8 @@ function (_React$Component) {
             className: "result-li",
             key: result.ticker
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-            to: "companies/".concat(result.ticker)
+            to: "/companies/".concat(result.ticker),
+            id: "search-link"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             id: "search-result-ticker"
           }, result.ticker), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1925,7 +1926,7 @@ function (_React$Component) {
           className: "watchlist-chart"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           id: "watch-item"
-        }, "$", stock.quote.close)));
+        }, "$", stock.quote.close.toFixed(2))));
       }));
     }
   }]);
