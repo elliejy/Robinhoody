@@ -28,8 +28,8 @@ class Search extends React.Component {
             return (
                 <li className="result-li" key={ result.ticker }>
                     <Link to={ `companies/${ result.ticker }` }>
-                        { result.ticker.toUpperCase() }
-                        { result.company_name }
+                        <div id="search-result-ticker">{ result.ticker }</div>
+                        <div id="search-result-company">{ result.company_name }</div>
                     </Link>
                 </li>
             )

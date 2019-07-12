@@ -1386,7 +1386,11 @@ function (_React$Component) {
             key: result.ticker
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
             to: "companies/".concat(result.ticker)
-          }, result.ticker.toUpperCase(), result.company_name));
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            id: "search-result-ticker"
+          }, result.ticker), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            id: "search-result-company"
+          }, result.company_name)));
         });
       }
 
