@@ -1581,9 +1581,11 @@ function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      var _this4 = this;
+
       e.preventDefault();
       this.props.processForm(this.state).then(function () {
-        return window.location.relaod;
+        return _this4.props.history.push("/");
       });
     }
   }, {
