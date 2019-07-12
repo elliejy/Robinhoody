@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 class Search extends React.Component {
@@ -8,20 +9,12 @@ class Search extends React.Component {
             value: ''
         }
         this.handleSearch = this.handleSearch.bind(this)
-        this.showResults = this.showResults.bind(this)
     }
 
     handleSearch(e){
         e.preventDefault();
-        
-        this.props.getSearchResults(e.target.value).then(()=>this.showResults)
-    }
-
-    showResults(){
-
-        if(!!(this.props.results.length)){
-            
-        }
+        this.setState({ value: e.target.value });
+        this.props.getSearchResults(e.target.value)
     }
 
     handleClick(e){
@@ -30,7 +23,7 @@ class Search extends React.Component {
 
     render (){
         let results
-        if(! this.props.results){
+        if(this.props.results.length){
           results = this.props.results.map( result => {
             return (
                 <li className="result-li" key={ result.ticker }>

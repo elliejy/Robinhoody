@@ -19,11 +19,11 @@ class Company extends React.Component {
 
     componentDidMount() {
         const ticker = this.props.match.params.ticker;
-        if ( !this.props.company || this.props.ticker !== ticker ) {
+        // if ( !this.props.company || this.props.ticker !== ticker ) {
                 this.props.fetchStockInfo( ticker )
                 this.props.fetchStock( ticker )
                 this.props.fetch1mStock(ticker)
-        }
+        // }
     }
     componentDidUpdate(prevProps){
         const ticker = this.props.match.params.ticker;

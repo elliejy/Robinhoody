@@ -668,13 +668,11 @@ function (_React$Component) {
   _createClass(Company, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var ticker = this.props.match.params.ticker;
+      var ticker = this.props.match.params.ticker; // if ( !this.props.company || this.props.ticker !== ticker ) {
 
-      if (!this.props.company || this.props.ticker !== ticker) {
-        this.props.fetchStockInfo(ticker);
-        this.props.fetchStock(ticker);
-        this.props.fetch1mStock(ticker);
-      }
+      this.props.fetchStockInfo(ticker);
+      this.props.fetchStock(ticker);
+      this.props.fetch1mStock(ticker); // }
     }
   }, {
     key: "componentDidUpdate",
@@ -1113,21 +1111,26 @@ function (_React$Component) {
     _this.logout = _this.props.logout;
     _this.state = {
       loggedIn: Boolean(_this.props.loggedIn),
-      currentUser: _this.currentUser
+      currentUser: _this.currentUser // if ( this.state.loggedIn ) {
+      //     this.props.fetchWatchlists() 
+      // }
+
     };
-
-    if (_this.state.loggedIn) {
-      _this.props.fetchWatchlists();
-    }
-
     return _this;
-  } // componentDidUpdate(prevProps) {
-  //     if(prevProps.location !== this.props.location){
-  //     }
-  // }
-
+  }
 
   _createClass(Home, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchWatchlists();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {// if(prevProps.location !== this.props.location){
+      //     this.props.fetchWatchlists();
+      // }
+    }
+  }, {
     key: "render",
     value: function render() {
       if (this.currentUser) {
@@ -1139,6 +1142,10 @@ function (_React$Component) {
   }, {
     key: "loggedInPath",
     value: function loggedInPath() {
+      if (!this.props.watchlists) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...");
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "loggedin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
@@ -1248,12 +1255,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mapStateToProps = function mapStateToProps(_ref) {
-  var entities = _ref.entities,
-      session = _ref.session;
+var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    loggedIn: Boolean(session.currentUserId),
-    currentUser: session.currentUserId
+    loggedIn: Boolean(state.session.currentUserId),
+    currentUser: state.session.currentUserId,
+    watchlists: state.entities.watchlists,
+    location: ownProps.location.pathname
   };
 };
 
@@ -1313,6 +1320,7 @@ var Root = function Root(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1333,6 +1341,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var Search =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1348,24 +1357,17 @@ function (_React$Component) {
       value: ''
     };
     _this.handleSearch = _this.handleSearch.bind(_assertThisInitialized(_this));
-    _this.showResults = _this.showResults.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Search, [{
     key: "handleSearch",
     value: function handleSearch(e) {
-      var _this2 = this;
-
       e.preventDefault();
-      this.props.getSearchResults(e.target.value).then(function () {
-        return _this2.showResults;
+      this.setState({
+        value: e.target.value
       });
-    }
-  }, {
-    key: "showResults",
-    value: function showResults() {
-      if (!!this.props.results.length) {}
+      this.props.getSearchResults(e.target.value);
     }
   }, {
     key: "handleClick",
@@ -1377,12 +1379,12 @@ function (_React$Component) {
     value: function render() {
       var results;
 
-      if (!this.props.results) {
+      if (this.props.results.length) {
         results = this.props.results.map(function (result) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             className: "result-li",
             key: result.ticker
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Link, {
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
             to: "companies/".concat(result.ticker)
           }, result.ticker.toUpperCase(), result.company_name));
         });
@@ -1760,7 +1762,7 @@ function (_React$Component) {
       e.preventDefault();
 
       if (this.props.following) {
-        this.props.removeWatchlist(this.props.watchlists[this.props.ticker.toLowerCase()].id).then(function () {
+        this.props.removeWatchlist(this.props.watchlists[this.props.ticker].id).then(function () {
           return _this2.setState({
             following: false
           });
@@ -1818,7 +1820,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     watchlists: state.entities.watchlists,
     ticker: ownProps.ticker,
     currentUserId: state.session.currentUserId,
-    following: Boolean(state.entities.watchlists[ownProps.ticker.toLowerCase()])
+    following: Boolean(state.entities.watchlists[ownProps.ticker])
   };
 };
 
@@ -1909,7 +1911,7 @@ function (_React$Component) {
           className: "company-li",
           key: stock.quote.symbol
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-          to: "/companies/".concat(stock.quote.symbol.toLowerCase()),
+          to: "/companies/".concat(stock.quote.symbol),
           id: "watchlist-link"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           id: "watch-item"
@@ -2013,19 +2015,19 @@ var companiesReducer = function companiesReducer() {
       return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["merge"])({}, state, newState);
 
     case _actions_company_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_STOCK"]:
-      newState[action.ticker] = {
+      newState[action.ticker.toUpperCase()] = {
         stock: action.stock
       };
       return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["merge"])({}, state, newState);
 
     case _actions_company_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_STOCKS"]:
-      newState[action.ticker] = {
+      newState[action.ticker.toUpperCase()] = {
         stocks: action.stocks
       };
       return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["merge"])({}, state, newState);
 
     case _actions_company_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_STOCK_INFO"]:
-      newState[action.ticker] = {
+      newState[action.ticker.toUpperCase()] = {
         info: action.data
       };
       return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["merge"])({}, state, newState);

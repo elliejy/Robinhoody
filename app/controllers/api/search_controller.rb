@@ -2,11 +2,9 @@ class Api::SearchController < ApplicationController
 
     def search
         @search = Company.where(
-        "company_name LIKE ? ", "%#{params["str".downcase]}%
-        OR company_name LIKE ? ", "%#{params["str".upcase]}% 
-        OR ticker LIKE ? ", "%#{params["str".upcase]}%
-        OR ticker LIKE ? ", "%#{params["str".downcase]}%
-        "
+            "company_name ILIKE ? OR ticker ILIKE ?",
+            "%#{params["str"]}%",
+            "%#{params["str"]}%"
         )
         render json: @search
     end

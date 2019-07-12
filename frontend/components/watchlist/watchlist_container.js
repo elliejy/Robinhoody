@@ -10,7 +10,7 @@ const mapStateToProps = (state, ownProps) => {
         watchlists: state.entities.watchlists,
         ticker: ownProps.ticker,
         currentUserId: state.session.currentUserId,
-        following: Boolean(state.entities.watchlists[ownProps.ticker.toLowerCase()]) 
+        following: Boolean(state.entities.watchlists[ownProps.ticker]) 
     }
 };
 

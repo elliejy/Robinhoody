@@ -4,7 +4,7 @@ import { POST_WATCHLIST, GET_WATCHLISTS, DELETE_WATCHLIST, UPDATE_WATCHLIST} fro
 
 const watchlistsReducer = (state={}, action) => {
     Object.freeze(state);
-    let newState= Object.assign({}, state);
+    let newState = Object.assign({}, state);
 
     switch(action.type) {
         case POST_WATCHLIST:

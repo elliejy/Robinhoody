@@ -14,4 +14,9 @@ class Company < ApplicationRecord
     validates :ticker, presence:true, uniqueness: true
 
     has_many :watchlists
+
+    before_save do
+        self.ticker.upcase!
+    end
+
 end

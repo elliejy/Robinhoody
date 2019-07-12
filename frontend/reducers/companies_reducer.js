@@ -18,13 +18,13 @@ const companiesReducer = (state={}, action) => {
             newState[action.ticker] = action.ticker
             return merge( {}, state, newState );
         case RECEIVE_STOCK:
-            newState[action.ticker] = {stock: action.stock}
+            newState[action.ticker.toUpperCase()] = {stock: action.stock}
             return merge( {}, state, newState );
         case RECEIVE_STOCKS:
-            newState[action.ticker] = {stocks: action.stocks}
+            newState[action.ticker.toUpperCase()] = {stocks: action.stocks}
             return merge( {}, state, newState );
         case RECEIVE_STOCK_INFO:
-            newState[action.ticker] = {info: action.data}
+            newState[action.ticker.toUpperCase()] = {info: action.data}
             return merge( {}, state, newState );
         case RECEIVE_MULTI_STOCKS:
             newState= action.payload

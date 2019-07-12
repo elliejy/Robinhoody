@@ -12,19 +12,23 @@ class Home extends React.Component {
         this.state = {
             loggedIn: Boolean( this.props.loggedIn),
             currentUser: this.currentUser,
-
         }
-        if ( this.state.loggedIn ) {
-            this.props.fetchWatchlists() }
+        // if ( this.state.loggedIn ) {
+        //     this.props.fetchWatchlists() 
+        // }
     }
 
-    // componentDidUpdate(prevProps) {
-    //     if(prevProps.location !== this.props.location){
+    componentDidMount() {
+        this.props.fetchWatchlists();
+    }
 
-    //     }
-    // }
-    render() {    
+    componentDidUpdate(prevProps) {
+        // if(prevProps.location !== this.props.location){
+        //     this.props.fetchWatchlists();
+        // }
+    }
 
+    render() {
         if ( this.currentUser) {
           return (this.loggedInPath())
         }else {
@@ -33,6 +37,11 @@ class Home extends React.Component {
     }
 
     loggedInPath(){
+
+        if(!this.props.watchlists){
+            return(<div>Loading...</div>)
+        }
+
         return(<>
            <div className="loggedin">
             <header className="header">

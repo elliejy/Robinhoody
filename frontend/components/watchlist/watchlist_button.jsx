@@ -14,7 +14,7 @@ class WatchlistButton extends React.Component {
 
         if ( this.props.following){
             this.props.removeWatchlist( 
-                this.props.watchlists[this.props.ticker.toLowerCase()].id 
+                this.props.watchlists[this.props.ticker].id 
             ).then(()=> this.setState({following: false}))
         } else {
             this.props.createWatchlist(this.props.ticker)

@@ -19,10 +19,8 @@ const mapStateToProps = ( state, ownProps ) => {
 
     return {
         company: state.entities.companies[ticker],
-
         ticker: ownProps.match.params.ticker,
         loggedIn: Boolean( state.session.currentUserId ),
-        
     };
 };
 

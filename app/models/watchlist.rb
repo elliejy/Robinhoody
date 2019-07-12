@@ -13,4 +13,8 @@ class Watchlist < ApplicationRecord
     belongs_to :user,
     foreign_key: :watcher_id,
     class_name: :User
+
+    before_save do
+        self.ticker.upcase!
+    end
 end
