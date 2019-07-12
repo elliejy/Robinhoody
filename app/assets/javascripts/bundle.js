@@ -2432,56 +2432,56 @@ var fetchCompany = function fetchCompany(ticker) {
 var fetchDailyData = function fetchDailyData(ticker) {
   return $.ajax({
     method: "get",
-    url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/quote?token=Tsk_6f506030b36145d69d8d9de043cd9e68")
+    url: "https://cloud.iexapis.com/stable/stock/".concat(ticker, "/quote?token=pk_e2ad3af5721a4d25b06e77544acf3362")
   });
 };
 var fetch1dData = function fetch1dData(ticker) {
   return $.ajax({
     method: "get",
-    url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/chart/1d?token=Tsk_6f506030b36145d69d8d9de043cd9e68")
+    url: "https://cloud.iexapis.com/stable/stock/".concat(ticker, "/chart/1d?token=pk_e2ad3af5721a4d25b06e77544acf3362")
   });
 };
 var fetch1wData = function fetch1wData(ticker) {
   return $.ajax({
     method: "get",
-    url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/chart/5d?token=Tsk_6f506030b36145d69d8d9de043cd9e68")
+    url: "https://cloud.iexapis.com/stable/stock/".concat(ticker, "/chart/5d?token=pk_e2ad3af5721a4d25b06e77544acf3362")
   });
 };
 var fetch1mData = function fetch1mData(ticker) {
   return $.ajax({
     method: "get",
-    url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/chart/1m?token=Tsk_6f506030b36145d69d8d9de043cd9e68")
+    url: "https://cloud.iexapis.com/stable/stock/".concat(ticker, "/chart/1m?token=pk_e2ad3af5721a4d25b06e77544acf3362")
   });
 };
 var fetch3mData = function fetch3mData(ticker) {
   return $.ajax({
     method: "get",
-    url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/chart/3m?token=Tsk_6f506030b36145d69d8d9de043cd9e68")
+    url: "https://cloud.iexapis.com/stable/stock/".concat(ticker, "/chart/3m?token=pk_e2ad3af5721a4d25b06e77544acf3362")
   });
 };
 var fetch1yData = function fetch1yData(ticker) {
   return $.ajax({
     method: "get",
-    url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/chart/1y?token=Tsk_6f506030b36145d69d8d9de043cd9e68")
+    url: "https://cloud.iexapis.com/stable/stock/".concat(ticker, "/chart/1y?token=pk_e2ad3af5721a4d25b06e77544acf3362")
   });
 };
 var fetch5yData = function fetch5yData(ticker) {
   return $.ajax({
     method: "get",
-    url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/chart?token=Tsk_6f506030b36145d69d8d9de043cd9e68")
+    url: "https://cloud.iexapis.com/stable/stock/".concat(ticker, "/chart?token=pk_e2ad3af5721a4d25b06e77544acf3362")
   });
 };
 var fetchStockInfo = function fetchStockInfo(ticker) {
   return $.ajax({
     method: "get",
-    url: "https://sandbox.iexapis.com/stable/stock/".concat(ticker, "/company?token=Tpk_a8dfb5b5d8cc45589e011267f749a13b")
+    url: "https://cloud.iexapis.com/stable/stock/".concat(ticker, "/company?token=pk_e2ad3af5721a4d25b06e77544acf3362")
   });
 };
 var fetchBatchStocks = function fetchBatchStocks(tickers) {
   var commatickers = tickers.join(',');
   return $.ajax({
     method: "get",
-    url: "https://sandbox.iexapis.com/stable/stock/market/batch?symbols=".concat(commatickers, "&types=quote,news,chart&range=1m&last=5&token=Tpk_a8dfb5b5d8cc45589e011267f749a13b")
+    url: "https://cloud.iexapis.com/stable/stock/market/batch?symbols=".concat(commatickers, "&types=quote,news,chart&range=1m&last=5&token=pk_e2ad3af5721a4d25b06e77544acf3362")
   });
 };
 
