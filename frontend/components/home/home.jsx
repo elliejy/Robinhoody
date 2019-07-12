@@ -18,9 +18,11 @@ class Home extends React.Component {
             this.props.fetchWatchlists() }
     }
 
-    componentDidMount() {
+    // componentDidUpdate(prevProps) {
+    //     if(prevProps.location !== this.props.location){
 
-    }
+    //     }
+    // }
     render() {    
 
         if ( this.currentUser) {
@@ -47,7 +49,7 @@ class Home extends React.Component {
                 <h1 className="loggedin-h1">Welcome to Robinhoody</h1>
                 <img className="default-chart" src={window.images.defchart} alt="Default Chart"/>
                 <div className="review">
-                    <h6>Application Under Review</h6>
+                    <h6 id="app-review">Application Under Review</h6>
                     <h6>You'll have a free stock soon. Get started by searching for your favorite companies</h6>
                 </div>
                 <div className="company-watchlist">

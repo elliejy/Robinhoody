@@ -1121,12 +1121,13 @@ function (_React$Component) {
     }
 
     return _this;
-  }
+  } // componentDidUpdate(prevProps) {
+  //     if(prevProps.location !== this.props.location){
+  //     }
+  // }
+
 
   _createClass(Home, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {}
-  }, {
     key: "render",
     value: function render() {
       if (this.currentUser) {
@@ -1167,7 +1168,9 @@ function (_React$Component) {
         alt: "Default Chart"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "review"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Application Under Review"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "You'll have a free stock soon. Get started by searching for your favorite companies")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        id: "app-review"
+      }, "Application Under Review"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "You'll have a free stock soon. Get started by searching for your favorite companies")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "company-watchlist"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "watchlist-ul"
