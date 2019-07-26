@@ -59,7 +59,13 @@ h5 {
 #appr{
     width:80%;
 }
-
+#website{
+    text-decoration: none;
+    color: white;
+}
+#website:hover {
+    color: aquamarine;
+}
 #addwatch{
     border: 1px solid aquamarine;
     border-radius: 4px;

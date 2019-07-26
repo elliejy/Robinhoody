@@ -90,6 +90,7 @@ class Company extends React.Component {
                     </div>
                 <div className="about">
                     <h2 id="about">About</h2>
+                    {/* <tag> {this.props.company.tags[0]}</tag> */}
                     <p id="description">
                                 { this.props.company.info.description }
                     </p>
@@ -99,14 +100,18 @@ class Company extends React.Component {
                                 <td className="thead">CEO</td>
                                 <td className="thead">Employees</td>
                                 <td className="thead">Sector</td>
-                                <td className="thead">Market Cap</td>
+                                <td className="thead">Exchange</td>
+                                <td className="thead">Website</td>
+                                
                             </tr>
                             <tr>
                                 <td>{ this.props.company.info.CEO }</td>
                                 <td>{ this.props.company.info.employees} </td>
                                 <td>{ this.props.company.info.sector }</td>
-                                <td>Market Ca</td>
+                                <td>{this.props.company.info.exchange}</td>
+                                <td><Link id="website" to={ this.props.company.info.website }>{ this.props.company.info.website }</Link></td>
                             </tr>
+                            <br/>
                             </tbody>
                         </table>
                 </div>

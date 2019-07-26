@@ -3,7 +3,11 @@ import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from 'r
 
 
 const Chart =({chart, percentChange}) => {
-    const close = Object.values( chart ).map( stock => ( stock.close ) )
+
+    const close = Object.values( chart ).map( (stock, idx) => {
+        // if (!stock.close) stock.close = Object.values(chat)[idx-1].close
+        return ( stock.close )
+    })
     let min = 0
     let max = 3000
     if ( close.length >= 1 ) {

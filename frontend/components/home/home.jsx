@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import GreetingContainer from '../greeting/greeting_container';
 import WatchlistItemsContainer from '../watchlist/watchlist_items_containers';
+import SearchContainer from '../search/search_container';
 
 class Home extends React.Component {
     constructor(props){
@@ -44,16 +45,14 @@ class Home extends React.Component {
 
         return(<>
            <div className="loggedin">
-            <header className="header">
-                <Link to="/" className="header-link">
-                    <img src={ window.images.logowhite } className="logowhite" />
-                    <div className="search-black">
-                        <img src={ window.images.magwhite } className="magwhite" />
-                        <input type="search" placeholder="Search" className="search-input-black" />
-                    </div>
-                    <GreetingContainer />
-                </Link>
-            </header>
+                  
+                <header className="header">
+                    <Link to="/" className="header-link"><img src={ window.images.logowhite } className="logowhite" /></Link>
+                        
+                        <SearchContainer />
+                        <GreetingContainer />
+                    
+                </header>
             <div className="loggedin-body">
                 <h1 className="loggedin-h1">Welcome to Robinhoody</h1>
                 <img className="default-chart" src={window.images.defchart} alt="Default Chart"/>
@@ -78,12 +77,14 @@ class Home extends React.Component {
             <header className="header">
                 <Link to="/" className="header-link">
                     <img src={ window.images.logo } className="logo" /><h4>robinhoody</h4>
-                    <div className="default-searchbar">
+                </Link>
+                    {/* <div className="default-searchbar">
                         <img src={ window.images.maggrey } className="mag" />
                         <input type="search" placeholder="Search" className="search-input" />
-                    </div>
+                    </div> */}
+                    <SearchContainer />
                     <GreetingContainer />
-                </Link>
+                
             </header>
 
             <div className="home-container">

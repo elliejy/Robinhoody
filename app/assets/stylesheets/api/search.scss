@@ -4,15 +4,28 @@
 
 
 .result-drop-ul {
-    color: aquamarine;
+    color: #21ce99;
     display: inline;
     list-style-type: none;
     position: absolute;
-    left: 27vw;
+    left: 33vw;
     top: 5.7vh;
     z-index: 1;
     min-width: 23vw;
     background: #1b1b1d;
+    padding: 3vh 6vw 3vh 2vw;
+}
+
+.result-drop-ul-logout {
+    color: #21ce99;
+    display: inline;
+    list-style-type: none;
+    position: absolute;
+    left: 33vw;
+    top: 5.7vh;
+    z-index: 0;
+    min-width: 23vw;
+    background: transparent;
     padding: 3vh 6vw 3vh 2vw;
 }
 
@@ -22,11 +35,18 @@
     padding: 0.5vh 2vw;
     min-width: 26vw;
 }
+.result-li-logout {
+    color: black;
+    min-height: 4vh;
+    padding: 0.5vh 2vw;
+    min-width: 26vw;
+}
 
 
 .search-form{
     margin-top: -4vh;
     display: inline;
+    z-index: 3;
 }
 .search-input-black{
     outline: none;
@@ -38,7 +58,7 @@
 }
 
 #search-result-ticker{
-    color: aquamarine;
+    color: #21ce99;
     font-size: 13px;
     font-weight: 900;
     font-family: 'Roboto', sans-serif;
@@ -47,7 +67,7 @@
 }
 
 #search-result-company{
-    color: aquamarine;
+    color: #21ce99;
     font-size: 13px;
     font-weight: 800;
     font-family: 'Roboto', sans-serif;
@@ -57,5 +77,9 @@
 
 .result-li:hover{
     background: rgb(18, 17, 17);
+    cursor: pointer;
+}
+.result-li-logout:hover{
+    background: rgba(233, 233, 233, 0.856);
     cursor: pointer;
 }

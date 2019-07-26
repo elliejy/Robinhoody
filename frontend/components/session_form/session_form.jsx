@@ -75,7 +75,7 @@ class SessionForm extends React.Component {
               </label>
               { this.renderErrors() }
               <br />
-              <div className="already"><h6 id="already">Already have an account?  { this.props.navLink } </h6></div>
+              <div className="already"><h6 id="already"> { this.props.navLink } </h6></div>
               
               
               <input className="session-submit" type="submit" value={this.props.formType} />

@@ -5,7 +5,9 @@ import Search from './search';
 const mapStateToProps = (state) => {
 
     return{
-    results: state.results}
+    results: state.results,
+    loggedIn: Boolean(state.session.id) 
+    }
 }
 
 const mapDispatchToProps = dispatch => ({

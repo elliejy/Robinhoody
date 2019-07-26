@@ -555,7 +555,8 @@ __webpack_require__.r(__webpack_exports__);
 var Chart = function Chart(_ref) {
   var chart = _ref.chart,
       percentChange = _ref.percentChange;
-  var close = Object.values(chart).map(function (stock) {
+  var close = Object.values(chart).map(function (stock, idx) {
+    // if (!stock.close) stock.close = Object.values(chat)[idx-1].close
     return stock.close;
   });
   var min = 0;
@@ -799,7 +800,12 @@ function (_React$Component) {
         className: "thead"
       }, "Sector"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "thead"
-      }, "Market Cap")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, this.props.company.info.CEO), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, this.props.company.info.employees, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, this.props.company.info.sector), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Market Ca"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Exchange"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "thead"
+      }, "Website")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, this.props.company.info.CEO), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, this.props.company.info.employees, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, this.props.company.info.sector), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, this.props.company.info.exchange), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+        id: "website",
+        to: this.props.company.info.website
+      }, this.props.company.info.website))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "add"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "addwatch"
@@ -1073,6 +1079,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _greeting_greeting_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../greeting/greeting_container */ "./frontend/components/greeting/greeting_container.js");
 /* harmony import */ var _watchlist_watchlist_items_containers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../watchlist/watchlist_items_containers */ "./frontend/components/watchlist/watchlist_items_containers.js");
+/* harmony import */ var _search_search_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../search/search_container */ "./frontend/components/search/search_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1090,6 +1097,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1156,16 +1164,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: window.images.logowhite,
         className: "logowhite"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "search-black"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: window.images.magwhite,
-        className: "magwhite"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "search",
-        placeholder: "Search",
-        className: "search-input-black"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_greeting_greeting_container__WEBPACK_IMPORTED_MODULE_2__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_search_search_container__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_greeting_greeting_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "loggedin-body"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "loggedin-h1"
@@ -1196,16 +1195,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: window.images.logo,
         className: "logo"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "robinhoody"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "default-searchbar"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: window.images.maggrey,
-        className: "mag"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "search",
-        placeholder: "Search",
-        className: "search-input"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_greeting_greeting_container__WEBPACK_IMPORTED_MODULE_2__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "robinhoody")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_search_search_container__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_greeting_greeting_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "home-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "home-free"
@@ -1354,7 +1344,8 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Search).call(this, props));
     _this.state = {
-      value: ''
+      value: '',
+      loggedIn: _this.props.loggedIn
     };
     _this.handleSearch = _this.handleSearch.bind(_assertThisInitialized(_this));
     return _this;
@@ -1377,12 +1368,14 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var results;
 
       if (this.props.results.length && this.state.value !== '') {
         results = this.props.results.map(function (result) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-            className: "result-li",
+            className: _this2.props.loggedIn ? "result-li" : "result-li-logout",
             key: result.ticker
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
             to: "/companies/".concat(result.ticker),
@@ -1396,9 +1389,9 @@ function (_React$Component) {
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "search-black"
+        className: this.props.loggedIn ? "search-black" : "default-searchbar"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: window.images.magwhite,
+        src: this.props.loggedIn ? window.images.magwhite : window.images.maggrey,
         className: "magwhite"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "search-form"
@@ -1407,10 +1400,10 @@ function (_React$Component) {
         onChange: this.handleSearch,
         type: "search",
         placeholder: "Search",
-        className: "search-input-black",
+        className: this.props.loggedIn ? "search-input-black" : "search-input",
         value: this.state.value
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "result-drop-ul"
+        className: this.props.loggedIn ? "result-drop-ul" : "result-drop-ul-logout"
       }, results));
     }
   }]);
@@ -1440,7 +1433,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    results: state.results
+    results: state.results,
+    loggedIn: Boolean(state.session.id)
   };
 };
 
@@ -1485,7 +1479,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     navLink: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
       to: "/signup",
       id: "sessionlink"
-    }, "Sign up here")
+    }, "Don't have an account?  Sign up here.")
   };
 };
 
@@ -1645,7 +1639,7 @@ function (_React$Component) {
         className: "already"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
         id: "already"
-      }, "Already have an account?  ", this.props.navLink, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, " ", this.props.navLink, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "session-submit",
         type: "submit",
         value: this.props.formType
@@ -1692,7 +1686,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     navLink: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
       to: "/login",
       id: "sessionlink"
-    }, "Log in here.")
+    }, "Already have an account? Log in here. ")
   };
 };
 
@@ -1772,18 +1766,22 @@ function (_React$Component) {
 
       e.preventDefault();
 
-      if (this.props.following) {
-        this.props.removeWatchlist(this.props.watchlists[this.props.ticker].id).then(function () {
-          return _this2.setState({
-            following: false
+      if (this.props.currentUserId) {
+        if (this.props.following) {
+          this.props.removeWatchlist(this.props.watchlists[this.props.ticker].id).then(function () {
+            return _this2.setState({
+              following: false
+            });
           });
-        });
+        } else {
+          this.props.createWatchlist(this.props.ticker).then(function () {
+            return _this2.setState({
+              following: true
+            });
+          });
+        }
       } else {
-        this.props.createWatchlist(this.props.ticker).then(function () {
-          return _this2.setState({
-            following: true
-          });
-        });
+        this.props.history.push('/login');
       }
     }
   }, {
@@ -1792,13 +1790,23 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: this.handleSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "watchbutton",
-        type: "submit",
-        value: this.props.following ? "Remove from Watchlist" : "Add to Watchlist"
-      }));
+      if (this.props.currentUserId) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+          onSubmit: this.handleSubmit
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          className: "watchbutton",
+          type: "submit",
+          value: this.props.following ? "Remove from Watchlist" : "Add to Watchlist"
+        }));
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+          onSubmit: this.handleSubmit
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          className: "watchbutton",
+          type: "submit",
+          value: "Login to add"
+        }));
+      }
     }
   }]);
 
@@ -1933,7 +1941,7 @@ function (_React$Component) {
           className: "watchlist-chart"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           id: "watch-item"
-        }, "$", stock.quote.close.toFixed(2))));
+        }, "$", stock.quote.latestPrice.toFixed(2))));
       }));
     }
   }]);
