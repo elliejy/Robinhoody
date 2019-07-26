@@ -1,5 +1,5 @@
 import GreetingContainer from '../greeting/greeting_container';
-
+import SearchContainer from '../search/search_container';
 
 const Nav = {
 
@@ -10,10 +10,7 @@ const Nav = {
                 <header className="header">
                     <Link to="/" className="header-link">
                         <img src={ window.images.logowhite } className="logowhite" />
-                        <div className="search-black">
-                            <img src={ window.images.magwhite } className="magwhite" />
-                            <input type="search" placeholder="Search" className="search-input-black" />
-                        </div>
+                        <SearchContainer />
                         <GreetingContainer />
                     </Link>
                 </header>

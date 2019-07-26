@@ -1375,7 +1375,7 @@ function (_React$Component) {
       if (this.props.results.length && this.state.value !== '') {
         results = this.props.results.map(function (result) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-            className: _this2.props.loggedIn ? "result-li" : "result-li-logout",
+            className: _this2.state.loggedIn ? "result-li" : "result-li-logout",
             key: result.ticker
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
             to: "/companies/".concat(result.ticker),
@@ -1389,9 +1389,9 @@ function (_React$Component) {
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: this.props.loggedIn ? "search-black" : "default-searchbar"
+        className: this.state.loggedIn ? "search-black" : "default-searchbar"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: this.props.loggedIn ? window.images.magwhite : window.images.maggrey,
+        src: this.state.loggedIn ? window.images.magwhite : window.images.maggrey,
         className: "magwhite"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "search-form"
@@ -1400,10 +1400,10 @@ function (_React$Component) {
         onChange: this.handleSearch,
         type: "search",
         placeholder: "Search",
-        className: this.props.loggedIn ? "search-input-black" : "search-input",
+        className: this.state.loggedIn ? "search-input-black" : "search-input",
         value: this.state.value
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: this.props.loggedIn ? "result-drop-ul" : "result-drop-ul-logout"
+        className: this.state.loggedIn ? "result-drop-ul" : "result-drop-ul-logout"
       }, results));
     }
   }]);

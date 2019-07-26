@@ -27,7 +27,7 @@ class Search extends React.Component {
         if(this.props.results.length && this.state.value!==''){
           results = this.props.results.map( result => {
             return (
-                <li className={ this.props.loggedIn ? "result-li": "result-li-logout"} key={ result.ticker }>
+                <li className={ this.state.loggedIn ? "result-li": "result-li-logout"} key={ result.ticker }>
                     <Link to={ `/companies/${ result.ticker }` } id="search-link">
                         <div id="search-result-ticker">{ result.ticker }</div>
                         <div id="search-result-company">{ result.company_name }</div>
@@ -36,16 +36,16 @@ class Search extends React.Component {
             )
         } )}
         return (
-            <div className={ this.props.loggedIn ? "search-black" : "default-searchbar"}>
-                <img src={ this.props.loggedIn ? window.images.magwhite : window.images.maggrey } className="magwhite" />
+            <div className={ this.state.loggedIn ? "search-black" : "default-searchbar"}>
+                <img src={ this.state.loggedIn ? window.images.magwhite : window.images.maggrey } className="magwhite" />
                 <form  className="search-form">
                         <input onClick={this.handleClick} 
                         onChange={ this.handleSearch }
                         type="search" placeholder="Search" 
-                        className={ this.props.loggedIn ? "search-input-black" : "search-input" }
+                        className={ this.state.loggedIn ? "search-input-black" : "search-input" }
                         value={this.state.value} />
                 </form>
-                <ul className={ this.props.loggedIn ? "result-drop-ul" : "result-drop-ul-logout"}>
+                <ul className={ this.state.loggedIn ? "result-drop-ul" : "result-drop-ul-logout"}>
   
                     { results}
                 </ul>
