@@ -42,7 +42,7 @@ main {
     left: 33vw;
     z-index: 1;
     min-width: 23vw;
-    background: #1b1b1d;
+    background: transparent;
     padding: 3vh 6vw 3vh 2vw;
 }
 
@@ -352,47 +352,50 @@ ul.watchlist-ul {
 }
 .home-container{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin-top: 40px;
-     width: 72vw;
+    width: 80vw;
     margin: auto;
+    height: 100vh;
 }
 .home-free{
-    width: 40%;
-    margin-top: 16vh;
-
+    margin-top: 6vh;
 }
 
 .home-h1 {
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
-  font-size: 50px;
-  margin-left: 7%;
+  font-size: 100px;
   margin-bottom: 10px;
-  max-width: 391px;
   letter-spacing: 1.5px;
+  width: 100%;
+  text-align: center;
 }
 .home-p {
     margin-left: 8%;
     font-weight: 30;
-    width: 300px;
     margin-top: 20px;
     margin-bottom: 50px;
-    letter-spacing: 0.02em;
-    font-size: 16px;
-    line-height: 29px;
+    letter-spacing: 0.05em;
+    font-size: 38px;
+    line-height: 59px;
     color: black;
+    text-align: center;
 }
 
 .below-free{
-  margin: 19% 8%;;
-  border-radius: 30px;
-  padding: 12px 20px;
-  background-color: #21ce99;
+  
   color: white;
   text-decoration: none;
   font-family:'Roboto', sans-serif;
   font-weight: bold;
+      border-radius: 60px;
+    /* padding: 12px 20px; */
+    background-color: #21ce99;
+    font-size: 45px;
+    padding: 36px 60px;
+    position: absolute;
+    margin-left: 30%;
 }
 .below-free:hover {
   text-decoration: underline;
@@ -411,6 +414,7 @@ ul.watchlist-ul {
     height: 100%;
     overflow:hidden;
     z-index: -4;
+    margin-top: 16%;
 }
 .two-phones > img{
   z-index: -3;
