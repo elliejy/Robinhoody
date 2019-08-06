@@ -5,7 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.firs
-
+require 'csv'
+csv_text = File.read(Rails/root.join('lib','seeds', 'companylist.csv'))
 ActiveRecord::Base.transaction do
 User.destroy_all
   demo_user = User.new({ username: 'user', password: 'testing' })
