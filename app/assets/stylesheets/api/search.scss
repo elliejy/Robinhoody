@@ -8,11 +8,11 @@
     display: inline;
     list-style-type: none;
     position: absolute;
-    left: 33vw;
+    left: 34vw;
     top: 5.7vh;
-    z-index: 1;
     min-width: 23vw;
     background: #1b1b1d;
+    z-index: 1; 
     padding: 3vh 6vw 3vh 2vw;
 }
 
@@ -21,11 +21,11 @@
     display: inline;
     list-style-type: none;
     position: absolute;
-    left: 33vw;
+    left: 31vw;
     top: 5.7vh;
-    z-index: 0;
+    z-index: 1;
     min-width: 23vw;
-    background: transparent;
+    opacity: 1;
     padding: 3vh 6vw 3vh 2vw;
 }
 

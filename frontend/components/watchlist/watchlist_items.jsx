@@ -26,9 +26,12 @@ class WatchlistItems extends React.Component{
             <>
            
                { this.props.multiStocks.map( stock => {
-                   
-                return (
-                    
+                   if(!stock){
+                       return (
+                           <div>Loading...</div>
+                       )
+                   }else {
+                       return (
                     <li className="company-li" key={stock.quote.symbol}>
                         <Link to={`/companies/${stock.quote.symbol}`} id="watchlist-link">
                             <div id="watch-item"> { stock.quote.symbol }</div>
@@ -36,8 +39,8 @@ class WatchlistItems extends React.Component{
                             <div id="watch-item">${ stock.quote.latestPrice.toFixed(2) }</div>
                         </Link>
                   
-                    </li> 
-                    )
+                    </li> )
+                    }
                 }
             
             )}

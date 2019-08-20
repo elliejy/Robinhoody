@@ -1359,6 +1359,13 @@ function (_React$Component) {
         value: e.target.value
       });
       this.props.getSearchResults(e.target.value);
+      var searchResults = document.querySelector(".result-drop-ul");
+
+      if (this.state.value !== '') {
+        searchResults.classList.add("zindex");
+      } else {
+        searchResults.classList.remove("zindex");
+      }
     }
   }, {
     key: "handleClick",
@@ -1375,7 +1382,7 @@ function (_React$Component) {
       if (this.props.results.length && this.state.value !== '') {
         results = this.props.results.map(function (result) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-            className: _this2.state.loggedIn ? "result-li" : "result-li-logout",
+            className: _this2.props.loggedIn ? "result-li" : "result-li-logout",
             key: result.ticker
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
             to: "/companies/".concat(result.ticker),
@@ -1434,7 +1441,7 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state) {
   return {
     results: state.results,
-    loggedIn: Boolean(state.session.id)
+    loggedIn: state.session.id === null ? false : true
   };
 };
 
@@ -1927,21 +1934,25 @@ function (_React$Component) {
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, this.props.multiStocks.map(function (stock) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "company-li",
-          key: stock.quote.symbol
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-          to: "/companies/".concat(stock.quote.symbol),
-          id: "watchlist-link"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          id: "watch-item"
-        }, " ", stock.quote.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_chart_chart__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          chart: stock.chart,
-          percentChange: stock.quote.changePercent,
-          className: "watchlist-chart"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          id: "watch-item"
-        }, "$", stock.quote.latestPrice.toFixed(2))));
+        if (!stock) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading...");
+        } else {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            className: "company-li",
+            key: stock.quote.symbol
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+            to: "/companies/".concat(stock.quote.symbol),
+            id: "watchlist-link"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            id: "watch-item"
+          }, " ", stock.quote.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_chart_chart__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            chart: stock.chart,
+            percentChange: stock.quote.changePercent,
+            className: "watchlist-chart"
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            id: "watch-item"
+          }, "$", stock.quote.latestPrice.toFixed(2))));
+        }
       }));
     }
   }]);

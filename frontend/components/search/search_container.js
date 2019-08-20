@@ -6,7 +6,7 @@ const mapStateToProps = (state) => {
 
     return{
     results: state.results,
-    loggedIn: Boolean(state.session.id) 
+    loggedIn: state.session.id === null ? false : true 
     }
 }
 
